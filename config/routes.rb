@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  root 'pages#index'
+  devise_for :associations
   devise_for :users
+  root 'pages#index'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -10,7 +11,5 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   post 'like/:association_id', to: 'like#like' 
   post 'unlike/:association_id', to: 'like#unlike'
+  resources :associations
 end
-  # Defines the root path route ("/")
-  # root "posts#index"
-
