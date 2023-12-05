@@ -1,0 +1,7 @@
+<%= form_with method: :post, url: payments_path, data: { turbo: false } do |form| %>
+  <%= form.hidden_field :asso_id, value: @association.id %>
+  <%= form.label :amount %>
+  <%= form.number_field :amount, step: 'any' %>
+
+  <%= form.submit 'Confirmer' %>
+<% end %>

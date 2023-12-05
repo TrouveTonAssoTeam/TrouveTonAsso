@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :donations
 
   resources :payments
+  get 'payments/success', to: 'payments#success', as: 'payment_success'
+  get 'payments/cancel', to: 'payments#cancel', as: 'payment_cancel'
 
   # Profile page and edit
   get 'profil', to: 'profil#show', as: 'profil'
