@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  get 'about', to: 'pages#about'
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   # Profile page and edit
   get 'profil', to: 'profil#show', as: 'profil'
   scope '/profil'  do
-    get 'edit', to: 'profil#edit', as: 'profil_edit'
-    post 'update', to: 'profil#update', as: 'profil_update'
+  get 'edit', to: 'profil#edit', as: 'profil_edit'
+  post 'update', to: 'profil#update', as: 'profil_update'
   # Defines the root path route ("/")
   # root "posts#index"
 end
