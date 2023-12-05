@@ -1,0 +1,17 @@
+<!-- app/views/association_profiles/edit.html.erb -->
+
+<h1>Modifier le profil de l'association</h1>
+
+<%= form_for @association_profile do |f| %>
+  <!-- Champs du formulaire pour la modification du profil -->
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <!-- Ajoutez d'autres champs au besoin -->
+
+  <div class="actions">
+    <%= f.submit "Enregistrer les modifications" %>
+  </div>
+<% end %>
