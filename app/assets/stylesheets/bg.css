@@ -79,3 +79,13 @@
         transform: translate(0);
     }
 }
+@media screen and (max-width: 1050px) {
+    .bg .dot {
+        opacity: 0.7;
+    }
+}
+@media screen and (max-width: 768px) {
+    .bg .dot {
+        opacity: 0.5;
+    }
+}
