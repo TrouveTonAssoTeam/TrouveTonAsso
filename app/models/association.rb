@@ -5,5 +5,6 @@ class Association < ApplicationRecord
   
     # Validations
     validates :name, :description, :city, :website, presence: true
-  
+    
+    has_many :donations
 end

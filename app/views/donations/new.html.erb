@@ -1,0 +1,8 @@
+<h2>Faites un don à <%= @association.name %></h2>
+
+<%= form_with(model: [@association, @donation]) do |form| %>
+  <%= form.label :amount %>
+  <%= form.number_field :amount, step: 'any' %>
+
+  <%= form.submit 'Confirmer' %>
+<% end %>
