@@ -65,6 +65,14 @@ footer.footer .footer-copy {
     text-align: center;
 }
 
+footer.footer .footer-copy > div {
+    word-spacing: 1.5rem;
+}
+
+footer.footer .footer-copy > div a {
+    word-spacing: 0;
+}
+
 footer.footer .footer-copy p {
     margin-bottom: 0.25rem;
 }
