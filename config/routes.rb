@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   devise_for :associations
   devise_for :users
   root 'pages#index'
@@ -12,6 +13,12 @@ Rails.application.routes.draw do
 
   resources :associations
 
+  # Profile page and edit
+  get 'profil', to: 'profil#show', as: 'profil'
+  scope '/profil'  do
+    get 'edit', to: 'profil#edit', as: 'profil_edit'
+    post 'update', to: 'profil#update', as: 'profil_update'
   # Defines the root path route ("/")
   # root "posts#index"
+end
 end
