@@ -12,10 +12,16 @@
 
   <body> 
     <% if notice %>
-     <p class="alert alert-success"><%= notice %></p>
+     <div class="alert alert-success">
+       <%= notice %>
+       <div class="close">&times;</div>
+     </div>
     <% end %>
     <% if alert %>
-    <p class="alert alert-danger"><%= alert %></p>
+      <div class="alert alert-error">
+        <%= alert %>
+        <div class="close">&times;</div>
+      </div>
    <% end %>
    <%= yield %> 
    
