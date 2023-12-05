@@ -1,0 +1,18 @@
+<nav class="navbar" id="site-navbar">
+    <div class="container">
+        <div class="navbar-brand">
+            <%= link_to root_path do %>
+                <%= render "shared/logo" %>
+            <% end %>
+        </div>
+        <div class="navbar-burger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="navbar-links">
+            <%= link_to "Home", root_path, class: "#{is_active?(root_path)}" %>
+            <%= link_to "Associations", associations_path, class: "#{is_active?(associations_path)}" %>
+        </div>
+    </div>
+</nav>
