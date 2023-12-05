@@ -17,12 +17,14 @@
   <div class="container">
     <% if notice %>
      <div class="alert alert-success">
-       <%= notice %>
-       <div class="close">&times;</div>
+        <h3> Succès ! </h3>
+        <%= notice %>
+        <div class="close">&times;</div>
      </div>
     <% end %>
     <% if alert %>
       <div class="alert alert-error">
+        <h3> Erreur ! </h3>
         <%= alert %>
         <div class="close">&times;</div>
       </div>

@@ -1,42 +1,46 @@
 .alert {
-  width: calc(100% - 50px);
-  padding: 16px 25px;
-  border-radius: var(--border-radius);
-  position: relative;
-  box-shadow: var(--box-shadow);
-  backdrop-filter: var(--background-blur);
-  border: 1px solid;
-  margin-bottom: 1rem;
+    width: calc(100% - 50px);
+    padding: 16px 25px;
+    border-radius: var(--border-radius);
+    position: relative;
+    box-shadow: var(--box-shadow);
+    backdrop-filter: var(--background-blur);
+    border: 1px solid;
+    margin-bottom: 1rem;
 }
 .alert .close {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  font-size: 1.3rem;
-  cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+.alert h3 {
+    margin: 0;
+    margin-bottom: 10px;
 }
 
 .alert-success {
-  background-color: rgba(var(--success-color-rgb), 0.1);
-  color: var(--success-text-color);
-  border-color: rgba(var(--success-color-rgb), 0.3);
+    background-color: rgba(var(--success-color-rgb), 0.1);
+    color: var(--success-text-color);
+    border-color: rgba(var(--success-color-rgb), 0.3);
 }
 
 .alert-error {
-  background-color: rgba(var(--error-color-rgb), 0.1);
-  color: var(--error-text-color);
-  border-color: rgba(var(--error-color-rgb), 0.3);
+    background-color: rgba(var(--error-color-rgb), 0.1);
+    color: var(--error-text-color);
+    border-color: rgba(var(--error-color-rgb), 0.3);
 }
 
 .fade-out {
-  animation: fadeOut 0.25s ease;
+    animation: fadeOut 0.25s ease;
 }
 
 @keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
