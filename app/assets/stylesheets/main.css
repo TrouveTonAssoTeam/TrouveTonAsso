@@ -15,6 +15,7 @@
 body {
   font-family: "Inter", sans-serif;
   color: var(--primary-color);
+  margin: 0;
 }
 
 h1,
@@ -66,4 +67,24 @@ b {
 
 .subtitle {
   font-weight: 100;
+}
+
+.container {
+  max-width: 1200px;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding-left: 2%;
+    padding-right: 2%;
+  }
 }

@@ -10,7 +10,9 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body> 
+  <body>
+
+  <div class="container">
     <% if notice %>
      <div class="alert alert-success">
        <%= notice %>
@@ -24,6 +26,8 @@
       </div>
    <% end %>
    <%= yield %> 
-   
+  </div>
+  
+  <%= render "shared/background" %>
   </body>
 </html>
