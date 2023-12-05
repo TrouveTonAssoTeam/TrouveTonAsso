@@ -9,6 +9,7 @@
     --error-color-rgb: 227, 53, 53;
     --error-text-color: #c68686;
     --box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.1);
+    --box-shadow-hover: 0px 6px 30px 0px rgba(0, 0, 0, 0.15);
     --background-blur: blur(4px);
     --border-color: rgba(255, 255, 255, 0.3);
     --background-card-color: rgba(255, 255, 255, 0.1);
