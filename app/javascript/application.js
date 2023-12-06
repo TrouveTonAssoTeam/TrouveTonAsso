@@ -3,3 +3,7 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 import "./like"
 import "./dislike"
+import "@hotwired/turbo-rails";
+import "./controllers";
+import "./alert";
+import "./navbar";
