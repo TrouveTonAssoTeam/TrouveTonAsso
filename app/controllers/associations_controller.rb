@@ -7,7 +7,9 @@ class AssociationsController < ApplicationController
   before_action :authenticate_association!, only: [:show]
   before_action :find_association, only: [:show]
 
-  private
+  def delete
+    association = Association.find(params[:id])
+  end 
 
   def find_association
     @association = Association.find(params[:id])
