@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'association_profiles/show'
+  get 'association_profiles/edit'
+  get 'association_profiles/update'
   devise_for :users, path: 'users', controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
@@ -20,9 +23,12 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  resources :associations, only: [:show]
+  resources :associations only: [:show, :edit, :update]
   get "association/test", to: "associations#test"
   post "association/new", to: "associations#new", as: :new_association
+
+  resources :association_profiles, only: [:show, :edit, :update]
+
 
   # Profile page and edit
   get 'profil', to: 'profil#show', as: 'profil'

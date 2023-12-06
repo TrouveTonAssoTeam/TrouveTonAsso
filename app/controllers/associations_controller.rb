@@ -4,9 +4,17 @@ require 'json'
 
 class AssociationsController < ApplicationController
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_association!, only: [:show]
+  before_action :find_association, only: [:show]
+
+  private
+
+  def find_association
+    @association = Association.find(params[:id])
+  end
 
   def test
-    
+    # Votre action test
   end
 
   def new
@@ -17,13 +25,31 @@ class AssociationsController < ApplicationController
     puts "data_hash : "
     puts data_hash
 
-    if data_hash["erreur"] != nil
+    if data_hash["erreur"].present?
       flash.now[:alert] = "Error : #{data_hash["erreur"]}"
     end
   end
 
-  def show
-      @association = Association.find(params[:id])
+  def show_association
+    @association = Association.find(params[:id])
+  end
+
+  def edit
+    @association = Association.find(params[:id])
+  end
+
+  def update
+    @association = Association.find(params[:id])
+
+    respond_to do |format|
+      if @association.update(association_params)
+        format.html { redirect_to @association, notice: 'Association was successfully updated.' }
+        format.json { render :show, status: :ok, location: @association }
+      else
+        format.html { render :edit }
+        format.json { render json: @association.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   protected
@@ -31,5 +57,12 @@ class AssociationsController < ApplicationController
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :description, :city, :website])
   end
- 
+
+  def association_params
+    params.require(:association).permit(:name, :description, :city, :website, :cover_photo)
+  end
 end
+
+
+
+
