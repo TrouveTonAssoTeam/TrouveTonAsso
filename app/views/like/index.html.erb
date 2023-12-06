@@ -4,7 +4,7 @@
         <div class='red-bg'></div>
         </ion-icon>
     <% end %>
-    <%= button_to "Dislike", unlike_asso_path(Association.all.sample), method: :post do %>
+    <%= button_to unlike_asso_path(Association.all.sample), method: :post do %>
       <span id = heart><i class="fa fa-heart-o" aria-hidden="true" ></i> </span>
       <% end %>
 
