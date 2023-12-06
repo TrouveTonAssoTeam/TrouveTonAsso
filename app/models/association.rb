@@ -4,6 +4,6 @@ class Association < ApplicationRecord
            :recoverable, :rememberable, :validatable
   
     # Validations
-    validates :name, :description, :city, :website, presence: true
+    # validates :name, :description, :city, :address, :zip, presence: true
   
 end

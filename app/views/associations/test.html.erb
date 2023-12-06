@@ -1,4 +1,4 @@
-<%= form_with url: new_association_path do |f| %>
+<%= form_with url: new_association_path, class: 'form' do |f| %>
   <%# f.text_field :name, autofocus: true, placeholder: 'Name' %>
   <%# f.text_area :description, placeholder: 'Description' %>
   <%# f.text_field :city, placeholder: 'City' %>
@@ -7,7 +7,7 @@
   <%# f.password_field :password, autocomplete: 'new-password', placeholder: 'Password' %>
   <%# f.password_field :password_confirmation, autocomplete: 'new-password', placeholder: 'Confirm Password' %>
   
-  <%= f.number_field :id, placeholder: 'SIREN ou n° RNA' %>
+  <%= f.text_field :id, placeholder: 'SIREN ou n° RNA' %>
 
-  <%= f.submit 'Sign up' %>
+  <%= f.submit 'Sign up', class: 'btn btn-primary' %>
 <% end %>
