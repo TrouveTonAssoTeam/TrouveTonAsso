@@ -72,3 +72,5 @@ end
 gem "devise", "~> 4.9"
 
 gem "dotenv-rails", "~> 2.8"
+
+gem "turbolinks", "~> 5.2"

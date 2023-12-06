@@ -1,5 +1,14 @@
-<div class='large-font text-center top-20'>
-    <ion-icon name="heart">
-      <div class='red-bg'></div>
-    </ion-icon>
+
+    <%= button_to  like_asso_path(Association.all.sample), method: :post do %>
+        <ion-icon name="heart">
+        <div class='red-bg'></div>
+        </ion-icon>
+    <% end %>
+    <%= button_to "Dislike", unlike_asso_path(Association.all.sample), method: :post do %>
+      <span id = heart><i class="fa fa-heart-o" aria-hidden="true" ></i> </span>
+      <% end %>
+
   </div>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
