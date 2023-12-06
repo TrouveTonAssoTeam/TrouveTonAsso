@@ -3,6 +3,11 @@ class DonationsController < ApplicationController
 
   def new
     @association = Association.all.sample
+      # Si pas d'asso renvoie à l'index
+      if @association.nil?
+      flash[:alert] = "Nous n'avons pas pu trouvé l'association choisie."
+      redirect_to root_path
+      end
   end
 
   def create
@@ -23,6 +28,7 @@ class DonationsController < ApplicationController
   private
 
   def donation_params
-    params.require(:donation).permit(:amount)
+    # Ajout du stripe_id 
+    params.require(:donation).permit(:amount, :stripe_id)
   end
 end

@@ -13,6 +13,10 @@ user = User.create!(
 )
 
 association = Association.create!(
-  name: 'TestAsso',
-
+  email: 'test@asso.com',
+  password: 'password',
+  name: 'Test Asso',
+  description: 'Description',
+  city: 'Ville',
+  website: 'https://example.com'
 )

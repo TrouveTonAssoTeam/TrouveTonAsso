@@ -33,11 +33,36 @@ class PaymentsController < ApplicationController
   end
 
   def success
-    # Vérifier si l'id de la session n'est pas associée à un don précédent, si oui -> redirect_back(fallback_location: root_path) avec alert
-    # Rajouter dans la table donations un stripe_id
     @asso = Association.find(params[:asso_id])
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @amount = @session.amount_total / 100
     @user = current_user
+
+    # Vérifier si l'id de la session n'est pas associée à un don précédent
+    existing_donation = Donation.find_by(stripe_id: params[:session_id])
+
+    if existing_donation
+      # Si oui -> redirect_back(fallback_location: root_path) avec alert
+      redirect_back(fallback_location: root_path, alert: 'Une erreur est survenue.')
+
+      else
+        # Sinon sauvegarde la donation avec le stripe_id
+        @donation = Donation.new(amount: @amount, stripe_id: params[:session_id], user: @user, association: @asso)
+
+      if @donation.save
+        # Si success redirige vers la page success avec une alerte de réussite
+        redirect_to payment_success_path, notice: 'Votre don a bien été effectué. Merci pour votre soutiens!'
+
+      else
+        # Sinon redirect_back(fallback_location: root_path) avec alert
+        redirect_back(fallback_location: root_path, alert: 'Une erreur est survenue.')
+      end
+    end
   end
+
+    def cancel
+    # Si paiement annulé
+    redirect_to payment_cancel_path, alert: 'Le paiement a été annulé.'
+    end
+
 end
