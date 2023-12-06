@@ -1,0 +1,117 @@
+.navbar {
+    width: 100%;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--background-card-color);
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+.navbar::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    backdrop-filter: var(--background-blur);
+    z-index: -1;
+}
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .navbar-burger {
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    cursor: pointer;
+    position: relative;
+    z-index: 100;
+}
+
+.navbar .navbar-burger .bar {
+    display: block;
+    width: 30px;
+    height: 3px;
+    margin: 3px 0;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: var(--border-radius);
+    backdrop-filter: var(--background-blur);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+.navbar .navbar-burger .bar:nth-of-type(2) {
+    width: 20px;
+}
+.navbar .navbar-burger:hover .bar:nth-of-type(2) {
+    width: 30px;
+}
+
+.navbar .navbar-burger .bar:nth-of-type(3) {
+    width: 10px;
+}
+.navbar .navbar-burger:hover .bar:nth-of-type(3) {
+    width: 30px;
+}
+
+/* When the navbar burger is clicked */
+.navbar .navbar-burger.opened .bar {
+    background-color: var(--primary-color);
+    width: 30px;
+}
+.navbar .navbar-burger.opened .bar:nth-of-type(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.navbar .navbar-burger.opened .bar:nth-of-type(2) {
+    opacity: 0;
+}
+.navbar .navbar-burger.opened .bar:nth-of-type(3) {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
+.navbar .navbar-links {
+    display: flex;
+    gap: 1.5rem;
+}
+.navbar .navbar-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 300;
+}
+.navbar .navbar-links a.active {
+    font-weight: 500;
+}
+.navbar .navbar-links a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar .navbar-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100svh;
+        background-color: var(--background-card-color);
+        backdrop-filter: blur(10px);
+        box-shadow: var(--box-shadow);
+        border-left: 1px solid var(--border-color);
+        padding: 3rem;
+        padding-top: 10vh;
+        flex-direction: column;
+        align-items: center;
+        transform: translateX(100%);
+    }
+    .navbar .navbar-links.animated {
+        transition: transform 0.3s ease-in-out;
+    }
+    .navbar .navbar-links.opened {
+        transform: translateX(0);
+    }
+    .navbar .navbar-burger {
+        display: flex;
+    }
+}

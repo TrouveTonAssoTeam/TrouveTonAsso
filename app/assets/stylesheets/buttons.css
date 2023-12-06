@@ -1,0 +1,39 @@
+.btn {
+    border-radius: var(--border-radius);
+    padding: 0.75rem 1rem;
+    border: 1px solid;
+    border-color: var(--border-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--box-shadow);
+    backdrop-filter: var(--background-blur);
+    transition: all 0.2s ease-in-out;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.btn:hover {
+    box-shadow: var(--box-shadow-hover);
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.3);
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.btn-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.btn-group > .btn {
+    flex: 1;
+}
