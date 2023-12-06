@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_04_154731) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_05_142138) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "association_profiles", force: :cascade do |t|
+    t.bigint "association_id"
+    t.text "description"
+    t.string "cover_photo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["association_id"], name: "index_association_profiles_on_association_id"
+  end
 
   create_table "associations", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -42,4 +51,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_154731) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "association_profiles", "associations"
 end

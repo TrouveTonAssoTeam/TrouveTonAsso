@@ -4,13 +4,14 @@ class AssociationProfilesController < ApplicationController
 
   
     def show
-      @association_profile = AssociationProfile.find_by(association: current_association)
+      @association_profile = AssociationProfile.find_by(association_id: current_association.id)
       if @association_profile
         # La logique pour afficher les détails du profil de l'association
       else
         redirect_to root_path, notice: "Aucun profil trouvé"
       end
     end
+    
   
     def new
       @association_profile = AssociationProfile.new
@@ -18,7 +19,7 @@ class AssociationProfilesController < ApplicationController
   
     def create
       @association_profile = AssociationProfile.new(association_profile_params)
-      @association_profile.association = current_association # Assurez-vous que l'association est correctement associée
+
       
       if @association_profile.save
         redirect_to @association_profile, notice: 'Profil créé avec succès'
