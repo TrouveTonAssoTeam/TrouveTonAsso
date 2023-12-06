@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :associations
-  devise_for :users
+  devise_for :users, path: 'users', controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
+
+  devise_for :associations, path: 'associations', controllers: {
+    sessions: 'associations/sessions',
+    registrations: 'associations/registrations'
+  }
+
   root 'pages#index'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -11,6 +19,8 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :associations, only: [:show]
+  get "association/test", to: "associations#test"
+  post "association/new", to: "associations#new", as: :new_association
 
   # Defines the root path route ("/")
   # root "posts#index"

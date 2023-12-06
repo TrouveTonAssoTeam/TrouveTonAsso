@@ -1,5 +1,17 @@
+require 'net/http'
+require 'uri'
+
 class AssociationsController < ApplicationController
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+  def test
+    
+  end
+
+  def new
+    uri = URI.parse("https://siva-integ1.cegedim.cloud/apim/api-asso/api/structure/#{params[:id]}")
+  response = Net::HTTP.get_response(uri)
+  end
 
   def show
       @association = Association.find(params[:id])
