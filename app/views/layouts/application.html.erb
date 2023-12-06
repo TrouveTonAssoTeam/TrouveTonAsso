@@ -11,14 +11,29 @@
     <%= javascript_include_tag 'https://js.stripe.com/v3/' %>
   </head>
 
-  <body> 
+  <body>
+
+  <%= render "shared/navbar" %>
+
+  <div class="container">
     <% if notice %>
-     <p class="alert alert-success"><%= notice %></p>
+     <div class="alert alert-success">
+        <h3> Succès ! </h3>
+        <%= notice %>
+        <div class="close">&times;</div>
+     </div>
     <% end %>
     <% if alert %>
-    <p class="alert alert-danger"><%= alert %></p>
+      <div class="alert alert-error">
+        <h3> Erreur ! </h3>
+        <%= alert %>
+        <div class="close">&times;</div>
+      </div>
    <% end %>
    <%= yield %> 
-   
+  </div>
+
+  <%= render "shared/footer" %>
+  <%= render "shared/background" %>
   </body>
 </html>
