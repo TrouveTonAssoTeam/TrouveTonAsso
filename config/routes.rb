@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   post 'like/:id', to: 'like#like', as: "like_asso"
   post 'unlike/:id', to: 'like#unlike', as: "unlike_asso"
   resources :associations
-end
 
   # Profile page and edit
   get 'profil', to: 'profil#show', as: 'profil'
@@ -25,5 +24,5 @@ end
   post 'update', to: 'profil#update', as: 'profil_update'
   # Defines the root path route ("/")
   # root "posts#index"
-end
+  end
 end
