@@ -47,7 +47,11 @@ class PaymentsController < ApplicationController
 
       else
         # Sinon sauvegarde la donation avec le stripe_id
-        @donation = Donation.new(amount: @amount, stripe_id: params[:session_id], user: @user, association: @asso)
+        @donation = Donation.new
+        @donation.amount = @amount
+        @donation.stripe_id = params[:session_id]
+        @donation.user = @user
+        @donation.association = @asso
 
       if @donation.save
         # Si success redirige vers la page success avec une alerte de réussite
