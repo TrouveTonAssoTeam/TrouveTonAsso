@@ -36,7 +36,13 @@
 
         <div class="footer-copy">
             <p>Copyright © 2023 - Tous droits réservés</p>
-            <div><a href="#">Mentions légales</a> | <a href="#">CGU</a> | <a href="#">Cookies</a></div>
+        
+            <%= link_to "Mentions légales", mentionslegales_path, class: "mx-2" %> |
+            <%= link_to "CGU", cgu_path, class: "mx-2" %> |
+            <%= link_to "Cookies", cookies_path , class: "mx-2" %>
+          </div>
+        </div>
+        
         </div>
     </div>
 </footer>

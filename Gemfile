@@ -72,3 +72,9 @@ end
 gem "devise", "~> 4.9"
 
 gem "dotenv-rails", "~> 2.8"
+
+gem "stripe"
+
+gem "turbolinks"
+
+gem "rails_real_favicon", "~> 0.1.1"

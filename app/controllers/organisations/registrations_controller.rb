@@ -2,7 +2,7 @@ require "uri"
 require "net/http"
 # frozen_string_literal: true
 
-class Associations::RegistrationsController < Devise::RegistrationsController
+class Organisations::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :is_association?
   # before_action :configure_account_update_params, only: [:update]
@@ -16,7 +16,7 @@ class Associations::RegistrationsController < Devise::RegistrationsController
   def create
     super
 
-    asso = Association.find_by(email: params[:association][:email])
+    asso = Organisation.find_by(email: params[:organisations][:email])
     asso.update(name: session[:asso]["name"], description: session[:asso]["description"], city: session[:asso]["city"], address: session[:asso]["address"], zip: session[:asso]["zip"], rna: session[:asso]["RNA"])
 
     session[:asso] = nil
@@ -56,7 +56,7 @@ class Associations::RegistrationsController < Devise::RegistrationsController
   # Redirect to check if asso is valid or note
   def is_association?
     flash[:alert] = "Vous devez renseigner un numéro d'association avant de continuer" unless session[:asso]
-    redirect_to association_test_path unless session[:asso]
+    redirect_to organisation_test_path unless session[:asso]
   end
 
   # If you have extra params to permit, append them to the sanitizer.

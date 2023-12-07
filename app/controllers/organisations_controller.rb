@@ -2,7 +2,7 @@ require 'net/http'
 require 'uri'
 require 'json'
 
-class AssociationsController < ApplicationController
+class OrganisationsController < ApplicationController
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :is_already_verified?
 
@@ -18,7 +18,7 @@ class AssociationsController < ApplicationController
 
     if data_hash["erreur"] != nil || data_hash["identite"]["active"] == false || Association.find_by(rna: data_hash["id_rna"]).present?
       flash[:alert] = "Le numéro renseigné n'est pas valable"
-      redirect_to association_test_path
+      redirect_to organisation_test_path
     else
       @asso = Hash.new
       @asso["name"] = data_hash["identite"]["nom"]
@@ -29,12 +29,12 @@ class AssociationsController < ApplicationController
       @asso["RNA"] = data_hash["id_rna"]
       session[:asso] = @asso
 
-      redirect_to new_association_registration_path
+      redirect_to new_organisation_registration_path
     end
   end
 
   def show
-      @association = Association.find(params[:id])
+      @organisation = Organisation.find(params[:id])
   end
 
   protected
@@ -46,7 +46,7 @@ class AssociationsController < ApplicationController
  
   def is_already_verified?
     if session[:asso]
-      redirect_to new_association_registration_path
+      redirect_to new_organisation_registration_path
     end
   end
 end
