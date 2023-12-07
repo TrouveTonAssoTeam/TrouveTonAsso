@@ -3,7 +3,17 @@ class PromotedController < ApplicationController
     def index
         @organisation = current_organisation
         
-        @past_promoted = Promoted.where(organisation: current_organisation).where("start_date <= ?", Date.today).order(created_at: :desc)
+        @all_promoted = Promoted.where(organisation: current_organisation).order(created_at: :desc)
+        @total_duration = 0
+        @all_promoted.each do |promoted|
+            @total_duration += promoted.duration
+        end
+
+        @total_price = 0
+        @all_promoted.each do |promoted|
+            @total_price += promoted.price
+        end
+
         @current_promoted = Promoted.where(organisation: current_organisation).where("start_date <= ? AND end_date >= ?", Date.today, Date.today).order(end_date: :desc)
         @is_promoted = @current_promoted.empty? ? false : true
         
@@ -17,12 +27,13 @@ class PromotedController < ApplicationController
         
         @current_promoted = Promoted.where(organisation: current_organisation).where("start_date <= ? AND end_date >= ?", Date.today, Date.today).order(end_date: :desc)
         @is_promoted = @current_promoted.empty? ? false : true
+        
+        @today = Date.today
 
         if @is_promoted
             @remaining_days = @current_promoted[0].end_date - Date.today
+            @today = @current_promoted[0].end_date
         end
-
-        @today = Date.today
     end
 
     def go_to_paiement
@@ -72,8 +83,14 @@ class PromotedController < ApplicationController
 
             @promoted = Promoted.new
             @promoted.organisation = current_organisation
-            @promoted.start_date = Date.today
-            @promoted.end_date = Date.today + @weeks * 7
+
+            if current_organisation.promoteds.where("end_date > ?", Date.today).empty?
+                @start_date = Date.today
+            else 
+                @start_date = current_organisation.promoteds.where("end_date > ?", Date.today).order(end_date: :desc)[0].end_date + 1
+            end
+            @promoted.start_date = @start_date
+            @promoted.end_date = @start_date + @weeks * 7
             @promoted.price = @total
             @promoted.stripe_id = @session.id
 

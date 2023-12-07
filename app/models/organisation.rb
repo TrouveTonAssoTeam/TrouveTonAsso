@@ -7,4 +7,5 @@ class Organisation < ApplicationRecord
     # validates :name, :description, :city, :address, :zip, presence: true
     
     has_many :donations
+    has_many :promoteds
 end

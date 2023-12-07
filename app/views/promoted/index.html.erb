@@ -18,7 +18,7 @@
 
     <div class="pb-6">
         <h2 class="mt-3">Vos mise en avant précédentes</h2>
-        <% if !@past_promoted.empty? %>
+        <% if !@all_promoted.empty? %>
         <div class="table-container">
             <table>
                 <thead>
@@ -31,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% @past_promoted.each do |promoted| %>
+                    <% @all_promoted.each do |promoted| %>
                         <tr>
                             <td><%= I18n.l(promoted.start_date, format: :long) %></td>
                             <td><%= I18n.l(promoted.end_date, format: :long) %></td>
@@ -41,6 +41,20 @@
                         </tr>
                     <% end %>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="2" class="text-left">
+                            Total :
+                        </th>
+                        <td>
+                            <%= @total_duration %>
+                        </td>
+                        <td>
+                            <%= if @total_price === @total_price.to_i then @total_price.to_i else @total_price end %> €
+                        </td>
+                        <td></td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
         <% else %>

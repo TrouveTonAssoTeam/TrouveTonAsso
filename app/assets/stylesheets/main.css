@@ -106,6 +106,14 @@ b {
     text-align: center;
 }
 
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
 .mt-0 {
     margin-top: 0 !important;
 }
