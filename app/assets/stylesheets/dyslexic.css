@@ -1,0 +1,24 @@
+.dyslexic {
+    font-family: "Open-Dyslexic", sans-serif;
+}
+.dyslexic * {
+    font-family: "Open-Dyslexic", sans-serif;
+}
+
+#dyslexic-popup {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 999;
+    text-align: center;
+    transform: translateY(calc(100% + 1rem));
+    animation: 1s 2s pop-in-bottom ease forwards;
+}
+@keyframes pop-in-bottom {
+    0% {
+        transform: translateY(calc(100% + 1rem));
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
