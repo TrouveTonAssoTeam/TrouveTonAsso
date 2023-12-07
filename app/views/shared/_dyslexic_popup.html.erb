@@ -1,0 +1,9 @@
+<% if !cookies[:dyslexie].present? %>
+    <div id="dyslexic-popup" class="dyslexic card">
+        <h3>Vous êtes dyslexique ?</h3>
+        <div class="btn-group">
+            <%= button_to "Adopter une police adaptée", set_dyslexie_path("true"), class: "btn btn-primary" %>
+            <%= button_to "Non", set_dyslexie_path("false"), class: "btn btn-secondary" %>
+        </div>
+    </div>
+<% end %>

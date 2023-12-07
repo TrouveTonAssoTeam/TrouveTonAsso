@@ -1,6 +1,4 @@
 /*
- *= require_tree .
- *= require_self
  *= require main
  *= require alerts
  *= require bg
@@ -9,4 +7,5 @@
  *= require form
  *= require cards
  *= require footer
+ *= require dyslexic
  */
