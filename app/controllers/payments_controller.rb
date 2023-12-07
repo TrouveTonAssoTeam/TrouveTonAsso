@@ -6,7 +6,7 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    @asso = Association.find(params[:asso_id])
+    @asso = Organisation.find(params[:organisation_id])
     @amount = params[:amount].to_i
     @session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
@@ -21,7 +21,7 @@ class PaymentsController < ApplicationController
         quantity: 1
       }],
       mode: 'payment',
-      success_url: payment_success_url(asso_id: @asso.id) + '&session_id={CHECKOUT_SESSION_ID}',
+      success_url: payment_success_url(organisation_id: @asso.id) + '&session_id={CHECKOUT_SESSION_ID}',
       cancel_url: payment_cancel_url
     )
 
@@ -33,7 +33,8 @@ class PaymentsController < ApplicationController
   end
 
   def success
-    @asso = Association.find(params[:asso_id])
+    puts "Params: #{params.inspect}" # Pour tests et vérifier les params passés dans la console
+    @asso = Organisation.find(params[:organisation_id])
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @amount = @session.amount_total / 100
     @user = current_user
@@ -51,7 +52,7 @@ class PaymentsController < ApplicationController
         @donation.amount = @amount
         @donation.stripe_id = params[:session_id]
         @donation.user = @user
-        @donation.association = @asso
+        @donation.organisation = @asso
 
       if @donation.save
         # Si success redirige vers la page success avec une alerte de réussite

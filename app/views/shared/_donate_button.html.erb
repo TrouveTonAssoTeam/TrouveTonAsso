@@ -1,5 +1,5 @@
 <%= form_with method: :post, url: payments_path, data: { turbo: false } do |form| %>
-  <%= form.hidden_field :asso_id, value: @association.id %>
+  <%= form.hidden_field :organisation_id, value: @organisation.id %>
   <%= form.label :amount %>
   <%= form.number_field :amount, step: 'any' %>
 

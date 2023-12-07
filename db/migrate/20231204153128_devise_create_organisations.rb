@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class DeviseCreateAssociations < ActiveRecord::Migration[7.1]
+class DeviseCreateOrganisations < ActiveRecord::Migration[7.1]
   def change
-    create_table :associations do |t|
+    create_table :organisation do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -36,8 +36,8 @@ class DeviseCreateAssociations < ActiveRecord::Migration[7.1]
       t.timestamps null: false
     end
 
-    add_index :associations, :email,                unique: true
-    add_index :associations, :reset_password_token, unique: true
+    add_index :organisation, :email,                unique: true
+    add_index :organisation, :reset_password_token, unique: true
     # add_index :associations, :confirmation_token,   unique: true
     # add_index :associations, :unlock_token,         unique: true
   end

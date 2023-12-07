@@ -2,9 +2,9 @@ class DonationsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @association = Association.all.sample
+    @organisation = Organisation.all.sample
       # Si pas d'asso renvoie à l'index
-      if @association.nil?
+      if @organisation.nil?
       flash[:alert] = "Nous n'avons pas pu trouvé l'association choisie."
       redirect_to root_path
       end

@@ -12,8 +12,22 @@ user = User.create!(
   password: 'password',
 )
 
-association = Association.create!(
+user = User.create!(
+  email: 'test2@user.com',
+  password: 'password',
+)
+
+organisation = Organisation.create!(
   email: 'test@asso.com',
+  password: 'password',
+  name: 'Test Asso',
+  description: 'Description',
+  city: 'Ville',
+  website: 'https://example.com'
+)
+
+organisation = Organisation.create!(
+  email: 'test2@asso.com',
   password: 'password',
   name: 'Test Asso',
   description: 'Description',
