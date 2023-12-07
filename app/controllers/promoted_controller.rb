@@ -65,20 +65,25 @@ class PromotedController < ApplicationController
 
     def paiement_success
         @session = Stripe::Checkout::Session.retrieve(params[:session_id])
-        @weeks = @session.metadata.weeks.to_i
-        @total = @session.amount_total / 100
 
-        @promoted = Promoted.new
-        @promoted.organisation = current_organisation
-        @promoted.start_date = Date.today
-        @promoted.end_date = Date.today + @weeks * 7
-        @promoted.price = @total
-        @promoted.stripe_id = @session.id
+        if Promoted.where(stripe_id: @session.id).empty?
+            @weeks = @session.metadata.weeks.to_i
+            @total = @session.amount_total / 100
 
-        if @promoted.save
-            redirect_to promoted_index_path, notice: "Merci pour votre paiement de #{@total} €. Votre association sera mise en avant pour #{@weeks * 7} jours de plus."
+            @promoted = Promoted.new
+            @promoted.organisation = current_organisation
+            @promoted.start_date = Date.today
+            @promoted.end_date = Date.today + @weeks * 7
+            @promoted.price = @total
+            @promoted.stripe_id = @session.id
+
+            if @promoted.save
+                redirect_to promoted_index_path, notice: "Merci pour votre paiement de #{@total} €. Votre association sera mise en avant pour #{@weeks * 7} jours de plus."
+            else
+                redirect_to promoted_index_path, alert: "Une erreur est survenue. Merci de contacter le support pour plus d'informations."
+            end
         else
-            redirect_to promoted_index_path, alert: "Une erreur est survenue. Merci de contacter le support pour plus d'informations."
+            redirect_back(fallback_location: promoted_index_path, alert: "Une erreur est survenue.")
         end
     end
 end
