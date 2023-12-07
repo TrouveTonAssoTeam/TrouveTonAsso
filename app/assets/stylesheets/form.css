@@ -36,6 +36,13 @@
     margin-top: 0.5rem;
 }
 
+.form input:disabled,
+.form select:disabled,
+.form textarea:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .form-group {
     display: flex;
     width: 100%;

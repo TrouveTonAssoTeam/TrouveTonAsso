@@ -6,4 +6,5 @@ class User < ApplicationRecord
          
     has_many :likes
     has_many :liked_associations, through: :likes, source: :association
+  has_many :donations
 end

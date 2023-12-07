@@ -1,0 +1,7 @@
+<h2>Merci pour votre don!</h2>
+
+<p>Montant du don: <%= number_to_currency(@amount, unit: '€') %></p>
+<p>Date du don: <%= @donation.created_at.strftime('%d/%m/%Y %H:%M:%S') %></p>
+<p>Association: <%= @asso.name %></p>
+
+<%= link_to 'Retour à la page de don', new_donation_path %>
