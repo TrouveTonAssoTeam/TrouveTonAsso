@@ -1,7 +1,7 @@
 <!-- associations/edit.html.erb -->
 
 <%= form_for @association, url: association_path(Association.find(params[:id])), method: :patch, html: { multipart: true } do |f| %>
-  <!-- Vos champs de formulaire ici -->
+
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name %>
