@@ -17,7 +17,7 @@ class LikeController < ApplicationController
 
     return est_like
 end
-est_like = gerer_like(est_like)
+
     def like
         puts "Vous avez bien liker cette page"
     end

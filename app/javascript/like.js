@@ -1,7 +1,5 @@
 // Javascript pour faire allumé mon bouton
-let icon = document.querySelector('ion-icon');
-icon.onclick = function(){
-  icon.classList.toggle('active');
+
 
   // Variable pour définir l'état de mon bouton
   let estLike = false;
@@ -20,3 +18,4 @@ icon.onclick = function(){
     //Ajoute d'autres action pour le "unliker"
     estLike = false
   }
+}

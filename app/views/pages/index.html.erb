@@ -94,3 +94,34 @@
     <div class="right-side no-display-md" style="background-image: url('<%= asset_path('form.jpg') %>');">
     </div>
 </div>
+
+<%= button_to  like_asso_path(Association.all.sample), method: :post do %>
+    <ion-icon name="heart">
+    <div class='red-bg'></div>
+    </ion-icon>
+<% end %>
+
+<%= button_to unlike_asso_path(Association.all.sample), method: :delete, class: 'like-btn', remote: true do %>
+  Unlike
+<% end %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const likeBtns = document.querySelectorAll('.like-btn');
+
+    likeBtns.forEach(function(btn) {
+      btn.addEventListener('click', function(event) {
+        if (btn.textContent === 'Like') {
+          btn.textContent = 'Unlike';
+        } else {
+          btn.textContent = 'Like';
+        }
+      });
+    });
+  });
+</script>
+</div>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<h1>Associations aimées par les utilisateurs :</h1>

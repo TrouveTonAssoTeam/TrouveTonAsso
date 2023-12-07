@@ -7,4 +7,8 @@ class PagesController < ApplicationController
 end
 def contact
 end
+
+	def index
+		@liked_associations = Association.joins(:liking_users).distinct
+	end
 end
