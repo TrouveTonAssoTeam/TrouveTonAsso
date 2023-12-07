@@ -14,24 +14,24 @@ class PromotedController < ApplicationController
             @total_price += promoted.price
         end
 
-        @current_promoted = Promoted.where(organisation: current_organisation).where("start_date <= ? AND end_date >= ?", Date.today, Date.today).order(end_date: :desc)
+        @current_promoted = Promoted.where(organisation: current_organisation).where("end_date >= ?", Date.today).order(end_date: :desc)
         @is_promoted = @current_promoted.empty? ? false : true
         
         if @is_promoted
-            @remaining_days = (@current_promoted[0].end_date - Date.today).to_i
+            @remaining_days = (@current_promoted[0].end_date - Date.today + 1).to_i
         end
     end
 
     def new
         @organisation = current_organisation
         
-        @current_promoted = Promoted.where(organisation: current_organisation).where("start_date <= ? AND end_date >= ?", Date.today, Date.today).order(end_date: :desc)
+        @current_promoted = Promoted.where(organisation: current_organisation).where("end_date >= ?", Date.today).order(end_date: :desc)
         @is_promoted = @current_promoted.empty? ? false : true
         
         @today = Date.today
 
         if @is_promoted
-            @remaining_days = @current_promoted[0].end_date - Date.today
+            @remaining_days = (@current_promoted[0].end_date - Date.today + 1).to_i
             @today = @current_promoted[0].end_date
         end
     end
