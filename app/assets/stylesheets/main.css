@@ -81,7 +81,7 @@ b {
 }
 
 .container {
-    max-width: 1400px;
+    max-width: min(1400px, 88%);
     padding-left: 6%;
     padding-right: 6%;
     margin-left: auto;

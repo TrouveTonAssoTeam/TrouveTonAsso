@@ -16,33 +16,37 @@
     <% end %>
     </div>
 
-    <h2 class="mt-6">Vos mise en avant précédentes</h2>
-    <% if !@past_promoted.empty? %>
-        <table>
-            <thead>
-                <tr>
-                    <th>Début</th>
-                    <th>Fin</th>
-                    <th>Durée (jours)</th>
-                    <th>Prix</th>
-                    <th>État</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @past_promoted.each do |promoted| %>
+    <div class="pb-6">
+        <h2 class="mt-3">Vos mise en avant précédentes</h2>
+        <% if !@past_promoted.empty? %>
+        <div class="table-container">
+            <table>
+                <thead>
                     <tr>
-                        <td><%= I18n.l(promoted.start_date, format: :long) %></td>
-                        <td><%= I18n.l(promoted.end_date, format: :long) %></td>
-                        <td><%= promoted.duration %></td>
-                        <td><%= if promoted.price === promoted.price.to_i then promoted.price.to_i else promoted.price end %> €</td>
-                        <td><%= promoted.state %></td>
+                        <th>Début</th>
+                        <th>Fin</th>
+                        <th>Durée (jours)</th>
+                        <th>Prix</th>
+                        <th>État</th>
                     </tr>
-                <% end %>
-            </tbody>
-        </table>
-    <% else %>
-        <p>Malheureusement, vous n'avez pas profité des joies de mettre votre association en avant sur TrouveTonAsso.</p>
-        <p>Vous pouvez y remédier en ajoutant des jours de promotion :</p>
-        <%= button_to "Promouvoir mon association", new_promoted_path, form: { class: 'form' }, method: :get, class: "btn btn-primary" %>
-    <% end %>
+                </thead>
+                <tbody>
+                    <% @past_promoted.each do |promoted| %>
+                        <tr>
+                            <td><%= I18n.l(promoted.start_date, format: :long) %></td>
+                            <td><%= I18n.l(promoted.end_date, format: :long) %></td>
+                            <td><%= promoted.duration %></td>
+                            <td><%= if promoted.price === promoted.price.to_i then promoted.price.to_i else promoted.price end %> €</td>
+                            <td><%= promoted.state %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+        <% else %>
+            <p>Malheureusement, vous n'avez pas profité des joies de mettre votre association en avant sur TrouveTonAsso.</p>
+            <p>Vous pouvez y remédier en ajoutant des jours de promotion :</p>
+            <%= button_to "Promouvoir mon association", new_promoted_path, form: { class: 'form' }, method: :get, class: "btn btn-primary" %>
+        <% end %>
+    </div>
 </div>

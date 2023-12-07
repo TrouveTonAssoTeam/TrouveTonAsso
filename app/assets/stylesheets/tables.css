@@ -1,0 +1,29 @@
+table {
+    width: 100%;
+    padding: 0 1rem;
+    min-width: max-content;
+}
+
+.table-container {
+    overflow-x: auto;
+    width: 100%;
+    background-color: var(--background-card-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: var(--background-blur);
+    border: 1px solid;
+    border-color: var(--border-color);
+}
+
+table thead th {
+    padding: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+table tfoot td,
+table tbody td {
+    padding: 0.5rem 1rem;
+}
+
+table tbody tr:not(:last-of-type) td {
+    border-bottom: 1px solid var(--border-color);
+}
