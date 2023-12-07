@@ -63,6 +63,7 @@ class PromotedController < ApplicationController
                 },
                 quantity: 1
             }],
+            customer_email: @organisation.email,
             metadata: {
                 weeks: @weeks
             },
