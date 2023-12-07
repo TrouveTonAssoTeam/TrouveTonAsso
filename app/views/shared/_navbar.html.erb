@@ -18,7 +18,7 @@
 
         <% if user_signed_in? %>
 
-            <%= link_to "Profil", user_path(current_user), class: "nav-link" %>      
+            <%= link_to "Profil", profil_path(current_user), class: "nav-link" %>      
             <%= link_to "Sign out", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "nav-link" %>
         
         <% else %>
