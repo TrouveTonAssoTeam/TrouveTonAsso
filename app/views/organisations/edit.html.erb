@@ -1,6 +1,4 @@
-<!-- associations/edit.html.erb -->
-
-<%= form_for @association, url: association_path(Association.find(params[:id])), method: :patch, html: { multipart: true } do |f| %>
+<%= form_for @organisation, url: organisation_path(Organisation.find(params[:id])), method: :patch, html: { multipart: true } do |f| %>
 
   <div class="field">
     <%= f.label :name %>

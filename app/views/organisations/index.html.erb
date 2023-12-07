@@ -1,9 +1,9 @@
 <!-- app/views/associations/index.html.erb -->
-<% if @associations.any? %>
+<% if @organisations.any? %>
   <h1>Liste des associations</h1>
   <ul>
-    <% @associations.each do |association| %>
-      <li><%= link_to association.name, association_path(association) %></li>
+    <% @organisations.each do |organisation| %>
+      <li><%= link_to organisation.name, organisation_path(organisation) %></li>
       <!-- Affichez d'autres détails si nécessaire -->
     <% end %>
   </ul>
