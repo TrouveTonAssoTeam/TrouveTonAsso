@@ -3,7 +3,7 @@ footer.footer {
     border-top: 1px solid var(--border-color);
     color: var(--primary-color);
     padding: 1.5rem;
-    margin-top: 2rem;
+    margin-top: auto;
     backdrop-filter: var(--background-blur);
     box-shadow: var(--box-shadow);
 }
