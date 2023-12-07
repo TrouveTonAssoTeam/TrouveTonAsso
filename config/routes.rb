@@ -24,9 +24,12 @@ Rails.application.routes.draw do
   # Profile page and edit
   get 'profil', to: 'profil#show', as: 'profil'
   scope '/profil'  do
-  get 'edit', to: 'profil#edit', as: 'profil_edit'
-  post 'update', to: 'profil#update', as: 'profil_update'
+    get 'edit', to: 'profil#edit', as: 'profil_edit'
+    post 'update', to: 'profil#update', as: 'profil_update'
+  end
   # Defines the root path route ("/")
   # root "posts#index"
-end
+
+  # Set the dyslexie mode
+  post 'dyslexie/:value', to: 'application#set_dyslexie', as: 'set_dyslexie'
 end
