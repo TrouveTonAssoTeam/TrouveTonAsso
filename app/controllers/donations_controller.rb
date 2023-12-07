@@ -14,16 +14,11 @@ class DonationsController < ApplicationController
     @user_donations = current_user.donations
   end
 
+  def organisation_donations
+    @organisation_donations = current_organisation.donations
+  end
+
   def create
-    # @association = Association.find(params[:association_id])
-    # @donation = current_user.donations.build(donation_params.merge(association: @association))
-
-    # if @donation.save
-    #   redirect_to new_payment_path
-    # else
-    #   render :new
-    # end
-
     puts "$" * 20
     puts params
     puts "$" * 20
