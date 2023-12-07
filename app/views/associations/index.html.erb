@@ -1,0 +1,12 @@
+<!-- app/views/associations/index.html.erb -->
+<% if @associations.any? %>
+  <h1>Liste des associations</h1>
+  <ul>
+    <% @associations.each do |association| %>
+      <li><%= link_to association.name, association_path(association) %></li>
+      <!-- Affichez d'autres détails si nécessaire -->
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucune association trouvée</p>
+<% end %>

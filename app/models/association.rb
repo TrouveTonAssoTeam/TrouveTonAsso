@@ -1,5 +1,5 @@
 class Association < ApplicationRecord
-    has_one :association_profiles
+    has_one_attached :cover_photo
     after_create :create_association_profile
 
     private

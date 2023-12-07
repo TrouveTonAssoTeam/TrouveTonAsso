@@ -15,6 +15,10 @@ class AssociationsController < ApplicationController
     @association = Association.find(params[:id])
   end
 
+  def index
+    @associations = Association.all
+  end
+
   def test
     # Votre action test
   end
@@ -57,6 +61,10 @@ class AssociationsController < ApplicationController
         format.json { render json: @association.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def dashboard
+    @association = current_association
   end
 
   protected
