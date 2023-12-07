@@ -8,6 +8,8 @@ def contact
 end
 
 	def index
-		@liked_associations = Association.joins(:liking_users).distinct
+		@liked_organisation = Organisation.joins(:liking_users).distinct
 	end
 end
+ 
+
