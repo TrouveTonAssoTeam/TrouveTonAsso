@@ -38,6 +38,11 @@ class AssociationsController < ApplicationController
 
   def edit
     @association = Association.find(params[:id])
+    if @association == current_association
+      # Afficher le formulaire de modification de la page d'accueil
+    else
+      redirect_to new_association_session_path, alert: "Vous devez vous connecter pour accéder à cette page."
+    end
   end
 
   def update
