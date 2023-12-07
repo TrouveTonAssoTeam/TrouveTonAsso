@@ -55,8 +55,8 @@ class PaymentsController < ApplicationController
         @donation.organisation = @asso
 
       if @donation.save
-        # Si success redirige vers la page success avec une alerte de réussite
-        redirect_to payment_success_path, notice: 'Votre don a bien été effectué. Merci pour votre soutiens!'
+        # Si success -> page success avec une alerte de réussite
+        flash.notice= "Votre don de #{@amount}€ pour #{@asso.name} a bien été effectué. Merci pour votre soutiens!"
 
       else
         # Sinon redirect_back(fallback_location: root_path) avec alert
