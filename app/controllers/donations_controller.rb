@@ -10,6 +10,10 @@ class DonationsController < ApplicationController
       end
   end
 
+  def user_donations
+    @user_donations = current_user.donations
+  end
+
   def create
     # @association = Association.find(params[:association_id])
     # @donation = current_user.donations.build(donation_params.merge(association: @association))
