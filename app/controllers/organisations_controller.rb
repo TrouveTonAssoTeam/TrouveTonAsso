@@ -5,6 +5,8 @@ require 'json'
 class OrganisationsController < ApplicationController
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :is_already_verified?
+  before_action :authenticate_organisation!, only: [:show]
+  before_action :find_organisation, only: [:show]
 
   def test
     
@@ -37,6 +39,48 @@ class OrganisationsController < ApplicationController
       @organisation = Organisation.find(params[:id])
   end
 
+  def delete
+    @organisation = Organisation.find(params[:id]) 
+  end 
+
+  def find_organisation
+    @organisation = Organisation.find(params[:id])
+  end
+
+  def index
+    @organisation = Organisation.find(params[:id])
+  end
+
+  def show_organisation
+    @organisation = Organisation.find(params[:id])
+  end
+
+  def edit
+    @organisation = Organisation.find(params[:id])
+    if @organisation == current_organisation
+    else
+      redirect_to new_organisation_session_path, alert: "Vous devez vous connecter pour accéder à cette page."
+    end
+  end
+
+  def update
+    @organisation = Organisation.find(params[:id])
+
+    respond_to do |format|
+      if @organisation.update(organisation_params)
+        format.html { redirect_to @organisation, notice: 'Association was successfully updated.' }
+        format.json { render :show, status: :ok, location: @organisation }
+      else
+        format.html { render :edit }
+        format.json { render json: @organisation.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def dashboard
+    @organisation = current_organisation
+  end
+
   protected
 
   def configure_permitted_parameters
@@ -49,4 +93,13 @@ class OrganisationsController < ApplicationController
       redirect_to new_organisation_registration_path
     end
   end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :description, :city, :website])
+  end
+
+  def association_params
+    params.require(:organisation).permit(:name, :description, :city, :website, :cover_photo)
+  end
+
 end
