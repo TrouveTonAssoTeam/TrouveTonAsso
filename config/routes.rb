@@ -32,4 +32,7 @@ Rails.application.routes.draw do
 
   # Set the dyslexie mode
   post 'dyslexie/:value', to: 'application#set_dyslexie', as: 'set_dyslexie'
+
+  # Resources for promoted asso
+  resources :promoted, only: [:index, :show]
 end
