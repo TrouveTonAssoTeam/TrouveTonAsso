@@ -10,48 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_07_134917) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_07_144937) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
-  end
-
-  create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.string "service_name", null: false
-    t.bigint "byte_size", null: false
-    t.string "checksum"
-    t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
-    t.string "variation_digest", null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end
-
-  create_table "association_profiles", force: :cascade do |t|
-    t.bigint "association_id"
-    t.text "description"
-    t.string "cover_photo"
+  create_table "donations", force: :cascade do |t|
+    t.integer "amount"
+    t.integer "organisation_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["association_id"], name: "index_association_profiles_on_association_id"
+    t.string "stripe_id"
   end
 
-  create_table "associations", force: :cascade do |t|
+  create_table "organisations", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -62,9 +34,20 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_134917) do
     t.string "name"
     t.text "description"
     t.string "city"
-    t.string "website"
-    t.index ["email"], name: "index_associations_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_associations_on_reset_password_token", unique: true
+    t.string "address"
+    t.string "zip"
+    t.string "rna"
+    t.index ["email"], name: "index_organisations_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_organisations_on_reset_password_token", unique: true
+  end
+
+  create_table "promoteds", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "organisation_id"
+    t.string "stripe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
