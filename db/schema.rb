@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_144937) do
     t.date "start_date"
     t.date "end_date"
     t.integer "organisation_id"
+    t.float "price"
     t.string "stripe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
