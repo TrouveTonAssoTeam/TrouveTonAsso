@@ -1,7 +1,7 @@
 <div class="text-center">
     <div class="pb-6">
     <% if @is_promoted %>
-        <div class="alert alert-success">
+        <div class="alert card-gold">
             <h1><%= @organisation.name %> est actuellement mise en avant !</h1>
             <p>Il vous reste encore <b><%= @remaining_days %> jour<%= @remaining_days == 1 ? '' : 's' %></b> de promotion.</p>
         </div>
