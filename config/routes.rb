@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
 
-  resources :organisations, only: [:index, :show, :edit, :update]
+  resources :organisations, only: [:index, :show, :edit, :update] 
   get "dashboard", to: 'organisations#dashboard'
   get "organisation/test", to: "organisations#test"
   post "organisation/new", to: "organisations#new", as: :new_organisation

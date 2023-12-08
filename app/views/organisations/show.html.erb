@@ -1,13 +1,23 @@
+<%= stylesheet_link_tag 'organisation.show', media: 'all' %>
 <% if @organisation %>
-  <h1>Détails de l'association <%= @organisation.name %></h1>
+  <div class="container">
+  <h1 class="mt-4 organisation-name"><strong><%= @organisation.name %></strong></h1>
 
-  <!-- Affichage de la photo de couverture -->
-  <% if @organisation.cover_photo.attached? %>
-    <%= image_tag @organisation.cover_photo %>
-  <% else %>
-    <p>Aucune photo de couverture pour cette association</p>
-  <% end %>
+    <% if @organisation.cover_photo.attached? %>
+      <div class="image-container">
+        <%= image_tag @organisation.cover_photo, class: "img-fluid rounded-custom" %>
+      </div>
+    <% else %>
+      <p>Aucune photo de couverture pour cette association</p>
+    <% end %>
 
+    <div class="element">
+      <p><strong>Description</strong><p>
+      <%= @organisation.description %>
+      <p><strong>Ville</strong></p> 
+      <%= @organisation.city %></p>
+    </div>
+  </div>
   <p>Description : <%= @organisation.description %></p>
   <p>Ville : <%= @organisation.city %></p>
   <!-- Autres détails si nécessaire -->
