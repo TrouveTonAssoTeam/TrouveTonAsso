@@ -1,0 +1,11 @@
+<h1>Bonjour, <%= @organisation.name %> !</h1>
+
+<% if @cagnotte.present? %>
+  <p>Vous avez récolté: <%= number_to_currency(@cagnotte.amount, unit: '€') %></p>
+  <p>Vous pouvez éffectuer une demande de retrait du montant de votre choix.</p>
+<% else %>
+  <p>Il semblerait que vous n'ayez pas encore reçu de dons.</p>
+  <p>Nous vous invitons à vous démarquer grâce à notre site pour augmenter vos chances de recevoir des dons!</p>
+<% end %>
+
+<%= link_to "Retour à l'acceuil", root_path %>

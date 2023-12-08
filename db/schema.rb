@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_07_171238) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_08_124400) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cagnotte_status", force: :cascade do |t|
+    t.integer "amount"
+    t.integer "organisation_id"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "cagnottes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "amount"
+    t.integer "organisation_id"
   end
 
   create_table "donations", force: :cascade do |t|
@@ -42,6 +52,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_171238) do
     t.string "address"
     t.string "zip"
     t.string "rna"
+    t.integer "cagnotte"
     t.index ["email"], name: "index_organisations_on_email", unique: true
     t.index ["reset_password_token"], name: "index_organisations_on_reset_password_token", unique: true
   end

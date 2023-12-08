@@ -57,7 +57,7 @@ class PaymentsController < ApplicationController
       if @donation.save
 
         # Incremente la cagnotte après chaque success donation
-        @asso.update_cagnotte(@amount, @donation)
+        @asso.cagnotte.increment!(@amount)
 
         # Si success -> page success avec une alerte de réussite
         flash.notice= "Votre don de #{@amount}€ pour #{@asso.name} a bien été effectué. Merci pour votre soutiens!"

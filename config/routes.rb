@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   get "organisation/test", to: "organisations#test"
   post "organisation/new", to: "organisations#new", as: :new_organisation
 
+
+  resources :cagnottes
+
   resources :donations, except: [:show]
 
   get 'donations/user_donations', to: 'donations#user_donations', as: 'user_donations'

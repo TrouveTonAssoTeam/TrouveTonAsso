@@ -29,7 +29,7 @@ organisation = Organisation.create!(
 organisation = Organisation.create!(
   email: 'test2@asso.com',
   password: 'password',
-  name: 'Test Asso',
+  name: 'Test Asso 2',
   description: 'Description',
   city: 'Ville',
   website: 'https://example.com'
