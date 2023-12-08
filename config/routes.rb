@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
+
+  # For likes
   resources :like, only: :index
   post 'like/:organisation_id', to: 'like#like', as: "like_asso"
   post 'unlike/:organisation_id', to: 'like#unlike', as: "unlike_asso"
@@ -50,4 +52,7 @@ Rails.application.routes.draw do
   end
   # Defines the root path route ("/")
   # root "posts#index"
+
+  # Set the dyslexie mode
+  post 'dyslexie/:value', to: 'application#set_dyslexie', as: 'set_dyslexie'
 end
