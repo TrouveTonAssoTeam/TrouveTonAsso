@@ -29,7 +29,13 @@ class OrganisationsController < ApplicationController
       @asso["city"] = data_hash["coordonnees"]["adresse_siege"]["commune"]
       @asso["zip"] = data_hash["coordonnees"]["adresse_siege"]["cp"]
       @asso["RNA"] = data_hash["id_rna"]
+
       session[:asso] = @asso
+
+      if @asso.save
+      
+        @asso.create_cagnotte(amount: 0)
+      end
 
       redirect_to new_organisation_registration_path
     end
@@ -98,7 +104,7 @@ class OrganisationsController < ApplicationController
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :description, :city, :website])
   end
 
-  def association_params
+  def organisation_params
     params.require(:organisation).permit(:name, :description, :city, :website, :cover_photo)
   end
 

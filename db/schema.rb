@@ -10,24 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_08_124400) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_08_173247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "cagnotte_status", force: :cascade do |t|
-    t.integer "amount"
-    t.integer "organisation_id"
-    t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "cagnottes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "amount"
-    t.integer "organisation_id"
-  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -57,6 +42,22 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_08_124400) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "cagnotte_statuses", force: :cascade do |t|
+    t.integer "amount"
+    t.integer "organisation_id"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cagnottes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "amount"
+    t.bigint "organisation_id"
+    t.index ["organisation_id"], name: "index_cagnottes_on_organisation_id"
+  end
+
   create_table "donations", force: :cascade do |t|
     t.integer "amount"
     t.integer "organisation_id"
@@ -80,7 +81,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_08_124400) do
     t.string "address"
     t.string "zip"
     t.string "rna"
-    t.integer "cagnotte"
     t.index ["email"], name: "index_organisations_on_email", unique: true
     t.index ["reset_password_token"], name: "index_organisations_on_reset_password_token", unique: true
   end
@@ -101,4 +101,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_08_124400) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cagnottes", "organisations"
 end

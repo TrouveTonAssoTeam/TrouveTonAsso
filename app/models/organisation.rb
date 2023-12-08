@@ -9,11 +9,10 @@ class Organisation < ApplicationRecord
     
     has_many :donations
     has_one :cagnotte
-    has_one :cagnotte_status
+    after_create :create_new_cagnotte
 
-    after_create :create_cagnotte
-
-    def create_cagnotte
-    create_cagnotte(amount: 0) if cagnotte.nil?
+    def create_new_cagnotte
+      create_cagnotte(amount: 0)
     end
+
 end
