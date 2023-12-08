@@ -1,0 +1,6 @@
+<%= form_with url: new_organisation_path, class: 'form' do |f| %>
+  
+  <%= f.text_field :id, placeholder: 'SIREN ou n° RNA' %>
+
+  <%= f.submit 'Sign up', class: 'btn btn-primary' %>
+<% end %>

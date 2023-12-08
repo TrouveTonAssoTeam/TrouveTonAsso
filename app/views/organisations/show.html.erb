@@ -1,0 +1,16 @@
+<% if @organisation %>
+  <h1>Détails de l'association <%= @organisation.name %></h1>
+
+  <!-- Affichage de la photo de couverture -->
+  <% if @organisation.cover_photo.attached? %>
+    <%= image_tag @organisation.cover_photo %>
+  <% else %>
+    <p>Aucune photo de couverture pour cette association</p>
+  <% end %>
+
+  <p>Description : <%= @organisation.description %></p>
+  <p>Ville : <%= @organisation.city %></p>
+  <!-- Autres détails si nécessaire -->
+<% else %>
+  <p>Association non trouvée</p>
+<% end %>

@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
-  
-  devise_for :organisations
-  devise_for :users
+  get 'association_profiles/show'
+  get 'association_profiles/edit'
+  get 'association_profiles/update'
+  devise_for :users, path: 'users', controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
+
+  devise_for :organisations, path: 'organisations', controllers: {
+    sessions: 'organisations/sessions',
+    registrations: 'organisations/registrations'
+  }
+
   root 'pages#index'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -16,7 +26,11 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  resources :organisations
+
+  resources :organisations, only: [:index, :show, :edit, :update]
+  get "dashboard", to: 'organisations#dashboard'
+  get "organisation/test", to: "organisations#test"
+  post "organisation/new", to: "organisations#new", as: :new_organisation
 
   resources :donations, except: [:show]
 
