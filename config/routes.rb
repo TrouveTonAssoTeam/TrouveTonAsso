@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'association_profiles/show'
+  get 'association_profiles/edit'
+  get 'association_profiles/update'
   devise_for :users, path: 'users', controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
@@ -25,7 +28,19 @@ Rails.application.routes.draw do
   resources :like, only: :index
   post 'like/:organisation_id', to: 'like#like', as: "like_asso"
   post 'unlike/:organisation_id', to: 'like#unlike', as: "unlike_asso"
-  resources :organisations
+
+  resources :organisations, only: [:index, :show, :edit, :update] 
+  get "dashboard", to: 'organisations#dashboard'
+  get "organisation/test", to: "organisations#test"
+  post "organisation/new", to: "organisations#new", as: :new_organisation
+
+  resources :donations, except: [:show]
+
+  get 'donations/user_donations', to: 'donations#user_donations', as: 'user_donations'
+
+  resources :payments, except: [:show]
+  get 'payments/success', to: 'payments#success', as: 'payment_success'
+  get 'payments/cancel', to: 'payments#cancel', as: 'payment_cancel'
 
   # Profile page and edit
   get 'profil', to: 'profil#show', as: 'profil'
