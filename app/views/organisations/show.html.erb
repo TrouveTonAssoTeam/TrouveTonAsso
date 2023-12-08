@@ -1,4 +1,4 @@
-<!-- associations/show.html.erb -->
+
 <% if @organisation && @organisation.is_promoted? %>
   <div class="card card-gold star-promoted" name="Cette association est mise en avant" title="Cette association est mise en avant">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -6,20 +6,26 @@
     </svg>
   </div>
 <% end %>
-
+<%= stylesheet_link_tag 'organisation.show', media: 'all' %>
 <% if @organisation %>
-  <h1>Détails de l'association <%= @organisation.name %></h1>
+  <div class="container">
+  <h1 class="mt-4 organisation-name"><strong><%= @organisation.name %></strong></h1>
 
-  <!-- Affichage de la photo de couverture -->
-  <% if @organisation.cover_photo.attached? %>
-    <%= image_tag @organisation.cover_photo %>
-  <% else %>
-    <p>Aucune photo de couverture pour cette association</p>
-  <% end %>
+    <% if @organisation.cover_photo.attached? %>
+      <div class="image-container">
+        <%= image_tag @organisation.cover_photo, class: "img-fluid rounded-custom" %>
+      </div>
+    <% else %>
+      <p>Aucune photo de couverture pour cette association</p>
+    <% end %>
 
-  <p>Description : <%= @organisation.description %></p>
-  <p>Ville : <%= @organisation.city %></p>
-  <!-- Autres détails si nécessaire -->
+    <div class="element">
+      <p><strong>Description</strong><p>
+      <%= @organisation.description %>
+      <p><strong>Ville</strong></p> 
+      <%= @organisation.city %></p>
+    </div>
+  </div>
 <% else %>
   <p>Association non trouvée</p>
 <% end %>

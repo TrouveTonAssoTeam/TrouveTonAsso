@@ -1,0 +1,56 @@
+.association-list{
+    background-color: #55377c87; 
+    color: white; 
+    padding: 10px; 
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .page-container {
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  .association-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .association-card {
+    width: calc(33.33% - 20px);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: auto;
+  }
+  
+  .card-body {
+    padding: 10px;
+  }
+  
+  .card-title {
+    margin-bottom: 10px;
+  }
+  
+  .btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+  }
+  
+ 
+  
