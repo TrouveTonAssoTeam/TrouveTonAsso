@@ -1,26 +1,28 @@
 <%= form_for @organisation, url: organisation_path(Organisation.find(params[:id])), method: :patch, html: { class: "form", multipart: true } do |f| %>
 
   <div class="field">
-    <%= f.label :name %>
+    <strong><%= f.label :name %></strong>
     <%= f.text_field :name, disabled: true %>
   </div>
 
   <div class="field">
-    <%= f.label :description %>
+    <strong><%= f.label :description %></strong>
     <%= f.text_area :description %>
   </div>
 
   <div class="field">
-    <%= f.label :city %>
+    <strong><%= f.label :city %></strong>
     <%= f.text_field :city, disabled: true %>
   </div>
 
   <div class="field">
-    <%= f.label :cover_photo %>
-    <%= f.file_field :cover_photo %>
+   <strong><%= f.label :cover_photo %></strong>
+   <br>
+    <%= f.file_field :cover_photo, style: 'display: none;', id: 'cover_photo_input' %>
+    <%= f.label 'Choisir une photo de couverture', class: 'btn btn-primary', for: 'cover_photo_input' %>
   </div>
 
   <div class="actions">
-    <%= f.submit 'Mettre à jour' %>
+    <%= f.submit 'Mettre à jour', class: 'btn btn-primary' %>
   </div>
 <% end %>
