@@ -1,0 +1,42 @@
+.page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+  }
+  
+  .content {
+    text-align: center;
+    background-color: #ffffff6c; 
+    border-radius: 10px;
+  }
+  
+  .title {
+    text-align: center;
+    background-color: #55377c; 
+    color: white; 
+    padding: 20px; 
+    border-radius: 10px;
+    margin-bottom: 20px; 
+  }
+
+  .event-buttons {
+    margin-top: 10px; 
+  }
+  
+  .cover-photo {
+    margin-bottom: 20px; 
+  }
+  
+  .rounded-corner {
+    border-radius: 10px; 
+    max-width: 200px; 
+    height: auto; 
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+  }
+  
