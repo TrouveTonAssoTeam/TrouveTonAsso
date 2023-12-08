@@ -51,6 +51,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_134917) do
     t.string "stripe_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "organisations_id"
+    t.string "likeable_type"
+    t.bigint "likeable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
+    t.index ["organisations_id"], name: "index_likes_on_organisations_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "organisations", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -85,4 +97,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_134917) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "likes", "organisations", column: "organisations_id"
+  add_foreign_key "likes", "users"
 end
