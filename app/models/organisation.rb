@@ -8,4 +8,12 @@ class Organisation < ApplicationRecord
     
     has_many :donations
     has_many :promoteds
+
+    def is_promoted?
+        if promoteds.where(organisation: self).where("start_date <= ? AND end_date >= ?", Date.today, Date.today).empty?
+            return false
+        else
+            return true
+        end
+    end
 end
