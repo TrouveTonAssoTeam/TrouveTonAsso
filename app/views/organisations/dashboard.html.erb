@@ -1,11 +1,30 @@
-<!-- app/views/associations/dashboard.html.erb -->
-<% if @association %>
-  <h1>Tableau de bord de <%= @organisation.name %></h1>
+<%= stylesheet_link_tag 'organisation.dashboard', media: 'all' %>
 
-  <h2>Statistiques</h2>
+<div class="page-container">
+  <div class="content">
+    <!-- Cover photo de l'organisation -->
+    <% if @organisation.cover_photo.attached? %>
+      <div class="cover-photo">
+        <%= image_tag @organisation.cover_photo, class: "rounded-corner" %>
+      </div>
+    <% end %>
 
-  <h2>Gestion des événements</h2>
+    <div class="title">
+      <% if @organisation %>
+        <h1>Dashboard</h1>
+        <%= @organisation.name %>
+      <% else %>
+        <p>Association non trouvée</p>
+      <% end %>
+    </div>
 
-<% else %>
-  <p>Association non trouvée</p>
-<% end %>
+    <div class="event-buttons text-center">
+      <!-- Ajout d'une div pour les boutons -->
+      <div class="button-group">
+        <button class="btn btn-secondary">Voir les événements</button>
+        <button class="btn btn-secondary">Créer un événement</button>
+        <button class="btn btn-secondary">Supprimer un événement</button>
+      </div>
+    </div>
+  </div>
+</div>

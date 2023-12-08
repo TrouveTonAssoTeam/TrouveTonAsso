@@ -48,7 +48,7 @@ class OrganisationsController < ApplicationController
   end
 
   def index
-    @organisation = Organisation.find(params[:id])
+    @organisations = Organisation.all
   end
 
   def show_organisation
@@ -95,11 +95,11 @@ class OrganisationsController < ApplicationController
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :description, :city, :website])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :description, :city])
   end
 
-  def association_params
-    params.require(:organisation).permit(:name, :description, :city, :website, :cover_photo)
+  def organisation_params
+    params.require(:organisation).permit(:name, :description, :city, :cover_photo)
   end
 
 end
