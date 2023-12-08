@@ -17,3 +17,18 @@
     flex-direction: row;
     gap: 1rem;
 }
+.card-gold {
+    border-color: var(--gold-color);
+    background-color: var(--background-gold-color);
+    color: white;
+    text-shadow: 0 1px 4px #00000042;
+    background: url("gold-background-texture-gradients-shadow.jpg") repeat;
+    background-size: cover;
+}
+.star-promoted {
+    width: fit-content;
+    padding: 0.75rem;
+}
+.star-promoted > svg {
+    filter: drop-shadow(0 1px 4px #00000042);
+}
