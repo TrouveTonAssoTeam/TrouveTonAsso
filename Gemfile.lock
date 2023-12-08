@@ -280,7 +280,6 @@ DEPENDENCIES
   rails (~> 7.1.1)
   rails_real_favicon (~> 0.1.1)
   selenium-webdriver
-  sprockets (~> 4.2)
   sprockets-rails
   stimulus-rails
   stripe

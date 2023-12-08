@@ -78,5 +78,3 @@ gem "stripe"
 gem "turbolinks"
 
 gem "rails_real_favicon", "~> 0.1.1"
-
-gem "sprockets", "~> 4.2"
