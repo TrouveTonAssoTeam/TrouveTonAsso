@@ -1,8 +1,8 @@
-<%= form_for @organisation, url: organisation_path(Organisation.find(params[:id])), method: :patch, html: { multipart: true } do |f| %>
+<%= form_for @organisation, url: organisation_path(Organisation.find(params[:id])), method: :patch, html: { class: "form", multipart: true } do |f| %>
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, disabled: true %>
   </div>
 
   <div class="field">
@@ -12,12 +12,7 @@
 
   <div class="field">
     <%= f.label :city %>
-    <%= f.text_field :city %>
-  </div>
-
-  <div class="field">
-    <%= f.label :website %>
-    <%= f.text_field :website %>
+    <%= f.text_field :city, disabled: true %>
   </div>
 
   <div class="field">

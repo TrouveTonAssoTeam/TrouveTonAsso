@@ -18,7 +18,7 @@ class OrganisationsController < ApplicationController
 
     data_hash = JSON.parse(response.body)
 
-    if data_hash["erreur"] != nil || data_hash["identite"]["active"] == false || Association.find_by(rna: data_hash["id_rna"]).present?
+    if data_hash["erreur"] != nil || data_hash["identite"]["active"] == false || Organisation.find_by(rna: data_hash["id_rna"]).present?
       flash[:alert] = "Le numéro renseigné n'est pas valable"
       redirect_to organisation_test_path
     else
