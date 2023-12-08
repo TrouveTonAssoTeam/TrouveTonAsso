@@ -5,6 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
          
     has_many :likes
-    has_many :liked_associations, through: :likes, source: :association
+    has_many :organisations, through: :likes
   has_many :donations
 end
