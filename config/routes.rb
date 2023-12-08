@@ -28,10 +28,8 @@ Rails.application.routes.draw do
   resources :like, only: :index
   post 'like/:organisation_id', to: 'like#like', as: "like_asso"
   post 'unlike/:organisation_id', to: 'like#unlike', as: "unlike_asso"
-  resources :organisations
 
-
-  resources :organisations, only: [:index, :show, :edit, :update]
+  resources :organisations, only: [:index, :show, :edit, :update] 
   get "dashboard", to: 'organisations#dashboard'
   get "organisation/test", to: "organisations#test"
   post "organisation/new", to: "organisations#new", as: :new_organisation
