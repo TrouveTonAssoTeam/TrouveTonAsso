@@ -16,7 +16,7 @@ class Organisations::RegistrationsController < Devise::RegistrationsController
   def create
     super
 
-    asso = Organisation.find_by(email: params[:organisations][:email])
+    asso = Organisation.find_by(email: params[:organisation][:email])
     asso.update(name: session[:asso]["name"], description: session[:asso]["description"], city: session[:asso]["city"], address: session[:asso]["address"], zip: session[:asso]["zip"], rna: session[:asso]["RNA"])
 
     session[:asso] = nil
