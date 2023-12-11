@@ -1,4 +1,4 @@
-<nav class="navbar" id="site-navbar">
+<nav class="nav <% if user_signed_in? %>bar" id="site-navbar">
     <div class="container">
         <div class="navbar-brand">
             <%= link_to root_path do %>
@@ -16,7 +16,7 @@
             <%= link_to "Contact", contact_path, class: "#{is_active?(contact_path)}" %>
             <%= link_to "A propos", about_path, class: "#{is_active?(about_path)}" %>
 
-        <% if user_signed_in? %>
+       
 
             <%= link_to "Profil", profil_path(current_user), class: "nav-link" %>      
             <%= link_to "Sign out", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "nav-link" %>
