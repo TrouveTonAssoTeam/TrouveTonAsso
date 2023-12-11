@@ -97,6 +97,16 @@
     </div>
 </div>
 
+<%= button_to  like_asso_path(Organisation.all.sample), method: :post do %>
+    <ion-icon name="heart">
+    <div class='red-bg'></div>
+    </ion-icon>
+<% end %>
+
+<%= button_to unlike_asso_path(Organisation.all.sample), method: :delete, class: 'like-btn', remote: true do %>
+  Unlike
+<% end %>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const likeBtns = document.querySelectorAll('.like-btn');
