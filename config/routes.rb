@@ -43,6 +43,8 @@ Rails.application.routes.draw do
       end
     end
     get "donate", to: "donations#new", as: "new_donation"
+
+    resources :faqs, only: [:index, :new, :create, :edit, :update, :destroy]
   end
 
   resources :payments, only: [:new, :create]

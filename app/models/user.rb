@@ -7,4 +7,6 @@ class User < ApplicationRecord
     has_many :likes
     has_many :organisations, through: :likes
   has_many :donations
+
+  has_many :faqs
 end

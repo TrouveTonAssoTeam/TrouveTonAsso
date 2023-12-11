@@ -36,6 +36,7 @@ class OrganisationsController < ApplicationController
 
   def show
       @organisation = Organisation.find(params[:id])
+      @faqs = @organisation.faqs
   end
 
   def delete

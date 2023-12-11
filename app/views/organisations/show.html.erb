@@ -24,6 +24,20 @@
       <%= @organisation.description %>
       <p><strong>Ville</strong></p> 
       <%= @organisation.city %></p>
+      
+      <h1> Questions-réponses </h1>
+      <% if !@faqs.empty? %>
+        <% @faqs.each do |faq| %>
+          <% if faq.answer %>
+            <p>Question de <%= if faq.user.first_name && faq.user.last_name then faq.user.first_name + " " + faq.user.last_name.slice(0,1) + "." else "Anonymous" end %> :</p>
+            <p><%= faq.question %></p>
+            <p><%= faq.answer %></p>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p>Aucune question-réponse pour cette association</p>
+      <% end %>
+      <%= link_to "Ajouter une question", new_organisation_faq_path(organisation_id: @organisation.id), class: "btn btn-primary" %>
     </div>
   </div>
 <% else %>
