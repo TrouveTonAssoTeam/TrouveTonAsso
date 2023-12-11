@@ -56,7 +56,7 @@ class Organisations::RegistrationsController < Devise::RegistrationsController
   # Redirect to check if asso is valid or note
   def is_association?
     flash[:alert] = "Vous devez renseigner un numéro d'association avant de continuer" unless session[:asso]
-    redirect_to organisation_test_path unless session[:asso]
+    redirect_to test_organisations_path unless session[:asso]
   end
 
   # If you have extra params to permit, append them to the sanitizer.

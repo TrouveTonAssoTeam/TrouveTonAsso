@@ -16,17 +16,19 @@
             <%= link_to "Contact", contact_path, class: "#{is_active?(contact_path)}" %>
             <%= link_to "A propos", about_path, class: "#{is_active?(about_path)}" %>
 
-        <% if user_signed_in? %>
-
-            <%= link_to "Profil", profil_path(current_user), class: "nav-link" %>      
-            <%= link_to "Sign out", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "nav-link" %>
+        <% if user_signed_in? || organisation_signed_in? %>
+            <% if user_signed_in? %>
+                <%= link_to "Profil", profil_index_path, class: "nav-link" %>      
+                <%= link_to "Sign out", destroy_user_session_path, method: :delete, data: {turbo_method: :delete, turbo_confirm: "Etes-vous sur de vouloir vous deconnecter ?"}, class: "nav-link" %>
+            <% elsif organisation_signed_in? %>
+                <%= link_to "Dashboard", dashboard_organisations_path, class: "nav-link" %>
+                <%= link_to "Sign out", destroy_organisation_session_path, method: :delete, data: {turbo_method: :delete, turbo_confirm: "Etes-vous sur de vouloir vous deconnecter ?"}, class: "nav-link" %>
+            <% end %>
         
         <% else %>
 
             <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
             <%= link_to "Sign in", new_user_session_path, class: "nav-link" %>
-            <%= button_to "Déconnexion", destroy_organisation_session_path, class: "btn btn-primary", method: :delete %>
-
 
         <% end %>
     </div>

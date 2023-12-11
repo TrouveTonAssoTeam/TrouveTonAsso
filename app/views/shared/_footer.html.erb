@@ -9,27 +9,28 @@
 
         <div class="footer-nav">
             <div class="nav-section">
-                <span class="section-title">Catégorie</span>
+                <span class="section-title">Général</span>
                 <ul>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">A propos</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><%= link_to "Accueil", root_path %></li></li>
+                    <li><%= link_to "A propos", about_path %></li>
+                    <li><%= link_to "Contact", contact_path %></li>
                 </ul>
             </div>
             <div class="nav-section">
-                <span class="section-title">Catégorie</span>
+                <span class="section-title">Associations</span>
                 <ul>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">A propos</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><%= link_to "liste des associations", organisations_path %></li>
+                    <li><%= link_to "Inscrire son association", test_organisations_path %></li>
+                    <li><%= link_to "Se connecter à son association", new_organisation_session_path %></li>
+                    <li><%= link_to "Dashboard de l'association", dashboard_organisations_path %></li>
                 </ul>
             </div>
             <div class="nav-section">
-                <span class="section-title">Catégorie</span>
+                <span class="section-title">Utilisateurs</span>
                 <ul>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">A propos</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><%= link_to "Se connecter", new_user_session_path %></li>
+                    <li><%= link_to "S'inscrire", new_user_registration_path %></li>
+                    <li><%= link_to "Accéder à son profil", profil_index_path %></li></li>
                 </ul>
             </div>
         </div>

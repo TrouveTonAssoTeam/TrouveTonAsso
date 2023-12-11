@@ -1,6 +1,6 @@
 <h2>Edit</h2>
 
-<%= form_for( @user, url: profil_update_path(@user), method: :post) do |f| %>
+<%= form_for( @user, url: profil_path(@user), method: :patch) do |f| %>
   
   <div class="field">
   <%= f.label :first_name %><br />

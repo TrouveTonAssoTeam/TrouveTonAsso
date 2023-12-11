@@ -1,6 +1,9 @@
-<%= form_with url: new_organisation_path, class: 'form' do |f| %>
+<%= form_with url: new_organisations_path, class: 'form' do |f| %>
   
   <%= f.text_field :id, placeholder: 'SIREN ou n° RNA' %>
 
   <%= f.submit 'Sign up', class: 'btn btn-primary' %>
+
+  <%= link_to "Vous êtes deja inscrit ?", new_organisation_session_path %>
+  <%= link_to "Vous êtes un utilisateur ? Inscrivez-vous", new_user_registration_path %>
 <% end %>
