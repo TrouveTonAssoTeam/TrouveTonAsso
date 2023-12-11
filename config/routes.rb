@@ -55,4 +55,11 @@ Rails.application.routes.draw do
 
   # Set the dyslexie mode
   post 'dyslexie/:value', to: 'application#set_dyslexie', as: 'set_dyslexie'
+
+  # Resources for promoted asso
+  resources :promoted, only: [:index, :new]
+  post 'promoted/go_to_paiement', to: 'promoted#go_to_paiement', as: 'promoted_go_to_paiement'
+  get 'promoted/success', to: 'promoted#paiement_success', as: 'promoted_success'
+  get 'promoted/cancel', to: 'promoted#paiement_cancel', as: 'promoted_cancel'
+  
 end

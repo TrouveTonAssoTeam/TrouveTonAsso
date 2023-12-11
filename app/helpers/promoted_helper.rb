@@ -1,0 +1,2 @@
+module PromotedHelper
+end

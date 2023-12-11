@@ -1,0 +1,66 @@
+<div class="text-center">
+    <div class="pb-6">
+    <% if @is_promoted %>
+        <div class="alert card-gold">
+            <h1><%= @organisation.name %> est actuellement mise en avant !</h1>
+            <p>Il vous reste encore <b><%= @remaining_days %> jour<%= @remaining_days == 1 ? '' : 's' %></b> de promotion.</p>
+        </div>
+        <p>Vous pouvez continuer de profiter de vos avantages en ajoutant des jours de promotion :</p>
+        <%= button_to "Rajouter des jours", new_promoted_path, form: { class: 'form' }, method: :get, class: "btn btn-primary" %>
+    <% else %>
+        <div class="alert alert-error">
+            <h1>Malheureusement, <%= @organisation.name %> n'est pas encore mise en avant !</h1>
+        </div>
+            <p>Vous pouvez vite remédier à cela en achetant des jours de promotion :</p>
+            <%= button_to "Promouvoir mon association", new_promoted_path, form: { class: 'form' }, method: :get, class: "btn btn-primary" %>
+    <% end %>
+    </div>
+
+    <div class="pb-6">
+        <h2 class="mt-3">Vos mise en avant précédentes</h2>
+        <% if !@all_promoted.empty? %>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Début</th>
+                        <th>Fin</th>
+                        <th>Durée (jours)</th>
+                        <th>Prix</th>
+                        <th>État</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @all_promoted.each do |promoted| %>
+                        <tr>
+                            <td><%= I18n.l(promoted.start_date, format: :long) %></td>
+                            <td><%= I18n.l(promoted.end_date, format: :long) %></td>
+                            <td><%= promoted.duration %></td>
+                            <td><%= if promoted.price === promoted.price.to_i then promoted.price.to_i else promoted.price end %> €</td>
+                            <td><%= promoted.state %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="2" class="text-left">
+                            Total :
+                        </th>
+                        <td>
+                            <%= @total_duration %>
+                        </td>
+                        <td>
+                            <%= if @total_price === @total_price.to_i then @total_price.to_i else @total_price end %> €
+                        </td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <% else %>
+            <p>Malheureusement, vous n'avez pas profité des joies de mettre votre association en avant sur TrouveTonAsso.</p>
+            <p>Vous pouvez y remédier en ajoutant des jours de promotion :</p>
+            <%= button_to "Promouvoir mon association", new_promoted_path, form: { class: 'form' }, method: :get, class: "btn btn-primary" %>
+        <% end %>
+    </div>
+</div>

@@ -7,7 +7,7 @@
 
 Rails.application.config.assets.configure do |env|
   mime_type = 'application/manifest+json'
-  extensions = ['.webmanifest', '.webmanifest.erb']  
+  extensions = ['.webmanifest']  
 
   if Sprockets::VERSION.to_i >= 4
     extensions << '.webmanifest.erb'    
