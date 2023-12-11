@@ -1,0 +1,49 @@
+.active > ion-icon {
+    animation: like 0.5s 1;
+    fill: red;
+    stroke: none;
+}
+ion-icon {
+    fill: transparent;
+    stroke: black;
+    stroke-width: 30;
+    transition: all 0.5s;
+}
+
+@keyframes like {
+    0% {
+        transform: scale(1);
+    }
+    80% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.like-btn {
+    cursor: pointer;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    font-size: x-large;
+    line-height: 16px;
+}
+
+.like-btn-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-card-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: var(--background-blur);
+    border: 1px solid;
+    border-color: var(--border-color);
+    transform: translate(50%, -50%);
+}

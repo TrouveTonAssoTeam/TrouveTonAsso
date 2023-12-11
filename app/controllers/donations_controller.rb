@@ -1,13 +1,9 @@
 class DonationsController < ApplicationController
   before_action :authenticate_user!
+  before_action :is_correct_user?, only: [:user_donations]
 
   def new
-    @organisation = Organisation.all.sample
-      # Si pas d'asso renvoie à l'index
-      if @organisation.nil?
-      flash[:alert] = "Nous n'avons pas pu trouvé l'association choisie."
-      redirect_to root_path
-      end
+    @organisation = Organisation.find(params[:organisation_id])
   end
 
   def user_donations
@@ -23,7 +19,7 @@ class DonationsController < ApplicationController
     puts params
     puts "$" * 20
   end
-
+  
   private
 
   def donation_params
