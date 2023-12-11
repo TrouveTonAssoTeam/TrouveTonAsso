@@ -1,5 +1,6 @@
 class DonationsController < ApplicationController
   before_action :authenticate_user!
+  before_action :is_correct_user?, only: [:user_donations]
 
   def new
     @organisation = Organisation.all.sample
