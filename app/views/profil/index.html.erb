@@ -1,4 +1,4 @@
 <p>Prénom : <%= @user.first_name %></p>
 <p>Nom : <%= @user.last_name %></p>
 
-<%= link_to "editer le profil", profil_edit_path %>
+<%= link_to "editer le profil", edit_profil_path(@user) %>
