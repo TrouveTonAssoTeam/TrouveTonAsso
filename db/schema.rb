@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_11_121707) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_11_160839) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,8 +43,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_121707) do
   end
 
   create_table "cagnotte_statuses", force: :cascade do |t|
-    t.integer "amount"
-    t.integer "organisation_id"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -69,6 +67,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_121707) do
     t.string "stripe_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "organisation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organisation_id"], name: "index_likes_on_organisation_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "organisations", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -85,6 +92,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_121707) do
     t.string "rna"
     t.index ["email"], name: "index_organisations_on_email", unique: true
     t.index ["reset_password_token"], name: "index_organisations_on_reset_password_token", unique: true
+  end
+
+  create_table "promoteds", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "organisation_id"
+    t.float "price"
+    t.string "stripe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -115,6 +132,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_121707) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cagnotte_statuses", "withdrawals"
   add_foreign_key "cagnottes", "organisations"
+  add_foreign_key "likes", "organisations"
+  add_foreign_key "likes", "users"
   add_foreign_key "withdrawals", "cagnotte_statuses"
   add_foreign_key "withdrawals", "organisations"
 end

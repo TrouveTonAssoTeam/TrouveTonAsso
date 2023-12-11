@@ -4,8 +4,8 @@
   <ul>
     <% @withdrawals.each do |withdrawal| %>
       <li>
-        <%= number_to_currency(withdrawal.amount, unit: '€') %> -
-        <%= withdrawal.created_at.strftime("%d %B %Y %H:%M") %> -
+        Montant: <%= number_to_currency(withdrawal.amount, unit: '€') %> -
+        Date: <%= withdrawal.created_at.strftime("%d %B %Y %H:%M") %> -
         Statut: <%= withdrawal.cagnotte_status&.status %>
       </li>
     <% end %>

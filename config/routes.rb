@@ -32,7 +32,6 @@ Rails.application.routes.draw do
   get "organisation/test", to: "organisations#test"
   post "organisation/new", to: "organisations#new", as: :new_organisation
 
-
   resources :cagnottes, only: [:show] do
     member do
       get :withdrawal
@@ -40,7 +39,15 @@ Rails.application.routes.draw do
     end
   end 
 
-  resources :withdrawals, only: [:index]
+  resources :withdrawals, only: [:index] do
+    collection do
+      get :admin_withdraw
+    end
+      member do
+        get :show_admin
+        patch :update_status
+      end
+  end
 
   resources :donations, except: [:show]
 
