@@ -26,6 +26,10 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
+  # For likes
+  resources :like, only: :index
+  post 'like/:organisation_id', to: 'like#like', as: "like_asso"
+  post 'unlike/:organisation_id', to: 'like#unlike', as: "unlike_asso"
 
   resources :organisations, only: [:index, :show, :edit, :update] 
   get "dashboard", to: 'organisations#dashboard'
@@ -57,4 +61,5 @@ Rails.application.routes.draw do
   post 'promoted/go_to_paiement', to: 'promoted#go_to_paiement', as: 'promoted_go_to_paiement'
   get 'promoted/success', to: 'promoted#paiement_success', as: 'promoted_success'
   get 'promoted/cancel', to: 'promoted#paiement_cancel', as: 'promoted_cancel'
+  
 end

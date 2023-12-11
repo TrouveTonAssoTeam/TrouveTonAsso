@@ -1,4 +1,7 @@
 /*
+ *= require_tree .
+ *= require_self 
+ *= require like
  *= require main
  *= require alerts
  *= require bg

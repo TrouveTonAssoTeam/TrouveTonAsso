@@ -3,8 +3,13 @@ class PagesController < ApplicationController
   end
   
   def about
-  end
-  
-  def contact
-  end
 end
+def contact
+end
+
+	def index
+		@liked_organisation = Organisation.joins(:liking_users).distinct
+	end
+end
+ 
+
