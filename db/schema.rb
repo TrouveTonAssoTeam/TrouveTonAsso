@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_07_134917) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_11_135722) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_134917) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "attendances", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_attendances_on_event_id"
+    t.index ["user_id"], name: "index_attendances_on_user_id"
+  end
+
   create_table "donations", force: :cascade do |t|
     t.integer "amount"
     t.integer "organisation_id"
@@ -49,6 +58,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_134917) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "stripe_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.bigint "organisation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "cover_photo"
+    t.index ["organisation_id"], name: "index_events_on_organisation_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -104,6 +125,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_134917) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "attendances", "events"
+  add_foreign_key "attendances", "users"
+  add_foreign_key "events", "organisations"
   add_foreign_key "likes", "organisations"
   add_foreign_key "likes", "users"
 end

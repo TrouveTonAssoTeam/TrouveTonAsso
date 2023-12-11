@@ -1,0 +1,29 @@
+<div class="event-details">
+  <% if @event.cover_photo.attached? %>
+    <%= image_tag url_for(@event.cover_photo), class: "img-fluid" %>
+  <% else %>
+    <p>Aucune photo de couverture disponible</p>
+  <% end %>
+
+  <div class="event-header">
+    <h1><%= @event.name %></h1>
+  </div>
+
+  <div class="event-description">
+    <p><strong>Description:</strong> <%= @event.description %></p>
+    <p><strong>Date de début:</strong> <%= @event.start_date %></p>
+    <p><strong>Date de fin:</strong> <%= @event.end_date %></p>
+    
+    <!-- Autres détails de l'événement -->
+    
+    <% if user_signed_in? %>
+      <% if current_user.events.include?(@event) %>
+        <%= link_to 'Se désinscrire', unattend_event_path(@event), method: :delete, class: 'btn btn-danger' %>
+      <% else %>
+        <%= link_to 'S\'inscrire', attend_event_path(@event), method: :post, class: 'btn btn-primary' %>
+      <% end %>
+    <% else %>
+      <%= link_to 'Se connecter pour s\'inscrire', new_user_session_path, class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

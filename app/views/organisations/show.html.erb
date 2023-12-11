@@ -26,6 +26,17 @@
       <%= @organisation.city %></p>
     </div>
   </div>
-<% else %>
-  <p>Association non trouvée</p>
-<% end %>
+   
+  <h2>Événements</h2>
+    <ul>
+       <% @organisation.events.each do |event| %>
+    <li>
+      <%= link_to event.name, event %>
+      <!-- Afficher d'autres détails de l'événement ici -->
+    </li>
+     <% end %>
+   </ul>
+
+     <% else %>
+      <p>Association non trouvée</p>
+     <% end %>

@@ -3,6 +3,7 @@ class Organisation < ApplicationRecord
     # Devise modules
     has_many :likes
     has_many :liking_users, through: :likes, source: :user
+    has_many :events, dependent: :destroy
     
     devise :database_authenticatable, :registerable,
            :recoverable, :rememberable, :validatable

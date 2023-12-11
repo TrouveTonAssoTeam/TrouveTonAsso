@@ -1,0 +1,13 @@
+
+<h1>Dashboard de <%= @organisation.name %></h1>
+
+<% if @events.any? %>
+  <h2>Événements de votre organisation :</h2>
+  <ul>
+    <% @events.each do |event| %>
+      <li><%= link_to event.name, event_path(event) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucun événement pour le moment.</p>
+<% end %>
