@@ -12,7 +12,7 @@
                 </p>
                 <div class="text-center">
                     <%= (i + 1) %> semaine<%= (i + 1) == 1 ? '' : 's' %> pour <%= case i + 1; when 1 then "5"; when 2 then "9,5"; when 3 then '13,5'; when 4 then '17'; end %> €
-                    <%= button_to "Promouvoir mon association #{(i + 1) * 7} jours", promoted_go_to_paiement_path(weeks: (i + 1)), form: { class: 'form mt-2' }, method: :post, class: "btn btn-primary", data: { turbo: false } %>
+                    <%= button_to "Promouvoir mon association #{(i + 1) * 7} jours", go_to_paiement_organisation_promoted_index_path(weeks: (i + 1)), form: { class: 'form mt-2' }, method: :post, class: "btn btn-primary", data: { turbo: false } %>
                 </div>
             </div>
         <% end %>
@@ -28,7 +28,7 @@
                 </p>
                 <div class="text-center">
                     <%= (i + 1) %> semaine<%= (i + 1) == 1 ? '' : 's' %> pour <%= case i + 1; when 1 then "5"; when 2 then "9,5"; when 3 then '13,5'; when 4 then '17'; end %> €
-                    <%= button_to "Promouvoir mon association #{(i + 1) * 7} jours", promoted_go_to_paiement_path(weeks: (i + 1)), form: { class: 'form mt-2' }, method: :post, class: "btn btn-primary", data: { turbo: false } %>
+                    <%= button_to "Promouvoir mon association #{(i + 1) * 7} jours", go_to_paiement_organisation_promoted_index_path(weeks: (i + 1)), form: { class: 'form mt-2' }, method: :post, class: "btn btn-primary", data: { turbo: false } %>
                 </div>
             </div>
         <% end %>

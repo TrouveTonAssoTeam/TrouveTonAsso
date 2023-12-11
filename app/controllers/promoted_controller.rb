@@ -68,14 +68,14 @@ class PromotedController < ApplicationController
                 weeks: @weeks
             },
             mode: 'payment',
-            success_url: promoted_success_url + '?session_id={CHECKOUT_SESSION_ID}',
-            cancel_url: promoted_cancel_url
+            success_url: success_organisation_promoted_index_url + '?session_id={CHECKOUT_SESSION_ID}',
+            cancel_url: cancel_organisation_promoted_index_url
         )
 
         redirect_to @session.url, allow_other_host: true
     end
 
-    def paiement_success
+    def success
         @session = Stripe::Checkout::Session.retrieve(params[:session_id])
 
         if Promoted.where(stripe_id: @session.id).empty?
@@ -96,12 +96,16 @@ class PromotedController < ApplicationController
             @promoted.stripe_id = @session.id
 
             if @promoted.save
-                redirect_to promoted_index_path, notice: "Merci pour votre paiement de #{@total} €. Votre association sera mise en avant pour #{@weeks * 7} jours de plus."
+                redirect_to organisation_promoted_index_path, notice: "Merci pour votre paiement de #{@total} €. Votre association sera mise en avant pour #{@weeks * 7} jours de plus."
             else
-                redirect_to promoted_index_path, alert: "Une erreur est survenue. Merci de contacter le support pour plus d'informations."
+                redirect_to organisation_promoted_index_path, alert: "Une erreur est survenue. Merci de contacter le support pour plus d'informations."
             end
         else
-            redirect_back(fallback_location: promoted_index_path, alert: "Une erreur est survenue.")
+            redirect_back(fallback_location: organisation_promoted_index_path, alert: "Une erreur est survenue.")
         end
+    end
+
+    def cancel
+        redirect_to organisation_promoted_index_path, alert: "Le paiement a été annulé."
     end
 end
