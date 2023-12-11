@@ -1,12 +1,17 @@
 <h1>Bonjour, <%= @organisation.name %> !</h1>
 
 <% if @cagnotte.present? %>
-  <p>Vous avez récolté: <%= number_to_currency(@cagnotte.amount, unit: '€') %></p>
+  <p>Vous avez une cagnotte de : <%= number_to_currency(@cagnotte.amount, unit: '€') %></p>
   <p>Vous pouvez effectuer une demande de retrait du montant de votre choix:</p>
+    <%= form_with(model: Withdrawal.new, url: process_withdrawal_cagnotte_path(@cagnotte), data: { turbo: false }) do |form| %>
+    <%= form.label :Montant %>
+    <%= form.number_field :amount, step: 'any' %>
 
+    <%= form.submit 'Confirmer' %>
+    <% end %>
 <% else %>
   <p>Il semblerait que vous n'ayez pas encore reçu de dons.</p>
   <p>Nous vous invitons à vous démarquer grâce à notre site pour augmenter vos chances de recevoir des dons!</p>
 <% end %>
-
+<%= link_to "Historique des Retraits", withdrawals_path %>
 <%= link_to "Retour à l'acceuil", root_path %>

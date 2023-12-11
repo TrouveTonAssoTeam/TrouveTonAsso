@@ -33,7 +33,14 @@ Rails.application.routes.draw do
   post "organisation/new", to: "organisations#new", as: :new_organisation
 
 
-  resources :cagnottes
+  resources :cagnottes, only: [:show] do
+    member do
+      get :withdrawal
+      post :process_withdrawal
+    end
+  end 
+
+  resources :withdrawals, only: [:index]
 
   resources :donations, except: [:show]
 

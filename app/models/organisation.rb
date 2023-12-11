@@ -10,6 +10,7 @@ class Organisation < ApplicationRecord
     has_many :donations
     has_one :cagnotte
     after_create :create_new_cagnotte
+    has_many :withdrawals
 
     def create_new_cagnotte
       create_cagnotte(amount: 0)

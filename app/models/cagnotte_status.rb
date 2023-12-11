@@ -1,4 +1,5 @@
 class CagnotteStatus < ApplicationRecord
-    belongs_to :cagnotte
     belongs_to :organisation
+    belongs_to :withdrawal
+
 end

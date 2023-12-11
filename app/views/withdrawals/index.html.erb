@@ -1,0 +1,17 @@
+<h1>Vos demandes de retrait</h1>
+
+<% if @withdrawals.any? %>
+  <ul>
+    <% @withdrawals.each do |withdrawal| %>
+      <li>
+        <%= number_to_currency(withdrawal.amount, unit: '€') %> -
+        <%= withdrawal.created_at.strftime("%d %B %Y %H:%M") %> -
+        Statut: <%= withdrawal.cagnotte_status&.status %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucun retrait effectué pour le moment.</p>
+<% end %>
+
+<%= link_to "Retour à la cagnotte", cagnotte_path(@organisation) %>
