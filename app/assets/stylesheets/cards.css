@@ -32,3 +32,20 @@
 .star-promoted > svg {
     filter: drop-shadow(0 1px 4px #00000042);
 }
+
+.badge-login {
+    flex: 1 fit-content;
+    text-align: center;
+    padding: 0.6rem;
+    text-decoration: none;
+    color: var(--primary-color);
+    opacity: 0.7;
+    transition: all 0.2s ease-in-out;
+}
+.badge-login.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+.badge-login:hover {
+    opacity: 1;
+}

@@ -2,12 +2,14 @@ Rails.application.routes.draw do
   # Devise for users and organisations
   devise_for :users, path: 'users', controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    passwords: 'users/passwords'
   }
 
   devise_for :organisations, path: 'organisations', controllers: {
     sessions: 'organisations/sessions',
-    registrations: 'organisations/registrations'
+    registrations: 'organisations/registrations',
+    passwords: 'organisations/passwords'
   }
 
   # Root page
