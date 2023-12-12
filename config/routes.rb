@@ -47,7 +47,36 @@ Rails.application.routes.draw do
     resources :faqs, only: [:index, :new, :create, :edit, :update, :destroy]
   end
 
+
+  resources :organisations, only: [:index, :show, :edit, :update] 
+  get "dashboard", to: 'organisations#dashboard'
+  get "organisation/test", to: "organisations#test"
+  post "organisation/new", to: "organisations#new", as: :new_organisation
+
+  resources :cagnottes, only: [:show] do
+    member do
+      get :withdrawal
+      post :process_withdrawal
+    end
+  end 
+
+  resources :withdrawals, only: [:index] do
+    collection do
+      get :admin_withdraw
+    end
+      member do
+        get :show_admin
+        patch :update_status
+      end
+  end
+
+  resources :donations, except: [:show]
+
+  get 'donations/user_donations', to: 'donations#user_donations', as: 'user_donations'
+
+  resources :payments, except: [:show]
   resources :payments, only: [:new, :create]
+
   get 'payments/success', to: 'payments#success', as: 'payment_success'
   get 'payments/cancel', to: 'payments#cancel', as: 'payment_cancel'
 

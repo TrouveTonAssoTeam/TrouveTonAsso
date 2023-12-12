@@ -1,0 +1,2 @@
+module CagnottesHelper
+end

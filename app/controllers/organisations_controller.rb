@@ -28,6 +28,7 @@ class OrganisationsController < ApplicationController
       @asso["city"] = data_hash["coordonnees"]["adresse_siege"]["commune"]
       @asso["zip"] = data_hash["coordonnees"]["adresse_siege"]["cp"]
       @asso["RNA"] = data_hash["id_rna"]
+
       session[:asso] = @asso
 
       redirect_to new_organisation_registration_path
