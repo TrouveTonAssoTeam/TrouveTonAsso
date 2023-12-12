@@ -91,8 +91,9 @@ class PromotedController < ApplicationController
 
             # Check if the organisation is already promoted or not
             # If so, the start date is the end date of the last promoted
+            # If not, the start date is tomorrow (to have a full week)
             if current_organisation.promoteds.where("end_date > ?", Date.today).empty?
-                @start_date = Date.today
+                @start_date = Date.today + 1
             else 
                 @start_date = current_organisation.promoteds.where("end_date > ?", Date.today).order(end_date: :desc)[0].end_date + 1
             end
