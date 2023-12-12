@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  get 'dashboard_organisation/index'
-  get 'association_profiles/show'
-  get 'association_profiles/edit'
-  get 'association_profiles/update'
+  # Devise for users and organisations
   devise_for :users, path: 'users', controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
@@ -13,18 +10,17 @@ Rails.application.routes.draw do
     registrations: 'organisations/registrations'
   }
 
+  # Root page
   root 'pages#index'
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  #Other pages
+  # static pages
   get 'about', to: 'pages#about'
   get 'contact', to: 'pages#contact'
   get 'mentionslegales', to: 'pages#mentionslegales'
   get 'cookies', to: 'pages#cookies'
   get 'cgu', to: 'pages#cgu'
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  
+  # Up check for health
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :events do
@@ -33,39 +29,38 @@ Rails.application.routes.draw do
   end
 
   # For likes
-  resources :like, only: :index
   post 'like/:organisation_id', to: 'like#like', as: "like_asso"
   post 'unlike/:organisation_id', to: 'like#unlike', as: "unlike_asso"
 
-  resources :organisations, only: [:index, :show, :edit, :update] 
-  get "dashboard", to: 'organisations#dashboard'
-  get "organisation/test", to: "organisations#test"
-  post "organisation/new", to: "organisations#new", as: :new_organisation
+  # Organisations routes with edit pages, donations, promoted
+  resources :organisations, only: [:index, :show, :edit, :update] do
+    collection do
+      get "test"
+      post "new", as: "new"
+      get "dashboard"
 
-  resources :donations, except: [:show]
+    end
+    resources :promoted, only: [:index, :new] do
+      collection do
+        get "success", to: "promoted#success", as: "success"
+        get "cancel", to: "promoted#cancel", as: "cancel"
+        post "go_to_paiement", to: "promoted#go_to_paiement", as: "go_to_paiement"
+      end
+    end
+    get "donate", to: "donations#new", as: "new_donation"
+  end
 
-  get 'donations/user_donations', to: 'donations#user_donations', as: 'user_donations'
-
-  resources :payments, except: [:show]
+  resources :payments, only: [:new, :create]
   get 'payments/success', to: 'payments#success', as: 'payment_success'
   get 'payments/cancel', to: 'payments#cancel', as: 'payment_cancel'
 
-  # Profile page and edit
-  get 'profil', to: 'profil#show', as: 'profil'
-  scope '/profil'  do
-    get 'edit', to: 'profil#edit', as: 'profil_edit'
-    post 'update', to: 'profil#update', as: 'profil_update'
+  # Profile page and routes associated
+  resources :profil, only: [:index, :edit, :update] do
+    get "donations", to: "donations#user_donations", as: "user_donations"
+    get "likes", to: "like#user_likes", as: "user_likes"
   end
-  # Defines the root path route ("/")
-  # root "posts#index"
 
   # Set the dyslexie mode
   post 'dyslexie/:value', to: 'application#set_dyslexie', as: 'set_dyslexie'
-
-  # Resources for promoted asso
-  resources :promoted, only: [:index, :new]
-  post 'promoted/go_to_paiement', to: 'promoted#go_to_paiement', as: 'promoted_go_to_paiement'
-  get 'promoted/success', to: 'promoted#paiement_success', as: 'promoted_success'
-  get 'promoted/cancel', to: 'promoted#paiement_cancel', as: 'promoted_cancel'
   
 end

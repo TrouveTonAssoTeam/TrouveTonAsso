@@ -4,9 +4,8 @@ require 'json'
 
 class OrganisationsController < ApplicationController
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :is_already_verified?
-  before_action :authenticate_organisation!, only: [:show]
-  before_action :find_organisation, only: [:show]
+  before_action :is_already_verified?, only: [:test]
+  before_action :authenticate_organisation!, only: [:dashboard, :edit, :update, :delete]
 
   def test
     
@@ -20,7 +19,7 @@ class OrganisationsController < ApplicationController
 
     if data_hash["erreur"] != nil || data_hash["identite"]["active"] == false || Organisation.find_by(rna: data_hash["id_rna"]).present?
       flash[:alert] = "Le numéro renseigné n'est pas valable"
-      redirect_to organisation_test_path
+      redirect_to test_organisations_path
     else
       @asso = Hash.new
       @asso["name"] = data_hash["identite"]["nom"]
@@ -43,16 +42,8 @@ class OrganisationsController < ApplicationController
     @organisation = Organisation.find(params[:id]) 
   end 
 
-  def find_organisation
-    @organisation = Organisation.find(params[:id])
-  end
-
   def index
     @organisations = Organisation.all
-  end
-
-  def show_organisation
-    @organisation = Organisation.find(params[:id])
   end
 
   def edit

@@ -1,7 +1,8 @@
 class ProfilController < ApplicationController
   before_action :authenticate_user!
+  before_action :is_correct_user?, only: [:edit, :update]
 
-    def show
+    def index
         @user = current_user
     end
 
@@ -17,7 +18,7 @@ class ProfilController < ApplicationController
 
 
         if @user.save
-            redirect_to profil_path
+            redirect_to profil_index_path
             notice = "Votre profile a bien été mis à jour."
         else 
             render :edit

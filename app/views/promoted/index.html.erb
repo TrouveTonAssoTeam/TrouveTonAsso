@@ -6,13 +6,13 @@
             <p>Il vous reste encore <b><%= @remaining_days %> jour<%= @remaining_days == 1 ? '' : 's' %></b> de promotion.</p>
         </div>
         <p>Vous pouvez continuer de profiter de vos avantages en ajoutant des jours de promotion :</p>
-        <%= button_to "Rajouter des jours", new_promoted_path, form: { class: 'form' }, method: :get, class: "btn btn-primary" %>
+        <%= button_to "Rajouter des jours", new_organisation_promoted_path, form: { class: 'form' }, method: :get, class: "btn btn-primary" %>
     <% else %>
         <div class="alert alert-error">
             <h1>Malheureusement, <%= @organisation.name %> n'est pas encore mise en avant !</h1>
         </div>
             <p>Vous pouvez vite remédier à cela en achetant des jours de promotion :</p>
-            <%= button_to "Promouvoir mon association", new_promoted_path, form: { class: 'form' }, method: :get, class: "btn btn-primary" %>
+            <%= button_to "Promouvoir mon association", new_organisation_promoted_path, form: { class: 'form' }, method: :get, class: "btn btn-primary" %>
     <% end %>
     </div>
 
