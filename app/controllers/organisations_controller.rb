@@ -31,11 +31,6 @@ class OrganisationsController < ApplicationController
 
       session[:asso] = @asso
 
-      if @asso.save
-      
-        @asso.create_cagnotte(amount: 0)
-      end
-
       redirect_to new_organisation_registration_path
     end
   end

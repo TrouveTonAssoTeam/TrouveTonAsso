@@ -16,7 +16,7 @@ class Organisation < ApplicationRecord
     has_many :withdrawals
 
     def create_new_cagnotte
-      create_cagnotte(amount: 0)
+      create_cagnotte
     end
 
     has_many :promoteds
