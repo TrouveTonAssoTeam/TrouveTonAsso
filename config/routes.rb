@@ -81,10 +81,7 @@ Rails.application.routes.draw do
   get 'payments/cancel', to: 'payments#cancel', as: 'payment_cancel'
 
   # Profile page and routes associated
-  resources :profil, only: [:index, :edit, :update] do
-    get "donations", to: "donations#user_donations", as: "user_donations"
-    get "likes", to: "like#user_likes", as: "user_likes"
-  end
+  resources :profil, only: [:index, :edit, :update]
 
   # Set the dyslexie mode
   post 'dyslexie/:value', to: 'application#set_dyslexie', as: 'set_dyslexie'

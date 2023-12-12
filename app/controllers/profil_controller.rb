@@ -4,6 +4,8 @@ class ProfilController < ApplicationController
 
     def index
         @user = current_user
+        @donations = @user.donations
+        @likes = @user.likes.map(&:organisation)
     end
 
     def edit
