@@ -30,9 +30,10 @@ class PromotedController < ApplicationController
         
         @today = Date.today
 
+        # If promoted, the start date is the day after the last end_date
         if @is_promoted
             @remaining_days = (@current_promoted[0].end_date - Date.today + 1).to_i
-            @today = @current_promoted[0].end_date
+            @today = @current_promoted[0].end_date + 1
         end
     end
 
@@ -78,25 +79,32 @@ class PromotedController < ApplicationController
     def success
         @session = Stripe::Checkout::Session.retrieve(params[:session_id])
 
+        # Check if the stripe_id is already in the database and prevent duplicates
         if Promoted.where(stripe_id: @session.id).empty?
             @weeks = @session.metadata.weeks.to_i
-            @total = @session.amount_total / 100
+
+            # We store the amount in float so / with a float number will give a float
+            @total = @session.amount_total / 100.0
 
             @promoted = Promoted.new
             @promoted.organisation = current_organisation
 
+            # Check if the organisation is already promoted or not
+            # If so, the start date is the end date of the last promoted
+            # If not, the start date is tomorrow (to have a full week)
             if current_organisation.promoteds.where("end_date > ?", Date.today).empty?
-                @start_date = Date.today
+                @start_date = Date.today + 1
             else 
                 @start_date = current_organisation.promoteds.where("end_date > ?", Date.today).order(end_date: :desc)[0].end_date + 1
             end
+
             @promoted.start_date = @start_date
             @promoted.end_date = @start_date + @weeks * 7
             @promoted.price = @total
             @promoted.stripe_id = @session.id
 
             if @promoted.save
-                redirect_to organisation_promoted_index_path, notice: "Merci pour votre paiement de #{@total} €. Votre association sera mise en avant pour #{@weeks * 7} jours de plus."
+                redirect_to organisation_promoted_index_path, notice: "Merci pour votre paiement de #{@total == @total.to_i ? @total.to_i : @total} €. Votre association sera mise en avant pour #{@weeks * 7} jours de plus."
             else
                 redirect_to organisation_promoted_index_path, alert: "Une erreur est survenue. Merci de contacter le support pour plus d'informations."
             end
