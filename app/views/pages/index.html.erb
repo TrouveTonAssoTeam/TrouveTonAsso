@@ -126,26 +126,6 @@
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-<table>
-  <caption></caption>
-  <colgroup>
-    <col style="background-color: lightblue;">
-    <col style="background-color: rgba(0,0,0,0.15);">
-  </colgroup>
-  <thead>
-    <tr>
-      <th>Associations</th>
-      <th>Like</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Goozy</td>
-      <td> </td>
-    </tr>
-    <!-- Autres lignes -->
-  </tbody>
-</table>
 
   <title>Liste dans un Tableau</title>
   <style>
@@ -168,9 +148,9 @@
 </head>
 <body>
 
-<h2>Association likée par l'utilisateur</h2>
+<h2>Associations likées par l'utilisateur</h2>
 
-<table>
+<table id="tableAssociations">
   <thead>
     <tr>
       <th>Likes</th>
@@ -179,68 +159,41 @@
   </thead>
   <tbody>
     <tr>
-      <td>0</td>
-      <td>Association 1</td>
+      <td class="likes">0</td>
+      <td>Association 1 <button onclick="toggleLike(this)">Like</button></td>
     </tr>
     <tr>
-      <td>0</td>
-      <td>Association 2</td>
+      <td class="likes">0</td>
+      <td>Association 2 <button onclick="toggleLike(this)">Like</button></td>
     </tr>
     <tr>
-      <td>0</td>
-      <td>Association 3</td>
+      <td class="likes">0</td>
+      <td>Association 3 <button onclick="toggleLike(this)">Like</button></td>
     </tr>
-    <!-- Ajoutez d'autres lignes pour d'autres éléments de la liste -->
-  </tbody>
-</table>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Associations Likées</title>
-</head>
-<body>
-
-<h2>Associations Likées</h2>
-
-<table id="tableAssociations">
-  <thead>
-    <tr>
-      <th>Associations Likées</th>
-    </tr>
-  </thead>
-  <tbody id="tbodyAssociations">
-    <!-- Les associations likées seront ajoutées ici -->
   </tbody>
 </table>
 
 <script>
-function ajouterAssociationLikée(nomAssociation) {
-  // Sélectionner le tbody où ajouter la nouvelle ligne
-  var tbody = document.getElementById("tbodyAssociations");
+function toggleLike(button) {
+  let row = button.parentNode.parentNode;
+  let likesCell = row.querySelector('td:first-child');
+  let currentLikes = parseInt(likesCell.textContent);
 
-  // Créer une nouvelle ligne
-  var nouvelleLigne = document.createElement("tr");
-
-  // Créer une cellule pour le nom de l'association
-  var celluleNom = document.createElement("td");
-  celluleNom.textContent = nomAssociation;
-
-  // Ajouter la cellule à la ligne
-  nouvelleLigne.appendChild(celluleNom);
-
-  // Ajouter la ligne au tbody du tableau
-  tbody.appendChild(nouvelleLigne);
+  if (button.dataset.liked === 'true') {
+   
+    if (currentLikes > 0) {
+      currentLikes--;
+      likesCell.textContent = currentLikes;
+    }
+    button.dataset.liked = 'false';
+    button.textContent = 'Like'; // Modifier le texte du bouton
+  } else {
+   
+    likesCell.textContent = currentLikes + 1;
+    button.dataset.liked = 'true';
+    button.textContent = 'Unlike'; // Modifier le texte du bouton
+  }
 }
-
-// Exemple d'utilisation : ajouter une association likée
-ajouterAssociationLikée("Association A");
-ajouterAssociationLikée("Association B");
-// Vous pouvez appeler cette fonction pour chaque nouvelle association likée
 </script>
 
 </body>
-</html>
