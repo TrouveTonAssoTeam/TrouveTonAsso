@@ -23,14 +23,12 @@ organisation = Organisation.create!(
   name: 'Test Asso',
   description: 'Description',
   city: 'Ville',
-  website: 'https://example.com'
 )
 
 organisation = Organisation.create!(
   email: 'test2@asso.com',
   password: 'password',
-  name: 'Test Asso',
+  name: 'Test Asso 2',
   description: 'Description',
   city: 'Ville',
-  website: 'https://example.com'
 )

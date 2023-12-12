@@ -1,0 +1,18 @@
+<h1>Détails de la demande de retrait</h1>
+
+<%# Mode test! : Accessible qu'aux admins une fois implémenté, il faudra faire les modifications nécessaires %>
+
+<p>Organisation: <%= @withdrawal.organisation.name %></p>
+<p>Montant: <%= number_to_currency(@withdrawal.amount, unit: '€') %></p>
+<p>Date de demande: <%= @withdrawal.created_at.strftime("%d %B %Y %H:%M") %></p>
+<p>Statut actuel: <%= @withdrawal.cagnotte_status&.status %></p>
+
+<%= form_with(model: @withdrawal, url: update_status_withdrawal_path(@withdrawal), method: :patch) do |form| %>
+  <div class="field">
+    <%= form.label :new_status, 'Nouveau statut' %>
+    <%= form.select :new_status, options_for_select(['En cours de traitement', 'Demande traitée']), { prompt: 'Sélectionner un statut' } %>
+  </div>
+  <%= form.submit 'Mettre à jour le statut' %>
+<% end %>
+
+<%= link_to 'Retour à la liste des demandes', admin_withdraw_withdrawals_path %>
