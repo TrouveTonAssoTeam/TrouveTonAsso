@@ -1,16 +1,18 @@
 <h2>Edit</h2>
 
 <%= form_for( @user, url: profil_path(@user), method: :patch) do |f| %>
-  <div class="form-group">
-    <%= f.label :avatar, "Choose Avatar" %>
-    <%= f.file_field :avatar, class: "form-control" %>
+  <div>
+    <%= f.label :avatar, "Choisir un avatar" %>
+    <%= f.file_field :avatar, class: "form-control", id: "avatar-input" %>
   </div>
 
-  <% if @user.avatar.attached? %>
-    <div class="form-group">
-      <%= image_tag @user.avatar, class: "avatar-preview" %>
-    </div>
-  <% end %>
+  <div class="text-center">
+    <% if @user.avatar.attached? %>
+      <%= image_tag @user.avatar, id: "avatar-preview", class: "avatar-preview", alt: "Avatar Preview" %>
+    <% else %>
+      <img id="avatar-preview" class="avatar-preview" src="#" alt="Avatar Preview" style="display: none;">
+    <% end %>
+  </div>
   
   <div class="field">
   <%= f.label :first_name %><br />
@@ -33,3 +35,25 @@
 
 
 <%= link_to "Back", :back %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const avatarInput = document.getElementById('avatar-input');
+      const avatarPreview = document.getElementById('avatar-preview');
+
+      avatarInput.addEventListener('change', function() {
+        const file = avatarInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            avatarPreview.src = e.target.result;
+            avatarPreview.style.display = 'block';
+          }
+          reader.readAsDataURL(file);
+        } else {
+          avatarPreview.src = '#';
+          avatarPreview.style.display = 'none';
+        }
+      });
+    });
+</script>
