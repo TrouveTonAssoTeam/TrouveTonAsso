@@ -3,7 +3,13 @@ class EventsController < ApplicationController
     before_action :authenticate_organisation!, only: [:new, :create, :edit, :update]
   
     def index
-      @events = Event.all
+      @organisation = Organisation.find_by(id: params[:organisation_id])
+      if @organisation.present?
+        @events = @organisation.events
+      else
+        flash[:error] = "Organisation introuvable"
+        redirect_to events_path # Rediriger vers une page appropriée en cas d'organisation non trouvée
+      end
     end
   
     def show
@@ -40,10 +46,14 @@ class EventsController < ApplicationController
       redirect_to events_url, notice: 'Événement supprimé avec succès.'
     end
 
-    # Action pour permettre à l'utilisateur de participer à un événement
     def attend
-     current_user.events << @event unless current_user.events.include?(@event)
-     redirect_to @event, notice: 'Vous participez à cet événement.'
+      @event = Event.find(params[:id]) # Récupérer l'événement en fonction de son ID
+      if @event && !current_user.events.include?(@event)
+        current_user.events << @event
+        redirect_to @event, notice: 'Vous participez à cet événement.'
+      else
+        redirect_to root_path, alert: 'L\'événement est introuvable ou vous y participez déjà.'
+      end
     end
 
     # Action pour permettre à l'utilisateur de se désinscrire d'un événement
@@ -52,7 +62,6 @@ class EventsController < ApplicationController
      redirect_to @event, notice: 'Vous ne participez plus à cet événement.'
     end
 
-  
     private
 
     def set_event
