@@ -2,10 +2,26 @@
 
 <%# Mode test! : Accessible qu'aux admins une fois implémenté, il faudra faire les modifications nécessaires %>
 
-<p>Organisation: <%= @withdrawal.organisation.name %></p>
-<p>Montant: <%= number_to_currency(@withdrawal.amount, unit: '€') %></p>
-<p>Date de demande: <%= @withdrawal.created_at.strftime("%d %B %Y %H:%M") %></p>
-<p>Statut actuel: <%= @withdrawal.cagnotte_status&.status %></p>
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Association:</th>
+        <th>Montant:</th>
+        <th>Date de demande:</th>
+        <th>Statut actuel:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @withdrawal.organisation.name %></td>
+        <td><%= number_to_currency(@withdrawal.amount, unit: '€') %></td>
+        <td><%= @withdrawal.created_at.strftime("%d %B %Y %H:%M") %></td>
+        <td><%= @withdrawal.cagnotte_status&.status %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <%= form_with(model: @withdrawal, url: update_status_withdrawal_path(@withdrawal), method: :patch) do |form| %>
   <div class="field">

@@ -1,7 +1,28 @@
 <h2>Merci pour votre don!</h2>
 
-<p>Montant du don: <%= number_to_currency(@amount, unit: '€') %></p>
-<p>Date du don: <%= @donation.created_at.strftime('%d/%m/%Y %H:%M:%S') %></p>
-<p>Association: <%= @asso.name %></p>
+<div class="table-container">
+    <table>
+    <thead>
+        <tr>
+        <th>Montant</th>
+        <% if @donation.tip_amount && @donation.tip_amount > 0 %>
+        <th>Votre généreuse participation</th>
+        <% end %>
+        <th>Date</th>
+        <th>Association bénéficiaire</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><%= number_to_currency(@donation.no_tip, unit: '€') %></td>
+            <% if @donation.tip_amount && @donation.tip_amount > 0 %>
+            <td><%= number_to_currency(@donation.tip_amount, unit: '€') %></td>
+            <% end %>
+            <td><%= @donation.created_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
+            <td><%= @donation.organisation.name %></td>
+        </tr>
+    </tbody>
+    </table>
+</div>
 
-<%= link_to "Retour à l'accueuil", root_path %>
+<%= link_to "Retour à l'accueil", root_path %>

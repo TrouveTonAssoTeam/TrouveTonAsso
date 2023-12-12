@@ -1,7 +1,10 @@
 <%= form_with method: :post, url: payments_path, data: { turbo: false } do |form| %>
   <%= form.hidden_field :organisation_id, value: @organisation.id %>
-  <%= form.label :amount %>
+  <%= form.label :Montant %>
   <%= form.number_field :amount, step: 'any' %>
+
+  <%= form.check_box :tip, value: '1', unchecked_value: '0' %>
+  <%= form.label :tip, 'Ajouter 1€ en soutien au site' %>
 
   <%= form.submit 'Confirmer' %>
 <% end %>
