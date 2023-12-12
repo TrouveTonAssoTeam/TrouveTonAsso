@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :donations
 
   has_many :faqs
+  has_one_attached :avatar
 end

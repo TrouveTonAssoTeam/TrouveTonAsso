@@ -72,6 +72,7 @@ class OrganisationsController < ApplicationController
 
   def dashboard
     @organisation = current_organisation
+    @questions = @organisation.faqs.where(answer: nil)
   end
 
   protected

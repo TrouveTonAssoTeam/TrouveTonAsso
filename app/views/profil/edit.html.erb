@@ -1,6 +1,16 @@
 <h2>Edit</h2>
 
 <%= form_for( @user, url: profil_path(@user), method: :patch) do |f| %>
+  <div class="form-group">
+    <%= f.label :avatar, "Choose Avatar" %>
+    <%= f.file_field :avatar, class: "form-control" %>
+  </div>
+
+  <% if @user.avatar.attached? %>
+    <div class="form-group">
+      <%= image_tag @user.avatar, class: "avatar-preview" %>
+    </div>
+  <% end %>
   
   <div class="field">
   <%= f.label :first_name %><br />
