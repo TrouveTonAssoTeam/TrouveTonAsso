@@ -72,8 +72,6 @@ Rails.application.routes.draw do
 
   resources :donations, except: [:show]
 
-  get 'donations/user_donations', to: 'donations#user_donations', as: 'user_donations'
-
   resources :payments, except: [:show]
   resources :payments, only: [:new, :create]
 
