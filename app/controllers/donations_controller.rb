@@ -10,6 +10,16 @@ class DonationsController < ApplicationController
     @user_donations = current_user.donations
   end
 
+  def organisation_donations
+    @organisation_donations = current_organisation.donations
+  end
+
+  def create
+    puts "$" * 20
+    puts params
+    puts "$" * 20
+  end
+  
   private
 
   def donation_params
