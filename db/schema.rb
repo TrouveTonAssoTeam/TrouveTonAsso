@@ -67,6 +67,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_112059) do
     t.string "stripe_id"
   end
 
+  create_table "faqs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "organisation_id"
+    t.string "question"
+    t.string "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organisation_id"], name: "index_faqs_on_organisation_id"
+    t.index ["user_id"], name: "index_faqs_on_user_id"
+  end
+
   create_table "likes", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "organisation_id"
