@@ -126,4 +126,74 @@
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-<h1>Associations aimées par les utilisateurs :</h1>
+
+  <title>Liste dans un Tableau</title>
+  <style>
+    /* Styles facultatifs pour le tableau */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Associations likées par l'utilisateur</h2>
+
+<table id="tableAssociations">
+  <thead>
+    <tr>
+      <th>Likes</th>
+      <th>Associations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="likes">0</td>
+      <td>Association 1 <button onclick="toggleLike(this)">Like</button></td>
+    </tr>
+    <tr>
+      <td class="likes">0</td>
+      <td>Association 2 <button onclick="toggleLike(this)">Like</button></td>
+    </tr>
+    <tr>
+      <td class="likes">0</td>
+      <td>Association 3 <button onclick="toggleLike(this)">Like</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<script>
+function toggleLike(button) {
+  let row = button.parentNode.parentNode;
+  let likesCell = row.querySelector('td:first-child');
+  let currentLikes = parseInt(likesCell.textContent);
+
+  if (button.dataset.liked === 'true') {
+   
+    if (currentLikes > 0) {
+      currentLikes--;
+      likesCell.textContent = currentLikes;
+    }
+    button.dataset.liked = 'false';
+    button.textContent = 'Like'; // Modifier le texte du bouton
+  } else {
+   
+    likesCell.textContent = currentLikes + 1;
+    button.dataset.liked = 'true';
+    button.textContent = 'Unlike'; // Modifier le texte du bouton
+  }
+}
+</script>
+
+</body>

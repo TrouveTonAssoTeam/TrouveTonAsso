@@ -29,3 +29,17 @@
 <% else %>
   <p>Association non trouvée</p>
 <% end %>
+
+<% if current_user.likes.where(organisation_id: @organisation.id).empty? %>
+    <%= button_to like_asso_path(@organisation), method: :post, class: 'like-btn' do %>
+        <ion-icon name="heart">
+        <div class='red-bg'></div>
+        </ion-icon>
+    <% end %>
+<% else %>
+    <%= button_to unlike_asso_path(@organisation), method: :post, class: 'like-btn active' do %>
+        <ion-icon name="heart">
+        <div class='red-bg'></div>
+        </ion-icon>
+    <% end %>
+<% end %>
