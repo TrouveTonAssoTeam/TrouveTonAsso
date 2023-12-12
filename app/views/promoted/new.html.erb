@@ -1,0 +1,37 @@
+<h1 class="text-center mb-6 mt-1">Mettez en avant votre association</h1>
+
+<% if @is_promoted %>
+
+    <p>Il vous reste <b><%= @remaining_days.to_i %> jours</b> de promotion.</p>
+    
+    <div class="card-container">
+        <% 4.times do |i| %>
+            <div class="card text-center">
+                <p>
+                Ajouter <b><%= (i + 1) * 7 %></b> jours</b> pour promouvoir votre association jusqu'au <b><%= I18n.l((@today + ((i + 1) * 7).days), format: :long) %></b>
+                </p>
+                <div class="text-center">
+                    <%= (i + 1) %> semaine<%= (i + 1) == 1 ? '' : 's' %> pour <%= case i + 1; when 1 then "5"; when 2 then "9,5"; when 3 then '13,5'; when 4 then '17'; end %> €
+                    <%= button_to "Promouvoir mon association #{(i + 1) * 7} jours", go_to_paiement_organisation_promoted_index_path(weeks: (i + 1)), form: { class: 'form mt-2' }, method: :post, class: "btn btn-primary", data: { turbo: false } %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+
+<% else %>
+
+    <div class="card-container">
+        <% 4.times do |i| %>
+            <div class="card text-center">
+                <p>
+                Ajouter <b><%= (i + 1) * 7 %></b> jours</b> pour promouvoir votre association jusqu'au <b><%= I18n.l((@today + ((i + 1) * 7).days), format: :long) %></b>
+                </p>
+                <div class="text-center">
+                    <%= (i + 1) %> semaine<%= (i + 1) == 1 ? '' : 's' %> pour <%= case i + 1; when 1 then "5"; when 2 then "9,5"; when 3 then '13,5'; when 4 then '17'; end %> €
+                    <%= button_to "Promouvoir mon association #{(i + 1) * 7} jours", go_to_paiement_organisation_promoted_index_path(weeks: (i + 1)), form: { class: 'form mt-2' }, method: :post, class: "btn btn-primary", data: { turbo: false } %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+
+<% end %>
