@@ -9,6 +9,10 @@ class User < ApplicationRecord
     has_many :likes
     has_many :organisations, through: :likes
   has_many :donations
+  has_many :attendances
+  has_many :events, through: :attendances
+  has_many :attended_events, through: :attendances, source: :event
+
 
   has_many :faqs
   has_one_attached :avatar
