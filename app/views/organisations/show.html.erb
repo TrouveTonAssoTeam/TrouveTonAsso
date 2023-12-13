@@ -16,7 +16,7 @@
 
     <% if @organisation.cover_photo.attached? %>
       <div class="image-container">
-        <%= image_tag @organisation.cover_photo, class: "img-fluid rounded-custom" %>
+        <%= image_tag @organisation.cover_photo, class: "img-fluid rounded-custom", alt: "Photo de couverture de l'association #{@organisation.name}" %>
       </div>
     <% else %>
       <p>Aucune photo de couverture pour cette association</p>
@@ -24,11 +24,11 @@
 
     <div class="element">
       <p><strong>Description</strong></p>
-      <%= @organisation.description %>
+      <p><%= @organisation.description %></p>
       <p><strong>Ville</strong></p> 
-      <%= @organisation.city %></p>
+      <p><%= @organisation.city %></p>
       <p><strong>Adresse</strong></p>
-      <%= @organisation.address %></p> 
+      <p><%= @organisation.address %></p> 
 
       <!-- Google Maps API -->
       <div id="map" style="height: 200px;"></div>
@@ -52,7 +52,7 @@
         src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.dig(:google_maps, :api_key) %>&libraries=places&callback=initMap">
       </script>
 
-
+    </div>
   </div>
 
   <h2>Événements de cette organisation :</h2>
@@ -77,10 +77,11 @@
   <h1> Questions-réponses </h1>
     <% if !@faqs.empty? %>
       <div class="faq-container">
-          <% @faqs.each do |faq| %>
-              <% if faq.answer %>
-                <div class="my-5">
-                                  <div class="question">
+        <% @faqs.each do |faq| %>
+          <% if faq.answer %>
+            <div class="my-5">
+
+              <div class="question">
                 <% if faq.user.avatar.attached? %>
                   <%= image_tag faq.user.avatar, class: "card-img-top", alt: "Photo de profil de #{if faq.user.first_name && faq.user.last_name then faq.user.first_name + " " + faq.user.last_name.slice(0,1) + "." else "Anonyme" end}" %>
                 <% else %>
@@ -105,16 +106,17 @@
                   <p><%= faq.question %></p>
                 </div>
               </div>
-                </div>
-              <% end %>
+
+            </div>
           <% end %>
-        </div>
+        <% end %>
+      </div>
     <% else %>
       <p>Aucune question-réponse pour cette association</p>
     <% end %>
 
-        <%= link_to "Ajouter une question", new_organisation_faq_path(organisation_id: @organisation.id), class: "btn btn-primary" %>
-      </div>
+    <%= link_to "Ajouter une question", new_organisation_faq_path(organisation_id: @organisation.id), class: "btn btn-primary" %>
+
   <!-- Autres détails si nécessaire -->
 
   <h2>Faites un don à <%= @organisation.name %></h2>
