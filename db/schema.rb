@@ -87,7 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_112059) do
     t.string "cover_photo"
     t.index ["organisation_id"], name: "index_events_on_organisation_id"
   end
-  
+
   create_table "faqs", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "organisation_id"
@@ -164,9 +164,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_112059) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attendances", "events"
   add_foreign_key "attendances", "users"
-  add_foreign_key "events", "organisations"
   add_foreign_key "cagnotte_statuses", "withdrawals"
   add_foreign_key "cagnottes", "organisations"
+  add_foreign_key "events", "organisations"
   add_foreign_key "likes", "organisations"
   add_foreign_key "likes", "users"
   add_foreign_key "withdrawals", "cagnotte_statuses"
