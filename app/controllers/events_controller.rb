@@ -71,6 +71,7 @@ class EventsController < ApplicationController
         flash[:error] = "L'événement n'a pas été trouvé dans cette organisation."
         redirect_to organisation_events_path(@organisation) # Redirige vers la liste des événements de cette organisation
       end
+
     end
    
     def event_params

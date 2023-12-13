@@ -1,47 +1,48 @@
-.association-list{
-    background-color: #55377c87; 
-    color: white; 
-    padding: 10px; 
+.association-list {
+    background-color: #55377c87;
+    color: white;
+    padding: 10px;
     border-radius: 10px;
     text-align: center;
-  }
+}
 
-  .page-container {
+.page-container {
     width: 90%;
     margin: 0 auto;
-  }
-  
-  .content {
+}
+
+.content {
     padding: 20px;
-  }
-  
-  .association-cards {
+}
+
+.association-cards {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-  }
-  
-  .association-card {
+}
+
+.association-card {
     width: calc(33.33% - 20px);
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow: hidden;
-  }
-  
-  .card-img-top {
+}
+
+.card-img-top {
     width: 100%;
     height: auto;
-  }
-  
-  .card-body {
+    background-color: var(--background-card-color);
+}
+
+.card-body {
     padding: 10px;
-  }
-  
-  .card-title {
+}
+
+.card-title {
     margin-bottom: 10px;
-  }
-  
-  .btn {
+}
+
+/* .btn {
     display: block;
     width: 100%;
     text-align: center;
@@ -50,7 +51,4 @@
     text-decoration: none;
     border: none;
     border-radius: 5px;
-  }
-  
- 
-  
+} */

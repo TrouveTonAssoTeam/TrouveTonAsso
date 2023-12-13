@@ -11,11 +11,13 @@
     <h1><%= @event.name %></h1>
   </div>
 
+
   <% if @event.start_date > Time.now %>
   <p>Statut : <span style="color: green;">À venir</span></p>
   <% else %>
   <p>Statut : <span style="color: red;">En cours</span></p>
   <% end %>
+
 
   <div class="event-description">
     <p><strong>Description :</strong> <%= @event.description %></p>
@@ -29,6 +31,7 @@
    <% end %>
   </div>
     
+    <!-- Autres détails de l'événement -->
     
     <% if user_signed_in? %>
       <% if current_user.events.include?(@event) %>
