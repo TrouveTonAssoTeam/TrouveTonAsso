@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       get "dashboard/faqs/:faq_id/answer", to: "faqs#new_answer", as: "answer_faq"
       post "dashboard/faqs/:faq_id/answer", to: "faqs#create_answer", as: "create_answer"
     end
+    resources :events, only: [:index]
     resources :faqs, only: [:new, :create]
     resources :promoted, only: [:index, :new] do
       collection do
@@ -80,7 +81,7 @@ Rails.application.routes.draw do
 
   resources :payments, except: [:show]
   resources :payments, only: [:new, :create]
-
+  
   get 'payments/success', to: 'payments#success', as: 'payment_success'
   get 'payments/cancel', to: 'payments#cancel', as: 'payment_cancel'
 
