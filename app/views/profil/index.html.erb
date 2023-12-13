@@ -29,7 +29,7 @@
                         <% @donations.each do |donation| %>
                             <tr>
                                 <td><%= donation.created_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
-                                <td><%= number_to_currency(donation.amount, unit: '€') %></td>
+                                <td><%= number_to_currency(donation.no_tip, unit: '€') %></td>
                                 <td><%= donation.organisation.name %></td>
                             </tr>
                         <% end %>

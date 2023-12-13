@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     get "donate", to: "donations#new", as: "new_donation"
   end
 
+  get '/tips/all_tips', to: 'tips#all_tips', as: 'all_tips'
 
   resources :organisations, only: [:index, :show, :edit, :update] 
   get "organisation/test", to: "organisations#test"

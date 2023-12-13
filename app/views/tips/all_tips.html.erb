@@ -1,0 +1,23 @@
+<h1>Liste des participations</h1>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>ID de l'user</th>
+        <th>ID du don</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @all_tips.each do |tip| %>
+        <tr>
+            <td><%= tip.user.id %></td>
+            <td><%= tip.donation.id %></td>
+            <td><%= tip.created_at.strftime("%d %B %Y %H:%M") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<hr>
