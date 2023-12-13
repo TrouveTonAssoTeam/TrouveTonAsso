@@ -149,6 +149,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_125710) do
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_reviews_on_event_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "tips", force: :cascade do |t|
     t.decimal "amount"
     t.bigint "donation_id", null: false

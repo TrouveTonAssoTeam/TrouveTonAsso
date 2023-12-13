@@ -1,4 +1,3 @@
-
 <%= stylesheet_link_tag 'events', media: 'all' %>
 <div class="event-details">
   <% if @event.cover_photo.attached? %>
@@ -11,66 +10,61 @@
     <h1><%= @event.name %></h1>
   </div>
 
- <div class="event-description">
+  <div class="event-description">
     <p><strong>Description :</strong> <%= @event.description %></p>
     <p><strong>Date de début :</strong> <%= @event.start_date %></p>
     <p><strong>Date de fin :</strong> <%= @event.end_date %></p>
 
-   <% if @event.participants.any? %>
-    <p><strong>Nombre de participants :</strong> <%= @event.participants.count %></p>
-   <% else %>
-    <p>Aucun participant pour cet événement pour le moment.</p>
-   <% end %>
+    <% if @event.participants.any? %>
+      <p><strong>Nombre de participants :</strong> <%= @event.participants.count %></p>
+    <% else %>
+      <p>Aucun participant pour cet événement pour le moment.</p>
+    <% end %>
   </div>
    
+  <p>Statut de l'événement : <%= @event.status %></p>
 
-<p>Statut de l'événement : <%= @event.status %></p>
+  <% if @event.past? && user_signed_in? && current_user.events.include?(@event) %> <!-- Condition pour afficher le formulaire d'avis uniquement si l'utilisateur est inscrit à l'événement -->
+    <%= form_with(model: [@event, Review.new], url: create_review_organisation_event_path(@event)) do |form| %>
+      <!-- Ajout des champs de nom et prénom -->
+      <%= form.label :reviewer_first_name, "Prénom" %>
+      <%= form.text_field :reviewer_first_name %>
 
-<!-- Affichage du formulaire d'avis si l'événement est passé -->
-<% if @event.past? && current_user && !@event.reviews.exists?(user_id: current_user.id) %>
-  <%= form_for [@event, Review.new] do |f| %>
-    <!-- Vos champs pour le formulaire d'avis -->
-    <%= f.label :rating, "Note (sur 5)" %>
-    <%= f.number_field :rating, in: 1..5 %>
+      <%= form.label :reviewer_last_name, "Nom" %>
+      <%= form.text_field :reviewer_last_name %>
+      
+      <!-- Les autres champs de l'avis -->
+      <%= form.label :body %>
+      <%= form.text_area :body %>
 
-    <%= f.label :body, "Commentaire" %>
-    <%= f.text_area :body %>
+      <%= form.label :rating %>
+      <%= form.number_field :rating, in: 1..5 %>
 
-    <%= f.submit "Envoyer l'avis" %>
-  <% end %>
-<% end %>
-    <!-- Autres détails de l'événement -->
-
-    <!-- Afficher les avis liés à cet événement -->
-<% if @event.reviews.any? %>
-  <h2>Avis pour cet événement</h2>
-  <ul>
-    <% @event.reviews.each do |review| %>
-      <li>
-        <strong>Description :</strong> <%= review.body %><br>
-        <strong>Note :</strong> <%= review.rating %><br>
-        <strong>Utilisateur ID :</strong> <%= review.user_id %>
-      </li>
+      <%= form.submit "Créer l'avis" %>
+      <br>
     <% end %>
-  </ul>
-<% else %>
-  <p>Aucun avis disponible pour cet événement pour le moment.</p>
-<% end %>
+  <% end %>
 
-<!-- Formulaire pour créer un nouvel avis -->
-<!-- Formulaire pour créer un nouvel avis -->
-<%= form_with(model: [@event, Review.new], url: create_review_organisation_event_path(@event)) do |form| %>
+  <% if @event.reviews.any? %>
+    <h2>Avis pour cet événement</h2>
+    <ul>
+      <% @event.reviews.each do |review| %>
+        <li>
+          <strong>Description :</strong> <%= review.body %><br>
+          <strong>Note :</strong> <%= review.rating %><br>
+          <strong>Utilisateur ID :</strong> <%= review.user_id %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>Aucun avis disponible pour cet événement pour le moment.</p>
+  <% end %>
 
-  <%= form.label :body %>
-  <%= form.text_area :body %>
-
-  <%= form.label :rating %>
-  <%= form.number_field :rating, in: 1..5 %>
-
-  <%= form.submit "Créer l'avis" %>
-  <br>
-<% end %>
-    
+  <% if @event.past? %> <!-- Condition pour désactiver les liens d'inscription et de désinscription une fois que l'événement est terminé -->
+    <% if user_signed_in? %>
+      <p>L'événement est clôturé.</p>
+    <% end %>
+  <% else %>
     <% if user_signed_in? %>
       <% if current_user.events.include?(@event) %>
         <%= link_to 'Se désinscrire', unattend_event_path(@event), data:{turbo_method: :delete}, method: :delete, class: 'btn btn-danger' %>
@@ -80,5 +74,5 @@
     <% else %>
       <%= link_to 'Se connecter pour s\'inscrire', new_user_session_path, class: 'btn btn-primary' %>
     <% end %>
-  </div>
+  <% end %>
 </div>
