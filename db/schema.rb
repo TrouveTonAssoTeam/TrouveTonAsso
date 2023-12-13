@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_12_190306) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_13_125710) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -89,7 +89,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_190306) do
     t.string "cover_photo"
     t.index ["organisation_id"], name: "index_events_on_organisation_id"
   end
-  
+
   create_table "faqs", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "organisation_id"
@@ -124,6 +124,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_190306) do
     t.string "address"
     t.string "zip"
     t.string "rna"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["email"], name: "index_organisations_on_email", unique: true
     t.index ["reset_password_token"], name: "index_organisations_on_reset_password_token", unique: true
   end
@@ -174,7 +176,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_190306) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attendances", "events"
   add_foreign_key "attendances", "users"
-  add_foreign_key "events", "organisations"
   add_foreign_key "cagnotte_statuses", "withdrawals"
   add_foreign_key "cagnottes", "organisations"
   add_foreign_key "events", "organisations"
