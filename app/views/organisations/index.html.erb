@@ -1,4 +1,6 @@
-<%= stylesheet_link_tag 'organisation.index', media: 'all' %>
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'organisation.index', media: 'all' %>
+<% end %>
 
 <div class="page-container">
   <div class="content">
@@ -15,7 +17,7 @@
               <%= image_tag organisation.cover_photo, class: "card-img-top", alt: organisation.name %>
             <% else %>
               <!-- Placeholder si aucune cover photo n'est attachée -->
-              <%= image_tag "placeholder_cover_photo.jpg", class: "card-img-top", alt: "Placeholder" %>
+              <%= image_tag "placeholder-image.png", class: "card-img-top", alt: "Placeholder" %>
             <% end %>
             <div class="card-body">
               <!-- Nom de l'association -->
