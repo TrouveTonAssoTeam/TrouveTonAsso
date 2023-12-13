@@ -23,6 +23,11 @@ Rails.application.routes.draw do
   # Up check for health
   get "up" => "rails/health#show", as: :rails_health_check
 
+  # for events
+  resources :events
+  get '/events/:id/attend', to: 'events#attend', as: 'attend_event'
+  delete '/events/:id/unattend', to: 'events#unattend', as: 'unattend_event'
+
   # For likes
   post 'like/:organisation_id', to: 'like#like', as: "like_asso"
   post 'unlike/:organisation_id', to: 'like#unlike', as: "unlike_asso"

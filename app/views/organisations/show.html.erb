@@ -29,9 +29,21 @@
       <%= @organisation.city %></p>
     </div>
   </div>
-  <p>Description : <%= @organisation.description %></p>
-  <p>Ville : <%= @organisation.city %></p>
-  <!-- Autres détails si nécessaire -->
+   
+  <h2>Événements</h2>
+    <ul>
+       <% @organisation.events.each do |event| %>
+    <li>
+      <%= link_to event.name, event %>
+      <!-- Afficher d'autres détails de l'événement ici -->
+    </li>
+     <% end %>
+   </ul>
+
+     <% else %>
+      <p>Association non trouvée</p>
+     <% end %>
+
   <h2>Faites un don à <%= @organisation.name %></h2>
 
   <%= render 'shared/donate_button', association: @organisation %>
