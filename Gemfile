@@ -84,3 +84,9 @@ gem "rails-i18n", "~> 7.0"
 gem "letter_opener"
 
 gem "geocoder"
+
+gem "administrate"
+
+gem "administrate-field-active_storage"
+
+gem "image_processing"

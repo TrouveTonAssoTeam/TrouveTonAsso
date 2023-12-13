@@ -3,3 +3,4 @@
 //= link_tree ../builds
 //= link favicon/site.webmanifest
 //= link favicon/browserconfig.xml
+//= link administrate-field-active_storage/application.css

@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      
+      resources :cagnottes
+      resources :cagnotte_statuses
+      resources :donations
+      resources :events
+      resources :faqs
+      resources :organisations
+      resources :promoteds
+      resources :users
+      resources :attendances
+
+      root to: "attendances#index"
+    end
   # Devise for users and organisations
   devise_for :users, path: 'users', controllers: {
     sessions: 'users/sessions',
