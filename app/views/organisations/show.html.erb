@@ -28,6 +28,25 @@
   </div>
   <p>Description : <%= @organisation.description %></p>
   <p>Ville : <%= @organisation.city %></p>
+
+  <h2>Événements de cette organisation :</h2>
+
+<% if @organisation.events.any? %>
+  <ul>
+    <% @organisation.events.each do |event| %>
+      <li>
+        <%= link_to event.name, event_path(event) %>
+        <% if event.start_date > Time.now %>
+          <span style="color: green;">À venir</span>
+        <% else %>
+          <span style="color: red;">En cours</span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucun événement trouvé pour cette organisation.</p>
+<% end %>
   <!-- Autres détails si nécessaire -->
   <h2>Faites un don à <%= @organisation.name %></h2>
 

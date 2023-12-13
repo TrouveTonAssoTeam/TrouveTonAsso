@@ -5,10 +5,10 @@ class EventsController < ApplicationController
     def index
       @organisation = Organisation.find_by(id: params[:organisation_id])
       if @organisation.present?
-        @events = @organisation.events
+        @events = @organisation.events # Assurez-vous que cette ligne récupère les événements liés à l'organisation
       else
         flash[:error] = "Organisation introuvable"
-        redirect_to events_path # Rediriger vers une page appropriée en cas d'organisation non trouvée
+        redirect_to events_path # Redirige vers une page appropriée en cas d'organisation non trouvée
       end
     end
   
@@ -65,7 +65,12 @@ class EventsController < ApplicationController
     private
 
     def set_event
-        @event = Event.find(params[:id])
+      @organisation = Organisation.find_by(id: params[:organisation_id])
+      @event = @organisation.events.find_by(id: params[:id]) if @organisation
+      unless @event
+        flash[:error] = "L'événement n'a pas été trouvé dans cette organisation."
+        redirect_to organisation_events_path(@organisation) # Redirige vers la liste des événements de cette organisation
+      end
     end
    
     def event_params

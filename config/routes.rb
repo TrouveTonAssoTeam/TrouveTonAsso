@@ -23,11 +23,6 @@ Rails.application.routes.draw do
   # Up check for health
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # for events
-  resources :events
-  get '/events/:id/attend', to: 'events#attend', as: 'attend_event'
-  delete '/events/:id/unattend', to: 'events#unattend', as: 'unattend_event'
-
   # For likes
   post 'like/:organisation_id', to: 'like#like', as: "like_asso"
   post 'unlike/:organisation_id', to: 'like#unlike', as: "unlike_asso"
@@ -50,36 +45,7 @@ Rails.application.routes.draw do
     get "donate", to: "donations#new", as: "new_donation"
   end
 
-
-  resources :organisations, only: [:index, :show, :edit, :update] 
-  get "dashboard", to: 'organisations#dashboard'
-  get "organisation/test", to: "organisations#test"
-  post "organisation/new", to: "organisations#new", as: :new_organisation
-
-  resources :cagnottes, only: [:show] do
-    member do
-      get :withdrawal
-      post :process_withdrawal
-    end
-  end 
-
-  resources :withdrawals, only: [:index] do
-    collection do
-      get :admin_withdraw
-    end
-      member do
-        get :show_admin
-        patch :update_status
-      end
-  end
-
-  resources :donations, except: [:show]
-
-  get 'donations/user_donations', to: 'donations#user_donations', as: 'user_donations'
-
-  resources :payments, except: [:show]
   resources :payments, only: [:new, :create]
-
   get 'payments/success', to: 'payments#success', as: 'payment_success'
   get 'payments/cancel', to: 'payments#cancel', as: 'payment_cancel'
 
