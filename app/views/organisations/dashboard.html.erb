@@ -49,7 +49,7 @@
     <div class="event-buttons text-center">
       <!-- Ajout d'une div pour les boutons -->
       <div class="button-group">
-        <a href="/events/index" class="btn btn-secondary">Voir les événements</a>
+         <%= link_to "Voir les événements", organisation_events_path(@organisation), class: "btn btn-secondary" %>
         <a href="/events/new" class="btn btn-secondary">Créer un événement</a>
       </div>
     </div>
