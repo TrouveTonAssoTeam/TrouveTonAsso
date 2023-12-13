@@ -4,6 +4,8 @@ class ProfilController < ApplicationController
 
     def index
         @user = current_user
+        @donations = @user.donations
+        @likes = @user.likes.map(&:organisation)
     end
 
     def edit
@@ -16,6 +18,9 @@ class ProfilController < ApplicationController
         @user.first_name = params[:user][:first_name]
         @user.last_name = params[:user][:last_name]
 
+        if params[:user][:avatar]
+            @user.avatar.attach(params[:user][:avatar])
+        end
 
         if @user.save
             redirect_to profil_index_path

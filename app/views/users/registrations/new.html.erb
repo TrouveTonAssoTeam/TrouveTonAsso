@@ -1,6 +1,15 @@
-<h2>Sign up</h2>
+<div class="card-container">
+  <%= link_to new_user_registration_path, class: "card badge-login active" do %>
+    Utilisateurs
+  <% end %>
+  <%= link_to test_organisations_path, class: "card badge-login" do %>
+    Associations
+  <% end %>
+</div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<h2 class="text-center">S'enregister</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form" }) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
 
   <div class="field">
@@ -22,7 +31,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", class: "btn btn-primary" %>
   </div>
 <% end %>
 

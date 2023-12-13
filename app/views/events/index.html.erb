@@ -1,0 +1,13 @@
+<h1>Événements de l'organisation <%= @organisation.name %></h1>
+
+<% if @events.any? %>
+  <ul>
+    <% @events.each do |event| %>
+      <li>
+        <%= link_to event.name, event_path(event) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucun événement trouvé pour cette organisation.</p>
+<% end %>

@@ -1,8 +1,6 @@
 /*
- *= require_tree .
- *= require_self 
- *= require like
  *= require main
+ *= require like
  *= require alerts
  *= require bg
  *= require navbar
@@ -12,4 +10,5 @@
  *= require footer
  *= require dyslexic
  *= require tables
+ *= require faq
  */

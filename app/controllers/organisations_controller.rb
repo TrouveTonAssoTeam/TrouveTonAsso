@@ -37,6 +37,7 @@ class OrganisationsController < ApplicationController
 
   def show
       @organisation = Organisation.find(params[:id])
+      @faqs = @organisation.faqs
   end
 
   def delete
@@ -71,6 +72,7 @@ class OrganisationsController < ApplicationController
 
   def dashboard
     @organisation = current_organisation
+    @questions = @organisation.faqs.where(answer: nil)
   end
 
   protected

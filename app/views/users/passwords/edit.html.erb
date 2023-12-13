@@ -1,6 +1,6 @@
-<h2>Change your password</h2>
+<h2>Changer votre mot de passe</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "form" }) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
   <%= f.hidden_field :reset_password_token %>
 
@@ -18,7 +18,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Change my password" %>
+    <%= f.submit "Changer le mot de passe", class: "btn btn-primary" %>
   </div>
 <% end %>
 
