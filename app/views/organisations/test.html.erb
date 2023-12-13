@@ -1,3 +1,17 @@
+<div class="card-container">
+  <%= link_to new_user_registration_path, class: "card badge-login" do %>
+    Utilisateurs
+  <% end %>
+  <%= link_to test_organisations_path, class: "card badge-login active" do %>
+    Associations
+  <% end %>
+</div>
+
+<h2 class="text-center">Enregistrer votre association</h2>
+<p> Afin de garantir la présence de véritables associations sur TrouveTonAsso, nous avons mis en place un système de vérification. Vous devez donc renseigner votre numéro SIREN ou RNA. </p>
+<p> Les informations publiques collectées seront partagées avec les autres utilisateurs, et vous ne serez pas en mesure de les modifier directement. </p>
+<p> Vous pourrez toutefois en faire la demande à <a href="mailto:contact@trouvetonasso.fr">contact@trouvetonasso.fr</a> </p>
+
 <%= form_with url: new_organisations_path, class: 'form' do |f| %>
   
   <%= f.text_field :id, placeholder: 'SIREN ou n° RNA' %>

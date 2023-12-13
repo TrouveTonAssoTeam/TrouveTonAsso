@@ -5,6 +5,7 @@
 <div class="page-container">
   <div class="content">
     <!-- Cover photo de l'organisation -->
+    <br>
     <% if @organisation.cover_photo.attached? %>
       <div class="cover-photo">
         <%= image_tag @organisation.cover_photo, class: "rounded-corner" %>
@@ -48,9 +49,8 @@
     <div class="event-buttons text-center">
       <!-- Ajout d'une div pour les boutons -->
       <div class="button-group">
-        <button class="btn btn-secondary">Voir les événements</button>
-        <button class="btn btn-secondary">Créer un événement</button>
-        <button class="btn btn-secondary">Supprimer un événement</button>
+        <a href="/events/index" class="btn btn-secondary">Voir les événements</a>
+        <a href="/events/new" class="btn btn-secondary">Créer un événement</a>
       </div>
     </div>
   </div>

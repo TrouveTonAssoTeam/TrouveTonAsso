@@ -1,4 +1,64 @@
-<p>Prénom : <%= @user.first_name %></p>
-<p>Nom : <%= @user.last_name %></p>
+<div class="card-container">
+    <div class="card card-body">
+        <h1>Vos informations</h1>
+        <p>Email : <%= @user.email %></p>
+        <p>Mot de passe : ********</p>
+        <%= link_to "Modifier le mot de passe", edit_user_registration_path(@user) %>
 
-<%= link_to "editer le profil", edit_profil_path(@user) %>
+        <p>Prénom : <%= @user.first_name %></p>
+        <p>Nom : <%= @user.last_name %></p>
+
+        <%= link_to "Editer le profil", edit_profil_path(@user) %>
+
+        <h4>Mécontent de votre profil ?</h4>
+        <%= link_to "Supprimer le compte", registration_path(@user), data: { confirm: "Êtes-vous sûr ?", turbo_confirm: "Êtes-vous sûr ?", turbo_method: :delete }, method: :delete %>
+    </div>
+    <div class="card card-body">
+        <h1>Historique de vos dons</h1>
+        <% if !@donations.empty? %>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Montant</th>
+                            <th>Association</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @donations.each do |donation| %>
+                            <tr>
+                                <td><%= donation.created_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
+                                <td><%= number_to_currency(donation.amount, unit: '€') %></td>
+                                <td><%= donation.organisation.name %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        <% else %>
+            <p>Vous n'avez aucun don pour le moment.</p>
+            <p>N'hésitez pas à faire un don sur la page d'une association !</p>
+        <% end %>
+    </div>
+    <div class="card card-body">
+        <h1>Vos associations likées</h1>
+        <% if !@likes.empty? %>
+            <div class="card-container">
+                <% @likes.each do |orga| %>
+                    <div class="card">
+                        <%= button_to unlike_asso_path(orga), method: :post, class: 'like-btn active', form: {class: 'like-btn-container'} do %>
+                            <ion-icon name="heart">
+                            <div class='red-bg'></div>
+                            </ion-icon>
+                        <% end %>
+                        <h2><%= orga.name %></h2>
+                        <p><%= orga.description %></p>
+                    </div>
+                <% end %>
+            </div>
+        <% else %>
+            <p>Vous n'avez aucune association likée pour le moment.</p>
+        <% end %>
+    </div>
+</div>
