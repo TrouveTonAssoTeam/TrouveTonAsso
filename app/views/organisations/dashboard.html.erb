@@ -8,7 +8,7 @@
     <br>
     <% if @organisation.cover_photo.attached? %>
       <div class="cover-photo">
-        <%= image_tag @organisation.cover_photo, class: "rounded-corner" %>
+        <%= image_tag @organisation.cover_photo, class: "rounded-corner", alt: "Photo de couverture de l'association #{@organisation.name}" %>
       </div>
     <% end %>
 
@@ -49,7 +49,7 @@
     <div class="event-buttons text-center">
       <!-- Ajout d'une div pour les boutons -->
       <div class="button-group">
-         <%= link_to "Voir les événements", organisation_events_path(@organisation), class: "btn btn-secondary" %>
+        <%= link_to "Voir les événements", organisation_events_path(@organisation), class: "btn btn-secondary" %>
         <a href="/events/new" class="btn btn-secondary">Créer un événement</a>
       </div>
     </div>
