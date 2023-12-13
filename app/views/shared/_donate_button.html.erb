@@ -1,6 +1,6 @@
 <%= form_with method: :post, url: payments_path, data: { turbo: false } do |form| %>
   <%= form.hidden_field :organisation_id, value: @organisation.id %>
-  <%= form.label :Montant %>
+  <%= form.label :amount, 'Montant' %>
   <%= form.number_field :amount, step: 'any' %>
 
   <%= form.check_box :tip, value: '1', unchecked_value: '0' %>
