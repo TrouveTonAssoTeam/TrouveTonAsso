@@ -7,27 +7,27 @@
     <% if @organisations.any? %>
     <div class="association-list">
       <h1>Liste des associations</h1>
-      </div>
-      <br>
-      <div class="association-cards">
-        <% @organisations.each do |organisation| %>
-          <div class="association-card">
-            <!-- Cover photo de l'association -->
-            <% if organisation.cover_photo.attached? %>
-              <%= image_tag organisation.cover_photo, class: "card-img-top", alt: organisation.name %>
-            <% else %>
-              <!-- Placeholder si aucune cover photo n'est attachée -->
-              <%= image_tag "placeholder-image.png", class: "card-img-top", alt: "Placeholder" %>
-            <% end %>
-            <div class="card-body">
-              <!-- Nom de l'association -->
-              <h5 class="card-title"><strong><%= organisation.name %></strong></h5>
-              <!-- Bouton "Voir plus" -->
-              <%= link_to "Voir plus", organisation_path(organisation), class: "btn btn-primary" %>
-            </div>
+    </div>
+    <br>
+    <div class="association-cards">
+      <% @organisations.each do |organisation| %>
+        <div class="association-card">
+          <!-- Cover photo de l'association -->
+          <% if organisation.cover_photo.attached? %>
+            <%= image_tag organisation.cover_photo, class: "card-img-top", alt: organisation.name %>
+          <% else %>
+            <!-- Placeholder si aucune cover photo n'est attachée -->
+            <%= image_tag "placeholder-image.png", class: "card-img-top", alt: "Placeholder" %>
+          <% end %>
+          <div class="card-body">
+            <!-- Nom de l'association -->
+            <h5 class="card-title"><strong><%= organisation.name %></strong></h5>
+            <!-- Bouton "Voir plus" -->
+            <%= link_to "Voir plus", organisation_path(organisation), class: "btn btn-primary" %>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
+    </div>
     <% else %>
       <p>Aucune association trouvée</p>
     <% end %>
