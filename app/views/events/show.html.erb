@@ -35,7 +35,7 @@
     
     <% if user_signed_in? %>
       <% if current_user.events.include?(@event) %>
-        <%= link_to 'Se désinscrire', unattend_event_path(@event), method: :delete, class: 'btn btn-danger' %>
+        <%= link_to 'Se désinscrire', unattend_event_path(@event), data:{turbo_method: :delete}, method: :delete, class: 'btn btn-danger' %>
       <% else %>
         <%= link_to 'S\'inscrire à l\'événement', attend_event_path(@event), class: 'btn btn-primary'%>
       <% end %>

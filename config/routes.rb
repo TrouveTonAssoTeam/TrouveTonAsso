@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       get "dashboard/faqs/:faq_id/answer", to: "faqs#new_answer", as: "answer_faq"
       post "dashboard/faqs/:faq_id/answer", to: "faqs#create_answer", as: "create_answer"
     end
+    resources :events, only: [:index]
     resources :faqs, only: [:new, :create]
     resources :promoted, only: [:index, :new] do
       collection do
@@ -54,6 +55,7 @@ Rails.application.routes.draw do
     get "donate", to: "donations#new", as: "new_donation"
   end
 
+  get '/tips/all_tips', to: 'tips#all_tips', as: 'all_tips'
 
   resources :organisations, only: [:index, :show, :edit, :update] 
   get "organisation/test", to: "organisations#test"
