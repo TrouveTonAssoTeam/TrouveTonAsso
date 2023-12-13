@@ -63,7 +63,8 @@ class PaymentsController < ApplicationController
       redirect_back(fallback_location: root_path, alert: "Il semble qu'il y ai déjà un don avec cet id.")
 
       else
-        # Sinon sauvegarde la donation avec le stripe_id
+        # Sinon sauvegarde la donation et le tip avec le stripe_id
+      
         @donation = Donation.new(
           amount: @amount,
           stripe_id: params[:session_id],
@@ -73,13 +74,15 @@ class PaymentsController < ApplicationController
           no_tip: @no_tip
         )
 
+        @tip = Tip.new(donation: @donation)
+        
         # Incremente la cagnotte après chaque success donation
         @asso.cagnotte.increment!(:amount, @donation.no_tip)
         
       if @donation.save
       
         # Si success -> page success avec une alerte de réussite
-        flash.notice= "Votre don de #{@no_tip}€ pour #{@asso.name} a bien été effectué. Merci pour votre soutiens!"
+        flash.notice= "Votre don de #{@donation.no_tip}€ pour #{@asso.name} a bien été effectué. Merci pour votre soutiens!"
       else
         # Sinon redirect_back(fallback_location: root_path) avec alert
         redirect_back(fallback_location: root_path, alert: "Une erreur est survenue. Votre don n'a pas été sauvegardé.")

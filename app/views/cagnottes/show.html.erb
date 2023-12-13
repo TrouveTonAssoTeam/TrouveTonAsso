@@ -40,7 +40,9 @@
         <tbody>
           <tr>
             <td class="text-center"><%= number_to_currency(donation.no_tip, unit: '€') %></td>
-            <td class="text-center"><%= donation.user_id %></td>
+            <td class="text-center">
+              <%= donation.user.first_name %>.<%= donation.user.last_name.first %>
+            </td>
             <td class="text-center"><%= donation.created_at.strftime("%d %B %Y %H:%M") %></td>
           </tr>
         </tbody>
