@@ -13,9 +13,9 @@
             
                 <div class="card-img-top">
                     <% if organisation.cover_photo.attached? %>
-                        <%= image_tag(organisation.cover_photo) %>
+                        <%= image_tag(organisation.cover_photo), alt: "Photo de couverture de l'association #{organisation.name}" %>
                     <% else %>
-                        <%= image_tag("placeholder-image.png") %>
+                        <%= image_tag("placeholder-image.png"), alt: "Photo générique de couverture de l'association #{organisation.name}" %>
                     <% end %>
                 </div>
                 <h4><%= organisation.name %></h4>
@@ -36,9 +36,9 @@
             
                 <div class="card-img-top">
                     <% if organisation.cover_photo.attached? %>
-                        <%= image_tag(organisation.cover_photo) %>
+                        <%= image_tag(organisation.cover_photo), alt: "Photo de couverture de l'association #{organisation.name}" %>
                     <% else %>
-                        <%= image_tag("placeholder-image.png") %>
+                        <%= image_tag("placeholder-image.png"), alt: "Photo générique de couverture de l'association #{organisation.name}" %>
                     <% end %>
                 </div>
                 <h4><%= organisation.name %></h4>
@@ -60,9 +60,9 @@
             
                 <div class="card-img-top">
                     <% if event.cover_photo.attached? %>
-                        <%= image_tag(event.cover_photo) %>
+                        <%= image_tag(event.cover_photo), alt: "Photo de couverture de l'evenement #{event.name}" %>
                     <% else %>
-                        <%= image_tag("placeholder-image.png") %>
+                        <%= image_tag("placeholder-image.png"), alt: "Photo générique de couverture de l'evenement #{event.name}" %>
                     <% end %>
                 </div>
                 <h4><%= event.name %></h4>

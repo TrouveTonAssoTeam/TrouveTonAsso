@@ -3,7 +3,7 @@
         <div class="site-info">
             <%= render "shared/logo" %>
             <p>Trouve ton asso, association de mise en relation d'associations à son public.</p>
-            <p>55 rue du Faubourg saint-Honoré, <br> 75008 Paris</p>
+            <p>55 rue du Faubourg Saint-Honoré, <br> 75008 Paris</p>
             <a href="mailto:contact@trouvetonasso.fr">contact@trouvetonasso.fr</a>
         </div>
 
@@ -11,7 +11,7 @@
             <div class="nav-section">
                 <span class="section-title">Général</span>
                 <ul>
-                    <li><%= link_to "Accueil", root_path %></li></li>
+                    <li><%= link_to "Accueil", root_path %></li>
                     <li><%= link_to "A propos", about_path %></li>
                     <li><%= link_to "Contact", contact_path %></li>
                 </ul>
@@ -19,7 +19,7 @@
             <div class="nav-section">
                 <span class="section-title">Associations</span>
                 <ul>
-                    <li><%= link_to "liste des associations", organisations_path %></li>
+                    <li><%= link_to "Liste des associations", organisations_path %></li>
                     <li><%= link_to "Inscrire son association", test_organisations_path %></li>
                     <li><%= link_to "Se connecter à son association", new_organisation_session_path %></li>
                     <li><%= link_to "Dashboard de l'association", dashboard_organisations_path %></li>
@@ -30,7 +30,7 @@
                 <ul>
                     <li><%= link_to "Se connecter", new_user_session_path %></li>
                     <li><%= link_to "S'inscrire", new_user_registration_path %></li>
-                    <li><%= link_to "Accéder à son profil", profil_index_path %></li></li>
+                    <li><%= link_to "Accéder à son profil", profil_index_path %></li>
                 </ul>
             </div>
         </div>
@@ -43,7 +43,6 @@
             <%= link_to "Cookies", cookies_path , class: "mx-2" %>
           </div>
         </div>
-        
-        </div>
+
     </div>
 </footer>
