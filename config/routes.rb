@@ -81,7 +81,7 @@ Rails.application.routes.draw do
 
   resources :payments, except: [:show]
   resources :payments, only: [:new, :create]
-
+  
   get 'payments/success', to: 'payments#success', as: 'payment_success'
   get 'payments/cancel', to: 'payments#cancel', as: 'payment_cancel'
 

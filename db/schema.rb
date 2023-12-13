@@ -177,6 +177,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_190306) do
   add_foreign_key "events", "organisations"
   add_foreign_key "cagnotte_statuses", "withdrawals"
   add_foreign_key "cagnottes", "organisations"
+  add_foreign_key "events", "organisations"
   add_foreign_key "likes", "organisations"
   add_foreign_key "likes", "users"
   add_foreign_key "tips", "donations"
