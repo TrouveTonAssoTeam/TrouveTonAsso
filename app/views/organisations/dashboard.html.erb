@@ -21,10 +21,35 @@
       <% end %>
     </div>
 
+    <div class="questions-container mb-5">
+      <h3>Vos questions en attente</h3>
+      <% if !@questions.empty? %>
+        <% @questions.each do |faq| %>
+          <div class="question">
+            <% if faq.user.avatar.attached? %>
+              <%= image_tag faq.user.avatar, class: "card-img-top", alt: "Photo de profil de #{if faq.user.first_name && faq.user.last_name then faq.user.first_name + " " + faq.user.last_name.slice(0,1) + "." else "Anonyme" end}" %>
+            <% else %>
+              <!-- Placeholder si aucune cover photo n'est attachée -->
+              <%= image_tag "anonymous-user.webp", class: "card-img-top", alt: "Une image de profil d'un utilisateur n'ayant pas défini de photo" %>
+            <% end %>
+            <div class="question-content">
+              <h4><%= if faq.user.first_name && faq.user.last_name then faq.user.first_name + " " + faq.user.last_name.slice(0,1) + "." else "Anonyme" end %></h4>
+              <p><%= faq.question %></p>
+            </div>
+          </div>
+          <div class="btn-group">
+            <%= link_to "Répondre à la question", answer_faq_organisations_path(faq), class: "btn btn-primary" %>
+            <button class="btn btn-secondary">Signaler la question</button>
+          </div>
+        <% end %>
+      <% else %>
+        <p>Aucune question en attente</p>
+      <% end %>
+    </div>
     <div class="event-buttons text-center">
       <!-- Ajout d'une div pour les boutons -->
       <div class="button-group">
-        <a href="/events/index" class="btn btn-secondary">Voir les événements</a>
+         <%= link_to "Voir les événements", organisation_events_path(@organisation), class: "btn btn-secondary" %>
         <a href="/events/new" class="btn btn-secondary">Créer un événement</a>
       </div>
     </div>

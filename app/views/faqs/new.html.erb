@@ -1,0 +1,6 @@
+<h1>Posez votre question à <%= @organisation.name %></h1>
+
+<%= form_with(model: @faq, url: organisation_faqs_path(@organisation), html: { class: "form" }) do |f| %>
+    <%= f.text_area :question, class: "form-control", placeholder: "Votre question à #{@organisation.name}" %>
+    <%= f.submit "Poser une question", class: "btn btn-primary" %>
+<% end %>

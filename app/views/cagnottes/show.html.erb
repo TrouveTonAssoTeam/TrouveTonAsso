@@ -3,15 +3,38 @@
 <% if @cagnotte.present? %>
   <p>Vous avez une cagnotte de : <%= number_to_currency(@cagnotte.amount, unit: '€') %></p>
   <p>Vous pouvez effectuer une demande de retrait du montant de votre choix:</p>
-    <%= form_with(model: Withdrawal.new, url: process_withdrawal_cagnotte_path(@cagnotte), data: { turbo: false }) do |form| %>
+  <%= form_with(model: Withdrawal.new, url: process_withdrawal_cagnotte_path(@cagnotte), data: { turbo: false }) do |form| %>
     <%= form.label :Montant %>
     <%= form.number_field :amount, step: 'any' %>
 
     <%= form.submit 'Confirmer' %>
+  <% end %>
+<%= link_to "Historique des Retraits", withdrawals_path %>
+
+<% if @organisation.donations.any? %>
+    <h2>Historique des dons</h2>
+    <% @organisation.donations.each do |donation| %>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Montant</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= number_to_currency(donation.no_tip, unit: '€') %></td>
+              <td><%= donation.created_at.strftime("%d %B %Y %H:%M") %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br>
     <% end %>
-<% else %>
+  <% else %>
   <p>Il semblerait que vous n'ayez pas encore reçu de dons.</p>
   <p>Nous vous invitons à vous démarquer grâce à notre site pour augmenter vos chances de recevoir des dons!</p>
+  <% end %>
 <% end %>
-<%= link_to "Historique des Retraits", withdrawals_path %>
-<%= link_to "Retour à l'acceuil", root_path %>
+<%= link_to "Retour à l'accueil", root_path %>
