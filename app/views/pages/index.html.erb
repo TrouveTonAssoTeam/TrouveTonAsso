@@ -103,29 +103,6 @@
     </ion-icon>
 <% end %>
 
-<%= button_to unlike_asso_path(Organisation.all.sample), method: :delete, class: 'like-btn', remote: true do %>
-  Unlike
-<% end %>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const likeBtns = document.querySelectorAll('.like-btn');
-
-    likeBtns.forEach(function(btn) {
-      btn.addEventListener('click', function(event) {
-        if (btn.textContent === 'Like') {
-          btn.textContent = 'Unlike';
-        } else {
-          btn.textContent = 'Like';
-        }
-      });
-    });
-  });
-</script>
-</div>
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
 <title>Liste dans un Tableau</title>
 <style>
   /* Styles facultatifs pour le tableau */
