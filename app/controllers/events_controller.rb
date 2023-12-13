@@ -58,6 +58,7 @@ class EventsController < ApplicationController
 
     # Action pour permettre à l'utilisateur de se désinscrire d'un événement
     def unattend
+     @event = Event.find(params[:id])
      current_user.events.delete(@event)
      redirect_to @event, notice: 'Vous ne participez plus à cet événement.'
     end
@@ -66,10 +67,10 @@ class EventsController < ApplicationController
 
     def set_event
       @organisation = Organisation.find_by(id: params[:organisation_id])
-      @event = @organisation.events.find_by(id: params[:id]) if @organisation
+      @event = Event.find_by(id: params[:id])
       unless @event
         flash[:error] = "L'événement n'a pas été trouvé dans cette organisation."
-        redirect_to organisation_events_path(@organisation) # Redirige vers la liste des événements de cette organisation
+        redirect_back(fallback_location: organisations_path)# Redirige vers la liste des événements de cette organisation
       end
 
     end
