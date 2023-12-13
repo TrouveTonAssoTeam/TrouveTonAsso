@@ -3,127 +3,84 @@
     <p>Chez Touve Ton Asso, nous croyons que chaque acte de générosité, quel que soit sa taille, a le pouvoir de transformer des vies. Notre plateforme est bien plus qu'un simple espace pour faire des dons ; c'est un lieu où l'empathie prend vie, où des causes inspirantes trouvent un écho, et où l'impact concret devient accessible à tous.</p>
     <%= link_to "En Savoir Plus", about_path, class: "nav-link" %>
 </div>
-<div class="card-container">
-    <div class="card">
-        <h1>card title</h1>
-        <p>card content</p>
-        <p>lorem ipsum</p>
-        <div class="btn-group">
-            <button class="btn btn-primary">Primary</button>
-            <button class="btn btn-secondary">Secondary</button>
-        </div>
+
+<% if !@promoted.empty? %>
+    <h1 class="mt-6">Les associations mises en avant</h1>
+    <p>Ces associations ont décidé de se mettre en avant, en soutenant notre travail.</p>
+    <div class="inline-card-container gold-container">
+        <% @promoted.each do |organisation| %>
+            <%= link_to organisation_path(organisation), class: "card card-gold" do %>
+            
+                <div class="card-img-top">
+                    <% if organisation.cover_photo.attached? %>
+                        <%= image_tag(organisation.cover_photo) %>
+                    <% else %>
+                        <%= image_tag("placeholder-image.png") %>
+                    <% end %>
+                </div>
+                <h4><%= organisation.name %></h4>
+                <p><%= organisation.description %></p>
+            
+            <% end %>
+        <% end %>
     </div>
-    <div class="card">
-        <h1>card title</h1>
-        <p>card content</p>
-        <p>lorem ipsum</p>
-        <button class="btn btn-secondary">Secondary</button>
-    </div>
-    <div class="card">
-        <h1>card title</h1>
-        <p>card content</p>
-        <p>lorem ipsum</p>
-        <button class="btn btn-primary">Primary</button>
-    </div>
-</div>
-
-<div class="form-container">
-    <h1>Contact</h1>
-    <form class="form">
-        <div>
-            <label for="name">Name</label>
-            <input type="text" id="name">
-        </div>
-
-        <div>
-            <label for="email">Email</label>
-            <input type="text" id="email">
-        </div>
-
-        <div>
-            <label for="message">Message</label>
-            <textarea id="message"></textarea>
-        </div>
-
-        <div class="form-group">
-            <div>
-                <label for="city">City</label>
-                <input type="text" id="city">
-            </div>
-            <div>
-                <label for="zip">Zipcode</label>
-                <input type="text" id="zip">
-            </div>
-        </div>
-
-        <input type="submit" class="btn btn-primary">
-    </form>
-</div>
-
-<div class="form-container form-side">
-    <div class="left-side">
-    <h1>Contact</h1>
-    <form class="form">
-        <div>
-            <label for="name">Name</label>
-            <input type="text" id="name">
-        </div>
-
-        <div>
-            <label for="email">Email</label>
-            <input type="text" id="email">
-        </div>
-
-        <div>
-            <label for="message">Message</label>
-            <textarea id="message"></textarea>
-        </div>
-
-        <div class="form-group">
-            <div>
-                <label for="city">City</label>
-                <input type="text" id="city">
-            </div>
-            <div>
-                <label for="zip">Zipcode</label>
-                <input type="text" id="zip">
-            </div>
-        </div>
-
-        <input type="submit" class="btn btn-primary">
-    </form>
-    </div>
-    <div class="right-side no-display-md" style="background-image: url('<%= asset_path('form.jpg') %>');">
-    </div>
-</div>
-
-<%= button_to  like_asso_path(Organisation.all.sample), method: :post do %>
-    <ion-icon name="heart">
-    <div class='red-bg'></div>
-    </ion-icon>
 <% end %>
 
-<%= button_to unlike_asso_path(Organisation.all.sample), method: :delete, class: 'like-btn', remote: true do %>
-  Unlike
-<% end %>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const likeBtns = document.querySelectorAll('.like-btn');
-
-    likeBtns.forEach(function(btn) {
-      btn.addEventListener('click', function(event) {
-        if (btn.textContent === 'Like') {
-          btn.textContent = 'Unlike';
-        } else {
-          btn.textContent = 'Like';
-        }
-      });
-    });
-  });
-</script>
+<h1 class="mt-6">Les dernières associations</h1>
+<p>Retrouvez une liste non exaustive des associations présentes sur TrouveTonAsso.</p>
+<%= link_to "Retrouvez toutes les associations ici", organisations_path %>
+<div class="inline-card-container purple-container">
+    <% if !@organisations.empty? %>
+        <% @organisations.each do |organisation| %>
+            <%= link_to organisation_path(organisation), class: "card" do %>
+            
+                <div class="card-img-top">
+                    <% if organisation.cover_photo.attached? %>
+                        <%= image_tag(organisation.cover_photo) %>
+                    <% else %>
+                        <%= image_tag("placeholder-image.png") %>
+                    <% end %>
+                </div>
+                <h4><%= organisation.name %></h4>
+                <p><%= organisation.description %></p>
+            
+            <% end %>
+        <% end %>
+    <% else %>
+        <h5 style="margin-left: auto; margin-right: auto">Aucune association pour le moment</h5>
+    <% end %>
 </div>
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-<h1>Associations aimées par les utilisateurs :</h1>
+<h1 class="mt-6">Les derniers evenements</h1>
+<p>Les associations peuvent proposer à leurs bénévoles ou à toutes personne désireuse de donner de son temps, des activités afin de contribuer à l'avenir. Retrouvez les futurs évenements présents sur TrouveTonAsso.</p>
+<div class="inline-card-container blue-container">
+    <% if !@events.empty? %>
+        <% @events.each do |event| %>
+            <%= link_to event_path(event), class: "card" do %>
+            
+                <div class="card-img-top">
+                    <% if event.cover_photo.attached? %>
+                        <%= image_tag(event.cover_photo) %>
+                    <% else %>
+                        <%= image_tag("placeholder-image.png") %>
+                    <% end %>
+                </div>
+                <h4><%= event.name %></h4>
+                <p class="mb-2"><%= event.description %></p>
+                <p>Du : <%= event.start_date %></p>
+                <p>Au : <%= event.end_date %></p>
+
+                <div class="badge mt-3">
+                    <% if event.participants.any? %>
+                        <%= event.participants.count %>
+                    <% else %>
+                        0
+                    <% end %>
+                    participant<%= event.participants.count <= 1 ? "" : "s" %>
+                </div>
+            <% end %>
+        <% end %>
+    <% else %>
+        <h5 style="margin-left: auto; margin-right: auto">Aucun evenement pour le moment</h5>
+    <% end %>
+</div>
