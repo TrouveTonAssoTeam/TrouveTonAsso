@@ -7,7 +7,14 @@ class Organisation < ApplicationRecord
     
     devise :database_authenticatable, :registerable,
            :recoverable, :rememberable, :validatable
-  
+
+    geocoded_by :full_address
+    after_validation :geocode, if: ->(obj) { obj.address.present? && obj.address_changed? }
+
+    def full_address
+      [address, city, zip].compact.join(', ')
+    end
+    
     # Validations
     # validates :name, :description, :city, :address, :zip, presence: true
     

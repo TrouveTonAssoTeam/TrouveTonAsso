@@ -66,6 +66,7 @@ Rails.application.routes.draw do
   end
 
   resources :reviews
+  get '/tips/all_tips', to: 'tips#all_tips', as: 'all_tips'
 
   resources :organisations, only: [:index, :show, :edit, :update] 
   get "organisation/test", to: "organisations#test"

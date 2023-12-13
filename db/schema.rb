@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_13_094016) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_13_125710) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -74,6 +74,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_094016) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "stripe_id"
+    t.integer "tip_amount"
+    t.decimal "no_tip", precision: 10, scale: 2
   end
 
   create_table "events", force: :cascade do |t|
@@ -122,6 +124,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_094016) do
     t.string "address"
     t.string "zip"
     t.string "rna"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["email"], name: "index_organisations_on_email", unique: true
     t.index ["reset_password_token"], name: "index_organisations_on_reset_password_token", unique: true
   end
@@ -145,6 +149,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_094016) do
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_reviews_on_event_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
+  create_table "tips", force: :cascade do |t|
+    t.decimal "amount"
+    t.bigint "donation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["donation_id"], name: "index_tips_on_donation_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -182,6 +192,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_094016) do
   add_foreign_key "likes", "users"
   add_foreign_key "reviews", "events"
   add_foreign_key "reviews", "users"
+  add_foreign_key "tips", "donations"
   add_foreign_key "withdrawals", "cagnotte_statuses"
   add_foreign_key "withdrawals", "organisations"
 end

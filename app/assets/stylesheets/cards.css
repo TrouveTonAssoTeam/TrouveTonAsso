@@ -17,6 +17,41 @@
     flex-direction: row;
     gap: 1rem;
 }
+.inline-card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    overflow: auto;
+    padding: 1.5rem;
+    margin: 2rem 0 5rem 0;
+}
+.inline-card-container .card {
+    justify-content: start;
+    max-width: 250px;
+    flex-shrink: 0;
+    text-decoration: none;
+    color: var(--primary-color);
+    text-align: center;
+}
+.inline-card-container .card h4 {
+    margin-bottom: 0.5rem;
+}
+.inline-card-container .card p {
+    margin: 0;
+}
+.inline-card-container .card p::first-letter {
+    text-transform: uppercase;
+}
+.inline-card-container > .card-gold {
+    background: var(--background-gold-color);
+    color: white;
+}
+.inline-card-container .card-img-top img {
+    width: 100%;
+    background-color: var(--background-card-color);
+    border-radius: var(--border-radius);
+}
 .card-gold {
     border-color: var(--gold-color);
     background-color: var(--background-gold-color);

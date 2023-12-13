@@ -12,11 +12,6 @@ user = User.create!(
   password: 'password',
 )
 
-user = User.create!(
-  email: 'test2@user.com',
-  password: 'password',
-)
-
 organisation = Organisation.create!(
   email: 'test@asso.com',
   password: 'password',
@@ -26,9 +21,11 @@ organisation = Organisation.create!(
 )
 
 organisation = Organisation.create!(
-  email: 'test2@asso.com',
+  email: 'test@geocoder.com',
   password: 'password',
-  name: 'Test Asso 2',
+  name: 'Test gem Geocoder',
   description: 'Description',
-  city: 'Ville',
+  address: '10 Rue de la Bombarde',
+  city: 'Lyon',
+  zip: '69005'
 )

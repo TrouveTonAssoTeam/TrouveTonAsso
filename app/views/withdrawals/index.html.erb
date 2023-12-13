@@ -1,17 +1,35 @@
 <h1>Vos demandes de retrait</h1>
 
 <% if @withdrawals.any? %>
-  <ul>
-    <% @withdrawals.each do |withdrawal| %>
-      <li>
-        Montant: <%= number_to_currency(withdrawal.amount, unit: '€') %> -
-        Date: <%= withdrawal.created_at.strftime("%d %B %Y %H:%M") %> -
-        Statut: <%= withdrawal.cagnotte_status&.status %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>Aucun retrait effectué pour le moment.</p>
-<% end %>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Association</th>
+          <th>Montant</th>
+          <th>Date de demande</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @withdrawals.each do |withdrawal| %>
+          <tr>
+            <td><%= withdrawal.organisation.name %></td>
+            <td><%= number_to_currency(withdrawal.amount, unit: '€') %></td>
+            <td><%= withdrawal.created_at.strftime("%d %B %Y %H:%M") %></td>
+            <td><%= withdrawal.cagnotte_status&.status %></td>
+            <td>
+              <%= link_to "Détails", show_admin_withdrawal_path(withdrawal) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <% else %>
+    <p>Aucun retrait effectué pour le moment.</p>
+  <% end %>
 
 <%= link_to "Retour à la cagnotte", cagnotte_path(@organisation) %>
