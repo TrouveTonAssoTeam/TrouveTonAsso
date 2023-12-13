@@ -11,7 +11,7 @@ class PaymentsController < ApplicationController
     @amount = (params[:amount].to_f * 100).to_i # Stripe ne supporte que les valeurs en centimes d'où le x100
 
     # Gestion du tip au payment : tip_amount est soit 100 soit 0 si checkbox uncheked et no_tip = montant du dons - montant du tip
-    @tip_amount = params[:tip].to_i == 1 ? 100 : 0 # 100 cents = 1 euro
+    @tip_amount = params[:tip].to_i * 100  # 100 cents = 1 euro
     @no_tip = @amount - @tip_amount
 
     
@@ -52,7 +52,7 @@ class PaymentsController < ApplicationController
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @amount = @session.amount_total / 100.0
     @user = current_user
-    @tip_amount = params[:tip].to_i == 1 ? 100 / 100.0 : 0 # Ici on divise 100 par 100 pour obtenir 1 et pouvoir soustraire avec le tip
+    @tip_amount = params[:tip].to_i
     @no_tip = @amount - @tip_amount
 
     # Vérifier si l'id de la session n'est pas associée à un don précédent
