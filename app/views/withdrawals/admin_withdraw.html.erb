@@ -1,0 +1,34 @@
+<h1>Liste des demandes de retrait</h1>
+
+<%# Mode test! : Accessible qu'aux admins une fois implémenté, il faudra faire les modifications nécessaires %>
+
+<% if @withdrawals.any? %>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Association</th>
+          <th>Montant</th>
+          <th>Date de demande</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @withdrawals.each do |withdrawal| %>
+          <tr>
+            <td><%= withdrawal.organisation.name %></td>
+            <td><%= number_to_currency(withdrawal.amount, unit: '€') %></td>
+            <td><%= withdrawal.created_at.strftime("%d %B %Y %H:%M") %></td>
+            <td><%= withdrawal.cagnotte_status&.status %></td>
+            <td>
+              <%= link_to "Détails", show_admin_withdrawal_path(withdrawal) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p>Il n'y a pas de nouvelle demande de retrait.</p>
+<% end %>
