@@ -2,12 +2,14 @@ Rails.application.routes.draw do
   # Devise for users and organisations
   devise_for :users, path: 'users', controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    passwords: 'users/passwords'
   }
 
   devise_for :organisations, path: 'organisations', controllers: {
     sessions: 'organisations/sessions',
-    registrations: 'organisations/registrations'
+    registrations: 'organisations/registrations',
+    passwords: 'organisations/passwords'
   }
 
   # Root page
@@ -75,8 +77,6 @@ Rails.application.routes.draw do
 
   resources :donations, except: [:show]
 
-  get 'donations/user_donations', to: 'donations#user_donations', as: 'user_donations'
-
   resources :payments, except: [:show]
   resources :payments, only: [:new, :create]
 
@@ -84,10 +84,7 @@ Rails.application.routes.draw do
   get 'payments/cancel', to: 'payments#cancel', as: 'payment_cancel'
 
   # Profile page and routes associated
-  resources :profil, only: [:index, :edit, :update] do
-    get "donations", to: "donations#user_donations", as: "user_donations"
-    get "likes", to: "like#user_likes", as: "user_likes"
-  end
+  resources :profil, only: [:index, :edit, :update]
 
   # Set the dyslexie mode
   post 'dyslexie/:value', to: 'application#set_dyslexie', as: 'set_dyslexie'
