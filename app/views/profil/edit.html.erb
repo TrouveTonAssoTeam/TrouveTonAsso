@@ -1,6 +1,22 @@
 <h2>Modifier vos informations</h2>
 
+
+<%= form_for( @user, url: profil_path(@user), method: :patch) do |f| %>
+  <div>
+    <%= f.label :avatar, "Choisir un avatar" %>
+    <%= f.file_field :avatar, class: "form-control", id: "avatar-input" %>
+  </div>
+
+  <div class="text-center">
+    <% if @user.avatar.attached? %>
+      <%= image_tag @user.avatar, id: "avatar-preview", class: "avatar-preview", alt: "Avatar Preview" %>
+    <% else %>
+      <img id="avatar-preview" class="avatar-preview" src="#" alt="Avatar Preview" style="display: none;">
+    <% end %>
+  </div>
+
 <%= form_for( @user, url: profil_path(@user), method: :patch, html: { class: "form" }) do |f| %>
+
   
   <div class="field">
   <%= f.label :first_name, "Prénom" %><br />
@@ -18,4 +34,31 @@
   </div>
 <% end %>
 
+
+<h3>Cancel my account</h3>
+
+
+
 <%= link_to "Retour", :back %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const avatarInput = document.getElementById('avatar-input');
+      const avatarPreview = document.getElementById('avatar-preview');
+
+      avatarInput.addEventListener('change', function() {
+        const file = avatarInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            avatarPreview.src = e.target.result;
+            avatarPreview.style.display = 'block';
+          }
+          reader.readAsDataURL(file);
+        } else {
+          avatarPreview.src = '#';
+          avatarPreview.style.display = 'none';
+        }
+      });
+    });
+</script>

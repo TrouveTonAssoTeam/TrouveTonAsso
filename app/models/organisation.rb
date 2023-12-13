@@ -22,6 +22,8 @@ class Organisation < ApplicationRecord
 
     has_many :promoteds
 
+    has_many :faqs
+
     def is_promoted?
         if promoteds.where(organisation: self).where("start_date <= ? AND end_date >= ?", Date.today, Date.today).empty?
             return false

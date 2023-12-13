@@ -1,0 +1,10 @@
+<h1>Répondre à la question</h1>
+
+<%= form_with(model: @faq, url: create_answer_organisations_path(@faq), method: :post, class: "form") do |form| %>
+    <div>
+        <%= form.label :answer, "Votre réponse" %>
+        <%= form.text_area :answer, class: "form-control", placeholder: "Votre réponse ici" %>
+    </div>
+
+    <%= form.submit "Envoyer", class: "btn btn-primary" %>
+<% end %>

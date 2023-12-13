@@ -40,8 +40,10 @@ Rails.application.routes.draw do
       get "test"
       post "new", as: "new"
       get "dashboard"
-
+      get "dashboard/faqs/:faq_id/answer", to: "faqs#new_answer", as: "answer_faq"
+      post "dashboard/faqs/:faq_id/answer", to: "faqs#create_answer", as: "create_answer"
     end
+    resources :faqs, only: [:new, :create]
     resources :promoted, only: [:index, :new] do
       collection do
         get "success", to: "promoted#success", as: "success"
@@ -54,7 +56,6 @@ Rails.application.routes.draw do
 
 
   resources :organisations, only: [:index, :show, :edit, :update] 
-  get "dashboard", to: 'organisations#dashboard'
   get "organisation/test", to: "organisations#test"
   post "organisation/new", to: "organisations#new", as: :new_organisation
 
