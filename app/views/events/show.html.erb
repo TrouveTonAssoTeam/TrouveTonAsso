@@ -11,15 +11,7 @@
     <h1><%= @event.name %></h1>
   </div>
 
-
-  <% if @event.start_date > Time.now %>
-  <p>Statut : <span style="color: green;">À venir</span></p>
-  <% else %>
-  <p>Statut : <span style="color: red;">En cours</span></p>
-  <% end %>
-
-
-  <div class="event-description">
+ <div class="event-description">
     <p><strong>Description :</strong> <%= @event.description %></p>
     <p><strong>Date de début :</strong> <%= @event.start_date %></p>
     <p><strong>Date de fin :</strong> <%= @event.end_date %></p>
@@ -30,8 +22,54 @@
     <p>Aucun participant pour cet événement pour le moment.</p>
    <% end %>
   </div>
-    
+   
+
+<p>Statut de l'événement : <%= @event.status %></p>
+
+<!-- Affichage du formulaire d'avis si l'événement est passé -->
+<% if @event.past? && current_user && !@event.reviews.exists?(user_id: current_user.id) %>
+  <%= form_for [@event, Review.new] do |f| %>
+    <!-- Vos champs pour le formulaire d'avis -->
+    <%= f.label :rating, "Note (sur 5)" %>
+    <%= f.number_field :rating, in: 1..5 %>
+
+    <%= f.label :body, "Commentaire" %>
+    <%= f.text_area :body %>
+
+    <%= f.submit "Envoyer l'avis" %>
+  <% end %>
+<% end %>
     <!-- Autres détails de l'événement -->
+
+    <!-- Afficher les avis liés à cet événement -->
+<% if @event.reviews.any? %>
+  <h2>Avis pour cet événement</h2>
+  <ul>
+    <% @event.reviews.each do |review| %>
+      <li>
+        <strong>Description :</strong> <%= review.body %><br>
+        <strong>Note :</strong> <%= review.rating %><br>
+        <strong>Utilisateur ID :</strong> <%= review.user_id %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucun avis disponible pour cet événement pour le moment.</p>
+<% end %>
+
+<!-- Formulaire pour créer un nouvel avis -->
+<!-- Formulaire pour créer un nouvel avis -->
+<%= form_with(model: [@event, Review.new], url: create_review_organisation_event_path(@event)) do |form| %>
+
+  <%= form.label :body %>
+  <%= form.text_area :body %>
+
+  <%= form.label :rating %>
+  <%= form.number_field :rating, in: 1..5 %>
+
+  <%= form.submit "Créer l'avis" %>
+  <br>
+<% end %>
     
     <% if user_signed_in? %>
       <% if current_user.events.include?(@event) %>
