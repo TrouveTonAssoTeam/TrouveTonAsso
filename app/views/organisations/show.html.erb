@@ -80,7 +80,31 @@
           <% @faqs.each do |faq| %>
               <% if faq.answer %>
                 <div class="my-5">
-                  <!-- ... your existing FAQ code ... -->
+                                  <div class="question">
+                <% if faq.user.avatar.attached? %>
+                  <%= image_tag faq.user.avatar, class: "card-img-top", alt: "Photo de profil de #{if faq.user.first_name && faq.user.last_name then faq.user.first_name + " " + faq.user.last_name.slice(0,1) + "." else "Anonyme" end}" %>
+                <% else %>
+                  <!-- Placeholder si aucun avatar n'est attaché -->
+                  <%= image_tag "anonymous-user.webp", class: "card-img-top", alt: "Une image de profil d'un utilisateur n'ayant pas défini de photo" %>
+                <% end %>
+                <div class="question-content">
+                  <h4><%= if faq.user.first_name && faq.user.last_name then faq.user.first_name + " " + faq.user.last_name.slice(0,1) + "." else "Anonyme" end %></h4>
+                  <p><%= faq.question %></p>
+                </div>
+              </div>
+
+              <div class="answer">
+                <% if faq.organisation.cover_photo.attached? %>
+                  <%= image_tag faq.organisation.cover_photo, class: "card-img-top", alt: "Logo de l'association #{faq.organisation.name}" %>
+                <% else %>
+                  <!-- Placeholder si aucune cover photo n'est attachée -->
+                  <%= image_tag "placeholder-image.png", class: "card-img-top", alt: "Logo de l'association n'en ayant pas défini" %>
+                <% end %>
+                <div class="answer-content">
+                  <h4><%= faq.organisation.name %></h4>
+                  <p><%= faq.question %></p>
+                </div>
+              </div>
                 </div>
               <% end %>
           <% end %>
