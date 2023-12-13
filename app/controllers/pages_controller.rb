@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def index
-    @organisations = Organisation.all.order("RANDOM()")
-    @events = Event.all.order("RANDOM()")
+    @organisations = Organisation.all.limit(15).order("RANDOM()")
+    @events = Event.all.limit(15).order("RANDOM()")
     @promoted = Promoted.where("start_date <= ? AND end_date >= ?", Date.today, Date.today).order(end_date: :desc).map(&:organisation)
   end
   
