@@ -6,14 +6,14 @@
     <p>Aucune photo de couverture disponible</p>
   <% end %>
   
-  <div class="event-header">
-    <h1><%= @event.name %></h1>
+  <div class="event-header text-center">
+    <h2><strong><%= @event.name %></strong></h2>
   </div>
 
-  <div class="event-description">
-    <p><strong>Description :</strong> <%= @event.description %></p>
-    <p><strong>Date de début :</strong> <%= @event.start_date %></p>
-    <p><strong>Date de fin :</strong> <%= @event.end_date %></p>
+  <div class="event-description text-center">
+    <p><strong></strong> <%= @event.description %></p>
+    <p><strong>Du</strong> <%= @event.start_date %></p>
+    <p><strong>Au</strong> <%= @event.end_date %></p>
 
     <% if @event.participants.any? %>
       <p><strong>Nombre de participants :</strong> <%= @event.participants.count %></p>
@@ -21,19 +21,17 @@
       <p>Aucun participant pour cet événement pour le moment.</p>
     <% end %>
   </div>
-   
-  <p>Statut de l'événement : <%= @event.status %></p>
+  <p class="text-center"><strong>Statut de l'événement<strong> : <%= @event.status %></p>
 
-  <% if @event.past? && user_signed_in? && current_user.events.include?(@event) %> <!-- Condition pour afficher le formulaire d'avis uniquement si l'utilisateur est inscrit à l'événement -->
+
+  <% if @event.past? && user_signed_in? && current_user.events.include?(@event) %>
     <%= form_with(model: [@event, Review.new], url: create_review_organisation_event_path(@event)) do |form| %>
-      <!-- Ajout des champs de nom et prénom -->
       <%= form.label :reviewer_first_name, "Prénom" %>
       <%= form.text_field :reviewer_first_name %>
 
       <%= form.label :reviewer_last_name, "Nom" %>
       <%= form.text_field :reviewer_last_name %>
       
-      <!-- Les autres champs de l'avis -->
       <%= form.label :body %>
       <%= form.text_area :body %>
 
@@ -44,23 +42,23 @@
       <br>
     <% end %>
   <% end %>
-
   <% if @event.reviews.any? %>
-    <h2>Avis pour cet événement</h2>
-    <ul>
-      <% @event.reviews.each do |review| %>
-        <li>
-          <strong>Description :</strong> <%= review.body %><br>
-          <strong>Note :</strong> <%= review.rating %><br>
-          <strong>Utilisateur ID :</strong> <%= review.user_id %>
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>Aucun avis disponible pour cet événement pour le moment.</p>
-  <% end %>
-
-  <% if @event.past? %> <!-- Condition pour désactiver les liens d'inscription et de désinscription une fois que l'événement est terminé -->
+  <h2 class="text-center"><strong>Avis pour cet événement</strong></h2>
+  <div class="review-cards">
+    <% @event.reviews.each do |review| %>
+      <div class="card">
+        <div class="card-body">
+          <p><strong>Utilisateur ID :</strong> <%= review.user_id %></p>
+          <p><strong>Commentaire :</strong> <%= review.body %></p>
+          <p><strong>Note :</strong> <%= review.rating %> &#9733;</p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>Aucun avis disponible pour cet événement pour le moment.</p>
+<% end %>
+  <% if @event.past? %>
     <% if user_signed_in? %>
       <p>L'événement est clôturé.</p>
     <% end %>
@@ -72,6 +70,7 @@
         <%= link_to 'S\'inscrire à l\'événement', attend_event_path(@event), class: 'btn btn-primary'%>
       <% end %>
     <% else %>
+    <br>
       <%= link_to 'Se connecter pour s\'inscrire', new_user_session_path, class: 'btn btn-primary' %>
     <% end %>
   <% end %>

@@ -1,6 +1,7 @@
+<%= stylesheet_link_tag 'events.new', media: 'all' %>
 <%= form_with(model: @event, local: false) do |form| %>
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name, 'Nom' %>
     <%= form.text_field :name %>
   </div>
 
@@ -10,12 +11,12 @@
   </div>
 
   <div class="field">
-    <%= form.label :start_date %>
+    <%= form.label :start_date, 'Date de début' %>
     <%= form.datetime_local_field :start_date %>
   </div>
 
   <div class="field">
-    <%= form.label :end_date %>
+    <%= form.label :end_date, 'Date de fin' %>
     <%= form.datetime_local_field :end_date %>
   </div>
 
@@ -29,5 +30,5 @@
     <%= form.file_field :cover_photo %>
   </div>
 
-  <%= form.submit 'Créer l\'événement' %>
+  <%= form.submit 'Créer l\'événement', class: 'btn btn-primary' %>
 <% end %>
