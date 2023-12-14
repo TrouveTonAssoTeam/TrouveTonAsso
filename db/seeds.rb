@@ -10,6 +10,7 @@
 user = User.create!(
   email: 'test@user.com',
   password: 'password',
+  admin: true
 )
 
 organisation = Organisation.create!(
