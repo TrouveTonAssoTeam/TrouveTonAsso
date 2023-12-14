@@ -2,6 +2,10 @@
 
 **"TrouveTonAsso"** is an online platform dedicated to discovering and supporting charitable organizations. Our mission is to simplify the donation process by creating a community where users can explore, engage, and make a difference in causes close to their hearts.
 
+<p align="center">
+  <img src="https://github.com/TrouveTonAssoTeam/TrouveTonAsso/assets/137758364/279f1cb8-6c39-4d26-a1b7-2ecbb2883c24" alt="TrouveTonAsso Image">
+</p>
+
 **"Features"**
 
     •Intuitive Exploration: Browse through a diverse list of charitable organizations and support what matters to you.
