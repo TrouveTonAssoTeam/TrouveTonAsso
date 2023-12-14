@@ -8,7 +8,7 @@
     <br>
     <% if @organisation.cover_photo.attached? %>
       <div class="cover-photo">
-        <%= image_tag @organisation.cover_photo, class: "rounded-corner" %>
+        <%= image_tag @organisation.cover_photo, class: "rounded-corner", alt: "Photo de couverture de l'association #{@organisation.name}" %>
       </div>
     <% end %>
 
@@ -27,13 +27,13 @@
         <% @questions.each do |faq| %>
           <div class="question">
             <% if faq.user.avatar.attached? %>
-              <%= image_tag faq.user.avatar, class: "card-img-top", alt: "Photo de profil de #{if faq.user.first_name && faq.user.last_name then faq.user.first_name + " " + faq.user.last_name.slice(0,1) + "." else "Anonyme" end}" %>
+              <%= image_tag faq.user.avatar, class: "card-img-top", alt: "Photo de profil de #{faq.user.name}" %>
             <% else %>
               <!-- Placeholder si aucune cover photo n'est attachée -->
               <%= image_tag "anonymous-user.webp", class: "card-img-top", alt: "Une image de profil d'un utilisateur n'ayant pas défini de photo" %>
             <% end %>
             <div class="question-content">
-              <h4><%= if faq.user.first_name && faq.user.last_name then faq.user.first_name + " " + faq.user.last_name.slice(0,1) + "." else "Anonyme" end %></h4>
+              <h4><%= faq.user.name %></h4>
               <p><%= faq.question %></p>
             </div>
           </div>
@@ -49,7 +49,7 @@
     <div class="event-buttons text-center">
       <!-- Ajout d'une div pour les boutons -->
       <div class="button-group">
-         <%= link_to "Voir les événements", organisation_events_path(@organisation), class: "btn btn-secondary" %>
+        <%= link_to "Voir les événements", organisation_events_path(@organisation), class: "btn btn-secondary" %>
         <a href="/events/new" class="btn btn-secondary">Créer un événement</a>
       </div>
     </div>

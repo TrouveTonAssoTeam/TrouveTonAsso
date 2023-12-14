@@ -5,6 +5,12 @@
         <p>Mot de passe : ********</p>
         <%= link_to "Modifier le mot de passe", edit_user_registration_path(@user) %>
 
+        <% if @user.avatar.attached? %>
+            <div class="form text-center">
+            <%= image_tag @user.avatar, class: "avatar-preview", alt: "Photo de profil de #{@user.name}", style: "margin: auto;" %>
+            <p>Photo de profil</p>
+            </div>
+        <% end %>
         <p>Prénom : <%= @user.first_name %></p>
         <p>Nom : <%= @user.last_name %></p>
 

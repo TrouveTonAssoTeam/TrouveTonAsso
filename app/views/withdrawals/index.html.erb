@@ -1,35 +1,43 @@
-<h1>Vos demandes de retrait</h1>
+<h2 style="text-align: center; margin-bottom: 20px;">Vos demandes de retrait</h2>
+<hr style="width: 50%; margin-bottom: 30px;">
 
 <% if @withdrawals.any? %>
-  <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>Association</th>
-          <th>Montant</th>
-          <th>Date de demande</th>
-          <th>Status</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @withdrawals.each do |withdrawal| %>
+  <% @withdrawals.each do |withdrawal| %>
+    <div class="table-container">
+      <table class="table">
+        <thead>
           <tr>
-            <td><%= withdrawal.organisation.name %></td>
-            <td><%= number_to_currency(withdrawal.amount, unit: '€') %></td>
-            <td><%= withdrawal.created_at.strftime("%d %B %Y %H:%M") %></td>
-            <td><%= withdrawal.cagnotte_status&.status %></td>
-            <td>
-              <%= link_to "Détails", show_admin_withdrawal_path(withdrawal) %>
-            </td>
+            <th class="text-center">Montant</th>
+            <th class="text-center">Date de demande</th>
+            <th class="text-center">Status</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center"><%= number_to_currency(withdrawal.amount, unit: '€') %></td>
+            <td class="text-center"><%= withdrawal.created_at.strftime("%d %B %Y %H:%M") %></td>
+            <td class="text-center"><%= withdrawal.cagnotte_status&.status %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br>
+  <% end %>
   <br>
   <% else %>
+  <div class="text-center">
     <p>Aucun retrait effectué pour le moment.</p>
+  </div>
   <% end %>
+<br>
+<br>
 
-<%= link_to "Retour à la cagnotte", cagnotte_path(@organisation) %>
+<div style="text-align: center; margin-top: 10px;">
+<%= link_to "Retour à la cagnotte", cagnotte_path(@organisation), style: 'text-decoration: none;' %>
+</div>
+
+<br>
+
+<div style="text-align: center; margin-top: 10px;">
+  <%= link_to "Retour à votre dashboard", dashboard_organisations_path, style: 'text-decoration: none;' %>
+</div>

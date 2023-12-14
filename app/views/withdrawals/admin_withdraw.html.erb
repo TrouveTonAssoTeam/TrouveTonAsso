@@ -1,34 +1,36 @@
-<h1>Liste des demandes de retrait</h1>
-
-<%# Mode test! : Accessible qu'aux admins une fois implémenté, il faudra faire les modifications nécessaires %>
+<h2 style="text-align: center; margin-bottom: 20px;">Liste des demandes de retrait</h2>
+<hr style="width: 50%; margin-bottom: 30px;">
 
 <% if @withdrawals.any? %>
-  <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>Association</th>
-          <th>Montant</th>
-          <th>Date de demande</th>
-          <th>Status</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @withdrawals.each do |withdrawal| %>
+  <% @withdrawals.each do |withdrawal| %>
+    <div class="table-container">
+      <table class="table">
+        <thead>
           <tr>
-            <td><%= withdrawal.organisation.name %></td>
-            <td><%= number_to_currency(withdrawal.amount, unit: '€') %></td>
-            <td><%= withdrawal.created_at.strftime("%d %B %Y %H:%M") %></td>
-            <td><%= withdrawal.cagnotte_status&.status %></td>
-            <td>
-              <%= link_to "Détails", show_admin_withdrawal_path(withdrawal) %>
+            <th class="text-center">Association</th>
+            <th class="text-center">Montant</th>
+            <th class="text-center">Date de demande</th>
+            <th class="text-center">Status</th>
+            <th class="text-center"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center"><%= withdrawal.organisation.name %></td>
+            <td class="text-center"><%= number_to_currency(withdrawal.amount, unit: '€') %></td>
+            <td class="text-center"><%= withdrawal.created_at.strftime("%d %B %Y %H:%M") %></td>
+            <td class="text-center"><%= withdrawal.cagnotte_status&.status %></td>
+            <td class="text-center">
+              <%= link_to "Détails", show_admin_withdrawal_path(withdrawal), style: 'text-decoration: none;' %>
             </td>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+        </tbody>
+      </table>
+    </div>
+    <br>
+  <% end %>
 <% else %>
+<div class="text-center">
   <p>Il n'y a pas de nouvelle demande de retrait.</p>
+</div>
 <% end %>

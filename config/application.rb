@@ -26,5 +26,8 @@ module TrouveTonAsso
     # 
     # Set the default locale to french
     config.i18n.default_locale = :fr
+
+    # Workaround for SassC::SyntaxError on precompile with administrate gem
+    config.assets.css_compressor = nil
   end
 end

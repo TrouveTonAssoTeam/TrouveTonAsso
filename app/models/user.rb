@@ -30,4 +30,13 @@ class User < ApplicationRecord
     UserMailer.welcome_email(self).deliver_now
   end
 
+  def name
+    if self.first_name && self.last_name
+      return self.first_name + " " + self.last_name.slice(0,1).upcase + "."
+    elsif self.first_name
+      return self.first_name
+    else
+      return "Anonyme"
+    end
+  end
 end
