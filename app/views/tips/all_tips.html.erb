@@ -12,7 +12,7 @@
     <tbody>
       <% @all_tips.each do |tip| %>
         <tr>
-            <td><%= tip.user.id %></td>
+            <td><%= tip.user.name %></td>
             <td><%= tip.donation.id %></td>
             <td><%= tip.created_at.strftime("%d %B %Y %H:%M") %></td>
         </tr>
