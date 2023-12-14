@@ -46,7 +46,7 @@
   <h2 class="text-center"><strong>Avis pour cet événement</strong></h2>
   <div class="review-cards">
     <% @event.reviews.each do |review| %>
-      <div class="card">
+      <div class="event card">
         <div class="card-body">
           <p><strong>Utilisateur ID :</strong> <%= review.user_id %></p>
           <p><strong>Commentaire :</strong> <%= review.body %></p>
@@ -56,7 +56,7 @@
     <% end %>
   </div>
 <% else %>
-  <p>Aucun avis disponible pour cet événement pour le moment.</p>
+  <p class="text-center">Aucun avis disponible pour cet événement pour le moment.</p>
 <% end %>
   <% if @event.past? %>
     <% if user_signed_in? %>

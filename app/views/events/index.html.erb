@@ -1,9 +1,9 @@
 <%= stylesheet_link_tag 'events.index', media: 'all' %>
-<h1><strong>Événements de l'organisation</strong> <%= @organisation.name %></h1>
-<% if @events.any? %>
-  <div class="row">
-    <% @events.each do |event| %>
-      <div class="col-md-4 mb-4">
+<div class="event card">
+  <h1 class="card-title"><strong><%= @organisation.name %></strong></h1>
+  <% if @events.any? %>
+    <div class="container">
+      <% @events.each do |event| %>
         <div class="card">
           <% if event.cover_photo.attached? %>
             <%= image_tag url_for(event.cover_photo), class: "card-img-top img-fluid rounded-image" %>
@@ -11,13 +11,13 @@
             <p class="card-img-top">Aucune photo de couverture disponible</p>
           <% end %>
           <div class="card-body">
-            <h1 class="card-title"><%= event.name %></h1>
-            <%= link_to "Voir plus", event_path(event), class: "btn btn-primary" %>
+            <h2 class="card-title"><%= event.name %></h2>
+            <%= link_to "Voir plus", event_path(event), class: "btn event-btn-primary" %>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
-<% else %>
-  <p>Aucun événement trouvé pour cette organisation.</p>
-<% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <p>Aucun événement trouvé pour cette organisation.</p>
+  <% end %>
+</div>

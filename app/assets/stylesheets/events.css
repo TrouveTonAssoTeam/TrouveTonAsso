@@ -1,10 +1,9 @@
+/* Vos styles existants */
+
 .rounded-image {
-    border-radius: 10px;
-  }
+  border-radius: 10px;
+}
 
-/* events.css */
-
-/* Styles généraux pour la section des détails de l'événement */
 .event-details {
   max-width: 800px;
   margin: 20px auto;
@@ -17,10 +16,9 @@
   align-items: center;
 }
 
-/* Styles spécifiques pour les éléments de l'événement */
 .event-details > * {
   width: 100%;
-  max-width: 600px; /* Ajustez la largeur maximale des éléments selon vos besoins */
+  max-width: 600px; 
 }
 
 .img-fluid {
@@ -70,10 +68,11 @@
   margin-top: 20px;
 }
 
-.card {
+.event .card {
   background-color: #ffffff48;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .card-body {

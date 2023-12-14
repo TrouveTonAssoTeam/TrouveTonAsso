@@ -1,24 +1,29 @@
-.card {
+.event-card {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Ajustez la hauteur selon vos besoins */
+    height: 100vh;
+    text-align: center;
   }
   
-  form {
+  .event-form {
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
     background-color: #f7f7f743;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    align-items: center;
+   
+
   }
     
-  .field {
+  .event-field {
     margin-bottom: 20px;
   }
     
-  label {
+  .event-label {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
@@ -27,7 +32,7 @@
   input[type="text"],
   input[type="number"],
   input[type="datetime-local"],
-  textarea {
+  .event-textarea {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -35,11 +40,14 @@
     font-size: 16px;
   }
     
-  textarea {
+  .event-textarea {
     height: 120px;
   }
     
   input[type="file"] {
     margin-top: 5px;
   }
+
+
+  
   

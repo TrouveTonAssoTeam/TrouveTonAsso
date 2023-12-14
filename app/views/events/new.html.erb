@@ -1,34 +1,36 @@
 <%= stylesheet_link_tag 'events.new', media: 'all' %>
-<%= form_with(model: @event, local: false) do |form| %>
-  <div class="field">
-    <%= form.label :name, 'Nom' %>
-    <%= form.text_field :name %>
-  </div>
+<div class="event-card">
+  <%= form_with(model: @event, local: false, html: { class: 'event-form' }) do |form| %>
+    <div class="event-field">
+      <%= form.label :name, 'Nom', class: 'event-label' %>
+      <%= form.text_field :name, class: 'event-text-field' %>
+    </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+    <div class="event-field">
+      <%= form.label :description, class: 'event-label' %>
+      <%= form.text_area :description, class: 'event-textarea' %>
+    </div>
 
-  <div class="field">
-    <%= form.label :start_date, 'Date de début' %>
-    <%= form.datetime_local_field :start_date %>
-  </div>
+    <div class="event-field">
+      <%= form.label :start_date, 'Date de début', class: 'event-label' %>
+      <%= form.datetime_local_field :start_date, class: 'event-text-field' %>
+    </div>
 
-  <div class="field">
-    <%= form.label :end_date, 'Date de fin' %>
-    <%= form.datetime_local_field :end_date %>
-  </div>
+    <div class="event-field">
+      <%= form.label :end_date, 'Date de fin', class: 'event-label' %>
+      <%= form.datetime_local_field :end_date, class: 'event-text-field' %>
+    </div>
 
-  <div class="field">
-    <%= form.label :organisation_id %>
-    <%= form.number_field :organisation_id %>
-  </div>
+    <div class="event-field">
+      <%= form.label :organisation_id, class: 'event-label' %>
+      <%= form.number_field :organisation_id, class: 'event-text-field' %>
+    </div>
 
-  <div class="field">
-    <%= form.label :cover_photo, 'Photo de couverture' %>
-    <%= form.file_field :cover_photo %>
-  </div>
+    <div class="event-field">
+      <%= form.label :cover_photo, 'Photo de couverture', class: 'event-label' %>
+      <%= form.file_field :cover_photo, class: 'event-file-field' %>
+    </div>
 
-  <%= form.submit 'Créer l\'événement', class: 'btn btn-primary' %>
-<% end %>
+    <%= form.submit 'Créer l\'événement', class: 'btn btn-primary' %>
+  <% end %>
+</div>
