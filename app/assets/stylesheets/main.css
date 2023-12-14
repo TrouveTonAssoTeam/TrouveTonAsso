@@ -83,6 +83,21 @@ b {
     font-weight: 100;
 }
 
+.badge {
+    border: 1px solid;
+    border-radius: var(--border-radius);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background-color: var(--background-card-color);
+    color: var(--primary-color);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: var(--background-blur);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .container {
     max-width: min(1400px, 88%);
     padding-left: 6%;

@@ -4,7 +4,7 @@ class ProfilController < ApplicationController
 
     def index
         @user = current_user
-        @donations = @user.donations
+        @donations = @user.donations.order(created_at: :desc)
         @likes = @user.likes.map(&:organisation)
     end
 

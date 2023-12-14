@@ -1,18 +1,47 @@
-<h1>Détails de la demande de retrait</h1>
+<h2 style="text-align: center; margin-bottom: 20px;">Détails de la demande de retrait</h2>
+<hr style="width: 50%; margin-bottom: 30px;">
 
-<%# Mode test! : Accessible qu'aux admins une fois implémenté, il faudra faire les modifications nécessaires %>
+<div class="table-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="text-center">Association:</th>
+        <th class="text-center">Montant:</th>
+        <th class="text-center">Date de demande:</th>
+        <th class="text-center">Statut actuel:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="text-center"><%= @withdrawal.organisation.name %></td>
+        <td class="text-center"><%= number_to_currency(@withdrawal.amount, unit: '€') %></td>
+        <td class="text-center"><%= @withdrawal.created_at.strftime("%d %B %Y %H:%M") %></td>
+        <td class="text-center"><%= @withdrawal.cagnotte_status&.status %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-<p>Organisation: <%= @withdrawal.organisation.name %></p>
-<p>Montant: <%= number_to_currency(@withdrawal.amount, unit: '€') %></p>
-<p>Date de demande: <%= @withdrawal.created_at.strftime("%d %B %Y %H:%M") %></p>
-<p>Statut actuel: <%= @withdrawal.cagnotte_status&.status %></p>
+<br>
+<br>
 
-<%= form_with(model: @withdrawal, url: update_status_withdrawal_path(@withdrawal), method: :patch) do |form| %>
-  <div class="field">
-    <%= form.label :new_status, 'Nouveau statut' %>
-    <%= form.select :new_status, options_for_select(['En cours de traitement', 'Demande traitée']), { prompt: 'Sélectionner un statut' } %>
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+  <div style="margin-bottom: 5px; text-align: center;">
+    <%= form_with(model: @withdrawal, url: update_status_withdrawal_path(@withdrawal), method: :patch) do |form| %>
+      <div class="field">
+        <%= form.label :new_status, 'Définir le nouveau statut :' %>
+        <%= form.select :new_status, options_for_select(['En cours de traitement', 'Demande traitée']), { prompt: 'Sélectionner un statut' } %>
+      </div>
+      <div style="text-align: center; margin-top: 30px;">
+        <%= form.submit 'Mettre à jour le statut', class: "btn btn-primary", style: 'width: auto; height: 30px; margin: 0 auto;' %>
+      </div>
+    <% end %>
   </div>
-  <%= form.submit 'Mettre à jour le statut' %>
-<% end %>
+</div>
 
-<%= link_to 'Retour à la liste des demandes', admin_withdraw_withdrawals_path %>
+<br>
+<br>
+
+<div style="text-align: center; margin-top: 10px;">
+  <%= link_to 'Retour à la liste des demandes', admin_withdraw_withdrawals_path, style: 'text-decoration: none;' %>
+</div>

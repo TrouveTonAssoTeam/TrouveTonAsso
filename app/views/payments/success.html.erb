@@ -1,7 +1,38 @@
-<h2>Merci pour votre don!</h2>
+<h2 style="text-align: center; margin-bottom: 20px;">Merci pour votre don!</h2>
+<hr style="width: 50%; margin-bottom: 30px;">
 
-<p>Montant du don: <%= number_to_currency(@amount, unit: '€') %></p>
-<p>Date du don: <%= @donation.created_at.strftime('%d/%m/%Y %H:%M:%S') %></p>
-<p>Association: <%= @asso.name %></p>
+<div class="table-container" style="overflow-x: auto;">
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th style="text-align: center;">Montant</th>
+                <% if @donation.tip_amount && @donation.tip_amount > 0 %>
+                    <th style="text-align: center;">Votre généreuse participation</th>
+                <% end %>
+                <th style="text-align: center;">Association bénéficiaire</th>
+                <th style="text-align: center;">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><%= number_to_currency(@donation.no_tip, unit: '€') %></td>
+                <% if @donation.tip_amount && @donation.tip_amount > 0 %>
+                    <td style="text-align: center;"><%= number_to_currency(@donation.tip_amount, unit: '€') %></td>
+                <% end %>
+                <td style="text-align: center;"><%= @donation.organisation.name %></td>
+                <td style="text-align: center;"><%= @donation.created_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-<%= link_to "Retour à l'accueuil", root_path %>
+<br>
+<br>
+
+<div style="text-align: center; margin-top: 10px;">
+  <%= link_to "Retour à votre profil", profil_index_path, style: 'text-decoration: none;' %>
+</div>
+<br>
+<div style="text-align: center; margin-top: 10px;">
+  <%= link_to "Retour à l'accueil", root_path, style: 'text-decoration: none;' %>
+</div>

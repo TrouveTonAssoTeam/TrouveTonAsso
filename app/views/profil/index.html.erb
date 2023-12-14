@@ -5,6 +5,12 @@
         <p>Mot de passe : ********</p>
         <%= link_to "Modifier le mot de passe", edit_user_registration_path(@user) %>
 
+        <% if @user.avatar.attached? %>
+            <div class="form text-center">
+            <%= image_tag @user.avatar, class: "avatar-preview", alt: "Photo de profil de #{@user.name}", style: "margin: auto;" %>
+            <p>Photo de profil</p>
+            </div>
+        <% end %>
         <p>Prénom : <%= @user.first_name %></p>
         <p>Nom : <%= @user.last_name %></p>
 
@@ -29,7 +35,7 @@
                         <% @donations.each do |donation| %>
                             <tr>
                                 <td><%= donation.created_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
-                                <td><%= number_to_currency(donation.amount, unit: '€') %></td>
+                                <td><%= number_to_currency(donation.no_tip, unit: '€') %></td>
                                 <td><%= donation.organisation.name %></td>
                             </tr>
                         <% end %>

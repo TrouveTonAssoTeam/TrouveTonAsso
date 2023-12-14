@@ -10,11 +10,15 @@
 user = User.create!(
   email: 'test@user.com',
   password: 'password',
+  first_name: 'Patricia',
+  last_name: 'Flamand',
 )
 
 user = User.create!(
-  email: 'test2@user.com',
+  email: 'test@user2.com',
   password: 'password',
+  first_name: 'Christian',
+  last_name: 'Bonenfant',
 )
 
 organisation = Organisation.create!(
@@ -22,13 +26,17 @@ organisation = Organisation.create!(
   password: 'password',
   name: 'Test Asso',
   description: 'Description',
-  city: 'Ville',
+  address: '10 Rue de la Bombarde',
+  city: 'Lyon',
+  zip: '69005',
 )
 
 organisation = Organisation.create!(
-  email: 'test2@asso.com',
+  email: 'test@asso2.com',
   password: 'password',
-  name: 'Test Asso 2',
+  name: 'Test asso 2',
   description: 'Description',
-  city: 'Ville',
+  address: '5 Bd du Roi',
+  city: 'Versailles',
+  zip: '78000',
 )

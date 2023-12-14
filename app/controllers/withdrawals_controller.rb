@@ -1,6 +1,6 @@
 class WithdrawalsController < ApplicationController
     before_action :authenticate_organisation!, only: [:index]
-    # before_action :authenticate_admin!, only: [:index_all]
+    # before_action :authenticate_admin!, only: [:admin_withdraw, :show_admin]
 
     def withdrawal_params
         params.require(:withdrawal).permit(:new_status)
@@ -12,15 +12,16 @@ class WithdrawalsController < ApplicationController
     end
 
     # Partie Admin
-    def admin_withdraw
-    @withdrawals = Withdrawal.includes(:organisation, :cagnotte_status).order(created_at: :desc)
-    end
+        def admin_withdraw
+        @withdrawals = Withdrawal.includes(:organisation, :cagnotte_status).order(created_at: :desc)
+        end
 
-    def show_admin
-        @withdrawal = Withdrawal.find(params[:id])
-        @cagnotte_status = @withdrawal.cagnotte_status
-    end
-
+        def show_admin
+            @withdrawal = Withdrawal.find(params[:id])
+            @cagnotte_status = @withdrawal.cagnotte_status
+        end
+    # end
+    
     def update_status
     @withdrawal = Withdrawal.find(params[:id])
     new_status = withdrawal_params[:new_status]

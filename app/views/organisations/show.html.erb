@@ -1,5 +1,6 @@
 <% content_for :head do %>
   <%= stylesheet_link_tag 'organisation.show', media: 'all' %>
+  <%= stylesheet_link_tag 'reviews', media: 'all' %>
 <% end %>
 
 <% if @organisation && @organisation.is_promoted? %>
@@ -12,42 +13,107 @@
 
 <% if @organisation %>
   <div class="container">
-  <h1 class="mt-4 organisation-name"><strong><%= @organisation.name %></strong></h1>
+    <h1 class="mt-4 organisation-name"><strong><%= @organisation.name %></strong></h1>
 
     <% if @organisation.cover_photo.attached? %>
       <div class="image-container">
-        <%= image_tag @organisation.cover_photo, class: "img-fluid rounded-custom" %>
+        <%= image_tag @organisation.cover_photo, class: "img-fluid rounded-custom", alt: "Photo de couverture de l'association #{@organisation.name}" %>
       </div>
     <% else %>
       <p>Aucune photo de couverture pour cette association</p>
     <% end %>
 
     <div class="element">
-      <p><strong>Description</strong><p>
-      <%= @organisation.description %>
+      <p><strong>Description</strong></p>
+      <p><%= @organisation.description %></p>
       <p><strong>Ville</strong></p> 
-      <%= @organisation.city %></p>
-      
-      <h1> Questions-réponses </h1>
-      <% if !@faqs.empty? %>
-        <div class="faq-container">
-          <% @faqs.each do |faq| %>
-            <% if faq.answer %>
-            <div class="my-5">
+      <p><%= @organisation.city %></p>
+      <p><strong>Adresse</strong></p>
+      <p><%= @organisation.address %></p> 
 
+      <!-- Google Maps API -->
+      <div id="map" style="height: 200px;"></div>
+
+      <script>
+        function initMap() {
+          var organizationLocation = { lat: <%= @organisation.latitude %>, lng: <%= @organisation.longitude %> };
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: organizationLocation
+          });
+          var marker = new google.maps.Marker({
+            position: organizationLocation,
+            map: map,
+            title: '<%= @organisation.name %>'
+          });
+        }
+      </script>
+
+      <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.dig(:google_maps, :api_key) %>&libraries=places&callback=initMap">
+      </script>
+    </div>
+
+   <!-- Section pour afficher les événements -->
+    <h2><strong>Événements</strong></h2>
+    <div class="events-container">
+      <% if @organisation.events.any? %>
+        <% @organisation.events.each do |event| %>
+          <div class="card event-card">
+            <div class="card-body">
+              <%= link_to event.name, event_path(event) %>
+              <% if event.start_date > Time.now %>
+                <span style="color: green;">À venir</span>
+              <% else %>
+                <span style="color: red;">En cours</span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p>Aucun événement trouvé pour cette organisation.</p>
+      <% end %>
+    </div>
+     <!-- Section pour afficher les avis sur les événements de l'association -->
+    <% if @organisation.events.any? %>
+  <div class="reviews-container">
+    <h2><strong>Derniers avis sur les événements de l'association</strong></h2>
+    <% @organisation.events.each do |event| %>
+      <% if event.reviews.any? %>
+        <div class="event-reviews">
+          <h3><i>Avis pour l'événement <%= event.name %></i></h3>
+          <% event.reviews.each do |review| %>
+            <div class="review-card">
+              <div class="review-info">
+                <strong>Utilisateur ID :</strong> <%= review.user_id %><br>
+                <strong>Description :</strong> <%= review.body %><br>
+                <strong>Note :</strong> <%= review.rating %> &#9733;<br>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+  <h1> Questions-réponses </h1>
+    <% if !@faqs.empty? %>
+      <div class="faq-container">
+        <% @faqs.each do |faq| %>
+          <% if faq.answer %>
+            <div class="my-5">
               <div class="question">
                 <% if faq.user.avatar.attached? %>
-                  <%= image_tag faq.user.avatar, class: "card-img-top", alt: "Photo de profil de #{if faq.user.first_name && faq.user.last_name then faq.user.first_name + " " + faq.user.last_name.slice(0,1) + "." else "Anonyme" end}" %>
+                  <%= image_tag faq.user.avatar, class: "card-img-top", alt: "Photo de profil de #{faq.user.name}" %>
                 <% else %>
                   <!-- Placeholder si aucun avatar n'est attaché -->
                   <%= image_tag "anonymous-user.webp", class: "card-img-top", alt: "Une image de profil d'un utilisateur n'ayant pas défini de photo" %>
                 <% end %>
                 <div class="question-content">
-                  <h4><%= if faq.user.first_name && faq.user.last_name then faq.user.first_name + " " + faq.user.last_name.slice(0,1) + "." else "Anonyme" end %></h4>
+                  <h4><%= faq.user.name %></h4>
                   <p><%= faq.question %></p>
                 </div>
               </div>
-
               <div class="answer">
                 <% if faq.organisation.cover_photo.attached? %>
                   <%= image_tag faq.organisation.cover_photo, class: "card-img-top", alt: "Logo de l'association #{faq.organisation.name}" %>
@@ -60,44 +126,19 @@
                   <p><%= faq.question %></p>
                 </div>
               </div>
-
+              <%= link_to "Ajouter une question", new_organisation_faq_path(organisation_id: @organisation.id), class: "btn btn-primary" %>
             </div>
-            <% end %>
           <% end %>
-        </div>
-      <% else %>
-        <p>Aucune question-réponse pour cette association</p>
-      <% end %>
-      <%= link_to "Ajouter une question", new_organisation_faq_path(organisation_id: @organisation.id), class: "btn btn-primary" %>
-    </div>
-  </div>
-
-  <p>Description : <%= @organisation.description %></p>
-  <p>Ville : <%= @organisation.city %></p>
-
-  <h2>Événements de cette organisation :</h2>
-
-<% if @organisation.events.any? %>
-  <ul>
-    <% @organisation.events.each do |event| %>
-      <li>
-        <%= link_to event.name, event_path(event) %>
-        <% if event.start_date > Time.now %>
-          <span style="color: green;">À venir</span>
-        <% else %>
-          <span style="color: red;">En cours</span>
         <% end %>
-      </li>
+      </div>
+    <% else %>
+      <p>Aucune question.</p>
     <% end %>
-  </ul>
-<% else %>
-  <p>Aucun événement trouvé pour cette organisation.</p>
-<% end %>
-  <!-- Autres détails si nécessaire -->
-
-  <h2>Faites un don à <%= @organisation.name %></h2>
-
-  <%= render 'shared/donate_button', association: @organisation %>
+    <%= link_to "Ajouter une question", new_organisation_faq_path(organisation_id: @organisation.id), class: "btn btn-primary" %>
+    <!-- Section pour faire un don à l'association -->
+    <h2><strong>Faites un don à <%= @organisation.name %></strong></h2>
+    <%= render 'shared/donate_button', association: @organisation %>
+  </div>
 <% else %>
   <p>Association non trouvée</p>
 <% end %>

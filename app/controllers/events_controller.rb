@@ -58,18 +58,51 @@ class EventsController < ApplicationController
 
     # Action pour permettre à l'utilisateur de se désinscrire d'un événement
     def unattend
+     @event = Event.find(params[:id])
      current_user.events.delete(@event)
      redirect_to @event, notice: 'Vous ne participez plus à cet événement.'
     end
 
+    def past?
+      Time.zone.now > end_date
+    end
+
+    def status
+      if end_date < Time.zone.now
+        update(status: 'Terminé')
+      elsif start_date > Time.zone.now
+        update(status: 'À venir')
+      else
+        update(status: 'En cours')
+      end
+    end
+
+    def create_review
+      @event = Event.find(params[:id])
+      @review = @event.reviews.build(review_params)
+      @review.user = current_user
+  
+      if @review.save
+        flash[:success] = "Votre avis a été ajouté avec succès !"
+        redirect_to @event
+      else
+        flash[:error] = "Erreur lors de l'ajout de l'avis"
+        render 'show'
+      end
+    end
+
     private
+
+    def review_params
+      params.require(:review).permit(:rating, :body)
+    end
 
     def set_event
       @organisation = Organisation.find_by(id: params[:organisation_id])
-      @event = @organisation.events.find_by(id: params[:id]) if @organisation
+      @event = Event.find_by(id: params[:id])
       unless @event
         flash[:error] = "L'événement n'a pas été trouvé dans cette organisation."
-        redirect_to organisation_events_path(@organisation) # Redirige vers la liste des événements de cette organisation
+        redirect_back(fallback_location: organisations_path)# Redirige vers la liste des événements de cette organisation
       end
 
     end

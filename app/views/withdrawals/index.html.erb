@@ -1,17 +1,43 @@
-<h1>Vos demandes de retrait</h1>
+<h2 style="text-align: center; margin-bottom: 20px;">Vos demandes de retrait</h2>
+<hr style="width: 50%; margin-bottom: 30px;">
 
 <% if @withdrawals.any? %>
-  <ul>
-    <% @withdrawals.each do |withdrawal| %>
-      <li>
-        Montant: <%= number_to_currency(withdrawal.amount, unit: '€') %> -
-        Date: <%= withdrawal.created_at.strftime("%d %B %Y %H:%M") %> -
-        Statut: <%= withdrawal.cagnotte_status&.status %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>Aucun retrait effectué pour le moment.</p>
-<% end %>
+  <% @withdrawals.each do |withdrawal| %>
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="text-center">Montant</th>
+            <th class="text-center">Date de demande</th>
+            <th class="text-center">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center"><%= number_to_currency(withdrawal.amount, unit: '€') %></td>
+            <td class="text-center"><%= withdrawal.created_at.strftime("%d %B %Y %H:%M") %></td>
+            <td class="text-center"><%= withdrawal.cagnotte_status&.status %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br>
+  <% end %>
+  <br>
+  <% else %>
+  <div class="text-center">
+    <p>Aucun retrait effectué pour le moment.</p>
+  </div>
+  <% end %>
+<br>
+<br>
 
-<%= link_to "Retour à la cagnotte", cagnotte_path(@organisation) %>
+<div style="text-align: center; margin-top: 10px;">
+<%= link_to "Retour à la cagnotte", cagnotte_path(@organisation), style: 'text-decoration: none;' %>
+</div>
+
+<br>
+
+<div style="text-align: center; margin-top: 10px;">
+  <%= link_to "Retour à votre dashboard", dashboard_organisations_path, style: 'text-decoration: none;' %>
+</div>

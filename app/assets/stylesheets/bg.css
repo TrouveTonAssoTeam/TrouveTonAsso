@@ -89,3 +89,35 @@
         opacity: 0.5;
     }
 }
+
+.gold-container {
+    background-image: linear-gradient(
+        to right,
+        #fee85917,
+        #eef47836,
+        #ffc42d39,
+        #caae672e,
+        #ebe8281d
+    );
+    border-radius: var(--border-radius);
+}
+.purple-container {
+    background-image: linear-gradient(
+        to right,
+        #f45df425,
+        #e15fdf37,
+        #e14dcb50,
+        #9a28eb1d
+    );
+    border-radius: var(--border-radius);
+}
+.blue-container {
+    background-image: linear-gradient(
+        to right,
+        #63cfef25,
+        #4ba8ff1c,
+        #5055e01c,
+        #4ba9ff1c
+    );
+    border-radius: var(--border-radius);
+}
