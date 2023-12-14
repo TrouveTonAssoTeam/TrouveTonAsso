@@ -1,0 +1,21 @@
+.review-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f9f9f960;
+  }
+  
+  .review-card h3 {
+    margin-bottom: 8px;
+  }
+  
+  .review-card ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .review-card li {
+    margin-bottom: 6px;
+  }
+  
