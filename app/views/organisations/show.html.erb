@@ -51,11 +51,9 @@
       <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.dig(:google_maps, :api_key) %>&libraries=places&callback=initMap">
       </script>
-
     </div>
-  </div>
 
-  <h2>Événements de cette organisation :</h2>
+    <h2>Événements de cette organisation :</h2>
 
   <% if @organisation.events.any? %>
     <ul>
@@ -74,6 +72,30 @@
     <p>Aucun événement trouvé pour cette organisation.</p>
   <% end %>
 
+
+    <!-- Section pour afficher les avis sur les événements de l'association -->
+    <% if @organisation.events.any? %>
+      <h2>Derniers avis sur les événements de l'association</h2>
+      <ul>
+        <% @organisation.events.each do |event| %>
+          <% if event.reviews.any? %>
+            <h3>Avis pour l'événement <%= event.name %></h3>
+            <ul>
+              <% event.reviews.each do |review| %>
+                <li>
+                  <strong>Description :</strong> <%= review.body %><br>
+                  <strong>Note :</strong> <%= review.rating %><br>
+                  <strong>Utilisateur ID :</strong> <%= review.user_id %>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+
   <h1> Questions-réponses </h1>
     <% if !@faqs.empty? %>
       <div class="faq-container">
@@ -83,13 +105,13 @@
 
               <div class="question">
                 <% if faq.user.avatar.attached? %>
-                  <%= image_tag faq.user.avatar, class: "card-img-top", alt: "Photo de profil de #{if faq.user.first_name && faq.user.last_name then faq.user.first_name + " " + faq.user.last_name.slice(0,1) + "." else "Anonyme" end}" %>
+                  <%= image_tag faq.user.avatar, class: "card-img-top", alt: "Photo de profil de #{faq.user.name}" %>
                 <% else %>
                   <!-- Placeholder si aucun avatar n'est attaché -->
                   <%= image_tag "anonymous-user.webp", class: "card-img-top", alt: "Une image de profil d'un utilisateur n'ayant pas défini de photo" %>
                 <% end %>
                 <div class="question-content">
-                  <h4><%= if faq.user.first_name && faq.user.last_name then faq.user.first_name + " " + faq.user.last_name.slice(0,1) + "." else "Anonyme" end %></h4>
+                  <h4><%= faq.user.name %></h4>
                   <p><%= faq.question %></p>
                 </div>
               </div>
@@ -106,22 +128,19 @@
                   <p><%= faq.question %></p>
                 </div>
               </div>
-
+              <%= link_to "Ajouter une question", new_organisation_faq_path(organisation_id: @organisation.id), class: "btn btn-primary" %>
             </div>
           <% end %>
         <% end %>
       </div>
     <% else %>
-      <p>Aucune question-réponse pour cette association</p>
+      <p>Aucun avis.</p>
     <% end %>
 
-    <%= link_to "Ajouter une question", new_organisation_faq_path(organisation_id: @organisation.id), class: "btn btn-primary" %>
-
-  <!-- Autres détails si nécessaire -->
-
-  <h2>Faites un don à <%= @organisation.name %></h2>
-
-  <%= render 'shared/donate_button', association: @organisation %>
+    <!-- Section pour faire un don à l'association -->
+    <h2>Faites un don à <%= @organisation.name %></h2>
+    <%= render 'shared/donate_button', association: @organisation %>
+  </div>
 <% else %>
   <p>Association non trouvée</p>
 <% end %>

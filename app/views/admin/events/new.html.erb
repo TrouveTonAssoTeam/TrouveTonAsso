@@ -1,0 +1,28 @@
+<h1 class="text-center">Nouvel Evènement</h1>
+
+      <%= form_with(model: @event, url: events_path, method: :post, class: 'mt-4') do |form| %>
+        <div class="mb-3">
+          <%= form.label :titre, class: 'form-label' %>
+          <%= form.text_field :titre, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :description, class: 'form-label' %>
+          <%= form.text_area :description, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :date, class: 'form-label' %>
+          <%= form.datetime_field :date, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :localisation, class: 'form-label' %>
+          <%= form.text_field :localisation, class: 'form-control' %>
+        </div>
+
+        <div class="text-center">
+          <%= form.submit 'Create Event', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+      </div>

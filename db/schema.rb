@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_13_125710) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_13_142740) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -140,6 +140,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_125710) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.integer "rating"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_reviews_on_event_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "tips", force: :cascade do |t|
     t.decimal "amount"
     t.bigint "donation_id", null: false
@@ -158,6 +169,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_125710) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
+    t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -181,6 +193,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_125710) do
   add_foreign_key "events", "organisations"
   add_foreign_key "likes", "organisations"
   add_foreign_key "likes", "users"
+  add_foreign_key "reviews", "events"
+  add_foreign_key "reviews", "users"
   add_foreign_key "tips", "donations"
   add_foreign_key "withdrawals", "cagnotte_statuses"
   add_foreign_key "withdrawals", "organisations"
