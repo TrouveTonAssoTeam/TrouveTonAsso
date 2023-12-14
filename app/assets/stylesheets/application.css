@@ -11,4 +11,7 @@
  *= require dyslexic
  *= require tables
  *= require faq
+ *= require events
+ *= require events.index
+ *= require events.new
  */
