@@ -7,7 +7,7 @@
 
         <% if @user.avatar.attached? %>
             <div class="form text-center">
-            <%= image_tag @user.avatar, class: "avatar-preview", alt: "Photo de profil de #{@user.first_name}", style: "margin: auto;" %>
+            <%= image_tag @user.avatar, class: "avatar-preview", alt: "Photo de profil de #{@user.name}", style: "margin: auto;" %>
             <p>Photo de profil</p>
             </div>
         <% end %>

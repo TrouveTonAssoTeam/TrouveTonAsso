@@ -83,13 +83,13 @@
 
               <div class="question">
                 <% if faq.user.avatar.attached? %>
-                  <%= image_tag faq.user.avatar, class: "card-img-top", alt: "Photo de profil de #{if faq.user.first_name && faq.user.last_name then faq.user.first_name + " " + faq.user.last_name.slice(0,1) + "." else "Anonyme" end}" %>
+                  <%= image_tag faq.user.avatar, class: "card-img-top", alt: "Photo de profil de #{faq.user.name}" %>
                 <% else %>
                   <!-- Placeholder si aucun avatar n'est attaché -->
                   <%= image_tag "anonymous-user.webp", class: "card-img-top", alt: "Une image de profil d'un utilisateur n'ayant pas défini de photo" %>
                 <% end %>
                 <div class="question-content">
-                  <h4><%= if faq.user.first_name && faq.user.last_name then faq.user.first_name + " " + faq.user.last_name.slice(0,1) + "." else "Anonyme" end %></h4>
+                  <h4><%= faq.user.name %></h4>
                   <p><%= faq.question %></p>
                 </div>
               </div>
