@@ -140,6 +140,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_142740) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.integer "rating"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_reviews_on_event_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "tips", force: :cascade do |t|
     t.decimal "amount"
     t.bigint "donation_id", null: false
@@ -182,6 +193,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_142740) do
   add_foreign_key "events", "organisations"
   add_foreign_key "likes", "organisations"
   add_foreign_key "likes", "users"
+  add_foreign_key "reviews", "events"
+  add_foreign_key "reviews", "users"
   add_foreign_key "tips", "donations"
   add_foreign_key "withdrawals", "cagnotte_statuses"
   add_foreign_key "withdrawals", "organisations"
