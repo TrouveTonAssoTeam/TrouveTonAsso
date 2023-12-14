@@ -1,29 +1,38 @@
-<h2>Merci pour votre don!</h2>
+<h2 style="text-align: center; margin-bottom: 20px;">Merci pour votre don!</h2>
+<hr style="width: 50%; margin-bottom: 30px;">
 
-<div class="table-container">
-    <table>
-    <thead>
-        <tr>
-        <th>Montant</th>
-        <% if @donation.tip_amount && @donation.tip_amount > 0 %>
-        <th>Votre généreuse participation</th>
-        <% end %>
-        <th>Date</th>
-        <th>Association bénéficiaire</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><%= number_to_currency(@donation.no_tip, unit: '€') %></td>
-            <% if @donation.tip_amount && @donation.tip_amount > 0 %>
-            <td><%= number_to_currency(@donation.tip_amount, unit: '€') %></td>
-            <% end %>
-            <td><%= @donation.created_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
-            <td><%= @donation.organisation.name %></td>
-        </tr>
-    </tbody>
+<div class="table-container" style="overflow-x: auto;">
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th style="text-align: center;">Montant</th>
+                <% if @donation.tip_amount && @donation.tip_amount > 0 %>
+                    <th style="text-align: center;">Votre généreuse participation</th>
+                <% end %>
+                <th style="text-align: center;">Association bénéficiaire</th>
+                <th style="text-align: center;">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><%= number_to_currency(@donation.no_tip, unit: '€') %></td>
+                <% if @donation.tip_amount && @donation.tip_amount > 0 %>
+                    <td style="text-align: center;"><%= number_to_currency(@donation.tip_amount, unit: '€') %></td>
+                <% end %>
+                <td style="text-align: center;"><%= @donation.organisation.name %></td>
+                <td style="text-align: center;"><%= @donation.created_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
+            </tr>
+        </tbody>
     </table>
 </div>
+
+<br>
 <br>
 
-<%= link_to "Retour à l'accueil", root_path %>
+<div style="text-align: center; margin-top: 10px;">
+  <%= link_to "Retour à votre profil", profil_index_path, style: 'text-decoration: none;' %>
+</div>
+<br>
+<div style="text-align: center; margin-top: 10px;">
+  <%= link_to "Retour à l'accueil", root_path, style: 'text-decoration: none;' %>
+</div>

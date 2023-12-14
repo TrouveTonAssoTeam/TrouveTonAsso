@@ -1,10 +1,20 @@
 <%= form_with method: :post, url: payments_path, data: { turbo: false } do |form| %>
-  <%= form.hidden_field :organisation_id, value: @organisation.id %>
-  <%= form.label :amount, 'Montant' %>
-  <%= form.number_field :amount, step: 'any' %>
+  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
 
-  <%= form.check_box :tip, value: '1', unchecked_value: '0' %>
-  <%= form.label :tip, 'Ajouter 1€ en soutien au site' %>
+      <%= form.hidden_field :organisation_id, value: @organisation.id %>
 
-  <%= form.submit 'Confirmer' %>
+    <div style="margin-bottom: 5px; text-align: center;">
+      <%= form.label :amount, 'Montant' %>
+      <%= form.number_field :amount, step: 'any', style: 'width: 100%; padding: 5px; box-sizing: border-box; border-radius: 10px' %>
+    </div>
+    <div style="margin-bottom: 30px; text-align: center;">
+      <%= form.check_box :tip, value: '1', unchecked_value: '0', style: 'margin-right: 15px;' %>
+      <%= form.label :tip, 'Ajouter 1€ en soutien au site' %>
+    </div>
+
+    <div style="text-align: center;">
+      <%= form.submit 'Confirmer', class: 'btn btn-primary' %>
+    </div>
+
+  </div>
 <% end %>
