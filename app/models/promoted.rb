@@ -1,6 +1,10 @@
 class Promoted < ApplicationRecord
     belongs_to :organisation
 
+    validates :start_date, presence: true, type: Date
+    validates :end_date, presence: true, type: Date
+    validates :price, presence: true
+
     def duration
         (self.end_date - self.start_date).to_i
     end
