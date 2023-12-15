@@ -1,4 +1,4 @@
-<div class="event-details">
+<div class="event-details" itemscope itemtype="http://schema.org/Event">
   <% if @event.cover_photo.attached? %>
     <%= image_tag url_for(@event.cover_photo), class: "img-fluid rounded-image" %>
   <% else %>
@@ -6,13 +6,14 @@
   <% end %>
   
   <div class="event-header text-center">
-    <h2><strong><%= @event.name %></strong></h2>
+    <h2 itemprop="name"><strong><%= @event.name %></strong></h2>
+    <h4 itemprop="organizer"><strong>Organisé par <%= @event.organisation.name %></strong></h4>
   </div>
 
   <div class="event-description text-center">
-    <p><strong></strong> <%= @event.description %></p>
-    <p><strong>Du</strong> <%= @event.start_date %></p>
-    <p><strong>Au</strong> <%= @event.end_date %></p>
+    <p itemprop="description"><strong></strong> <%= @event.description %></p>
+    <p itemprop="startDate"><strong>Du</strong> <%= @event.start_date %></p>
+    <p itemprop="endDate"><strong>Au</strong> <%= @event.end_date %></p>
 
     <% if @event.participants.any? %>
       <p><strong>Nombre de participants :</strong> <%= @event.participants.count %></p>
@@ -20,7 +21,7 @@
       <p>Aucun participant pour cet événement pour le moment.</p>
     <% end %>
   </div>
-  <p class="text-center"><strong>Statut de l'événement<strong> : <%= @event.status %></p>
+  <p class="text-center"><strong>Statut de l'événement</strong> : <%= @event.status %></p>
 
 
   <% if @event.past? && user_signed_in? && current_user.events.include?(@event) %>
@@ -74,3 +75,7 @@
     <% end %>
   <% end %>
 </div>
+
+<script type="application/ld+json">
+  <%= event_jsonld(@event) %>
+</script>

@@ -12,8 +12,8 @@
 <% end %>
 
 <% if @organisation %>
-  <div class="container">
-    <h1 class="mt-4 organisation-name"><strong><%= @organisation.name %></strong></h1>
+  <div class="container" itemscope itemtype="http://schema.org/Organization">
+    <h1 class="mt-4 organisation-name" itemprop="name"><strong><%= @organisation.name %></strong></h1>
 
     <% if @organisation.cover_photo.attached? %>
       <div class="image-container">
@@ -25,10 +25,10 @@
 
     <div class="element">
       <p><strong>Description</strong></p>
-      <p><%= @organisation.description %></p>
+      <p itemprop="description"><%= @organisation.description %></p>
       <p><strong>Ville</strong></p> 
       <p><%= @organisation.city %></p>
-      <p><strong>Adresse</strong></p>
+      <p itemprop="address"><strong>Adresse</strong></p>
       <p><%= @organisation.address %></p> 
 
       <!-- Google Maps API -->
@@ -142,3 +142,7 @@
 <% else %>
   <p>Association non trouvée</p>
 <% end %>
+
+<script type="application/ld+json">
+  <%= organisation_jsonld(@organisation) %>
+</script>
