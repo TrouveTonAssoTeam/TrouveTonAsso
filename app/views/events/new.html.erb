@@ -1,3 +1,6 @@
+<% content_for :title, "Créer votre événement" %>
+<% content_for :meta_description, "Contribuez à la communauté, rencontrer des volontaires et rencontrer des volontaires à proximité. Créer des activités avec votre association." %>
+
 <div class="event-card">
   <%= form_with(model: @event, local: false, html: { class: 'event-form' }) do |form| %>
     <div class="event-field">

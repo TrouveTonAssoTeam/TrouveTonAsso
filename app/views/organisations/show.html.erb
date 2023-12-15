@@ -2,6 +2,8 @@
   <%= stylesheet_link_tag 'organisation.show', media: 'all' %>
   <%= stylesheet_link_tag 'reviews', media: 'all' %>
 <% end %>
+<% content_for :title, @organisation.name %>
+<% content_for :meta_description, @organisation.description %>
 
 <% if @organisation && @organisation.is_promoted? %>
   <div class="card card-gold star-promoted" name="Cette association est mise en avant" title="Cette association est mise en avant">

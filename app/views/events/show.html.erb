@@ -1,3 +1,6 @@
+<% content_for :title, @event.name %>
+<% content_for :meta_description, @event.description %>
+
 <div class="event-details" itemscope itemtype="http://schema.org/Event">
   <% if @event.cover_photo.attached? %>
     <%= image_tag url_for(@event.cover_photo), class: "img-fluid rounded-image" %>

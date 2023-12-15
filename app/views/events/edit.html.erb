@@ -1,3 +1,6 @@
+<% content_for :title, "Modifier #{@event.name}" %>
+<% content_for :meta_description, "Modifier les détails de l'événement déjà créé" %>
+
 <%= form_with(model: @event, local: true, multipart: true) do |form| %>
   <div class="form-group">
     <%= form.label :name %>

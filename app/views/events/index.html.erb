@@ -1,3 +1,6 @@
+<% content_for :title, "Liste des événements" %>
+<% content_for :meta_description, "Retrouvez ici la liste de tous les événements de #{@organisation.name}" %>
+
 <div class="event card">
   <h1 class="card-title"><strong><%= @organisation.name %></strong></h1>
   <% if @events.any? %>
