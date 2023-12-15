@@ -7,6 +7,8 @@
   <% end %>
 </div>
 
+<br>
+
 <h2 class="text-center">Se connecter</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form" }) do |f| %>
@@ -23,13 +25,15 @@
   <% if devise_mapping.rememberable? %>
     <div class="field text-center">
       <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.label :remember_me, "Rester connecté" %>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Se connecter", class: "btn btn-primary" %>
-  </div>
+<br>
+
+<div class="actions" style="text-align: center;">
+  <%= f.submit "Connexion", class: "btn btn-primary", style: "font-size: 16px; padding: 5px 10px; margin: 0 auto;" %>
+</div>
 <% end %>
 
 <%= render "organisations/shared/links" %>

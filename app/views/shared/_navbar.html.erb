@@ -11,7 +11,7 @@
             <span class="bar"></span>
         </div>
         <div class="navbar-links">
-            <%= link_to "Home", root_path, class: "#{is_active?(root_path)}" %>
+            <%= link_to "Accueil", root_path, class: "#{is_active?(root_path)}" %>
             <%= link_to "Associations", organisations_path, class: "#{is_active?(organisations_path)}" %>
             <%= link_to "Contact", contact_path, class: "#{is_active?(contact_path)}" %>
             <%= link_to "A propos", about_path, class: "#{is_active?(about_path)}" %>
@@ -27,7 +27,7 @@
         
         <% else %>
 
-            <%= link_to "Se connecter", new_user_session_path, class: "#{is_active?(new_user_session_path)}" %>
+            <%= link_to "Se connecter", new_user_session_path, class: "#{is_active?(new_user_session_path, new_organisation_session_path)}" %>
 
         <% end %>
         </div>
