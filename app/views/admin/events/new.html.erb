@@ -7,19 +7,24 @@
         </div>
 
         <div class="mb-3">
+        <%= form.label :organisation_id, class: 'form-label' %>
+        <%= form.text_field :organisation_id, class: 'form-control' %>
+      </div>
+
+        <div class="mb-3">
           <%= form.label :description, class: 'form-label' %>
           <%= form.text_area :description, class: 'form-control' %>
         </div>
 
         <div class="mb-3">
-          <%= form.label :date, class: 'form-label' %>
-          <%= form.datetime_field :date, class: 'form-control' %>
+          <%= form.label :start_date, class: 'form-label' %>
+          <%= form.datetime_field :start_date, class: 'form-control' %>
         </div>
 
         <div class="mb-3">
-          <%= form.label :localisation, class: 'form-label' %>
-          <%= form.text_field :localisation, class: 'form-control' %>
-        </div>
+        <%= form.label :end_date, class: 'form-label' %>
+        <%= form.datetime_field :end_date, class: 'form-control' %>
+      </div>
 
         <div class="text-center">
           <%= form.submit 'Create Event', class: 'btn btn-primary' %>

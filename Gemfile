@@ -92,3 +92,4 @@ gem "administrate"
 gem "administrate-field-active_storage"
 
 gem "image_processing"
+gem "faker", "~> 3.2"

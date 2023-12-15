@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
     before_action :set_event, only: [:show, :edit, :update, :destroy]
-    before_action :authenticate_organisation!, only: [:new, :create, :edit, :update]
+    before_action :authenticate_organisation!, only: [:new, :create, :edit, :update], unless: -> { current_user&.admin? }
+
   
     def index
       @organisation = Organisation.find_by(id: params[:organisation_id])
@@ -19,13 +20,24 @@ class EventsController < ApplicationController
       @event = Event.new
     end
   
-    def create
+    def create 
+      if params[:organisation_id]
+        current_organisation = Organisation.find(params[:organisation_id])
+        @event = current_organisation.events.new(name:params[:titre], description:params[:description], organisation_id:params[:organisation_id], start_date:params[:start_date], end_date:params[:end_date])
+        if @event.save
+        redirect_to @event, notice: 'Événement créé avec succès.'
+      else
+        render :new
+      end
+
+      else
       @event = current_organisation.events.new(event_params)
       if @event.save
         redirect_to @event, notice: 'Événement créé avec succès.'
       else
         render :new
       end
+    end
     end
   
   
