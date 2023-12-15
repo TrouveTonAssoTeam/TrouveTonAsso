@@ -2,6 +2,11 @@ class ProfilController < ApplicationController
   before_action :authenticate_user!
   before_action :is_correct_user?, only: [:edit, :update]
 
+  def show
+    @user = current_user
+    @liked_organisations = @user.likes.includes(:organisation).map(&:organisation)
+  end 
+  
     def index
         @user = current_user
         @donations = @user.donations.order(created_at: :desc)
