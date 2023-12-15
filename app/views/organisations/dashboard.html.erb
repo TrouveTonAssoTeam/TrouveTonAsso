@@ -4,7 +4,6 @@
 
 <div class="page-container">
   <div class="content">
-    <!-- Cover photo de l'organisation -->
     <br>
     <% if @organisation.cover_photo.attached? %>
       <div class="cover-photo">
@@ -47,10 +46,11 @@
       <% end %>
     </div>
     <div class="event-buttons text-center">
-      <!-- Ajout d'une div pour les boutons -->
       <div class="button-group">
         <%= link_to "Voir les événements", organisation_events_path(@organisation), class: "btn btn-secondary" %>
-        <a href="/events/new" class="btn btn-secondary">Créer un événement</a>
+        <%= link_to "Créer un événement", new_event_path(@organisation), class: "btn btn-secondary" %>
+        <%= link_to "Voir la cagnotte", cagnotte_path(@organisation), class: "btn btn-secondary" %>
+        <%= link_to "Voir les demandes de retrait", withdrawals_path(@organisation), class: "btn btn-secondary" %>
       </div>
     </div>
   </div>
