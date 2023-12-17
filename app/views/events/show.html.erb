@@ -1,6 +1,6 @@
 <div class="event-details">
   <% if @event.cover_photo.attached? %>
-    <%= image_tag url_for(@event.cover_photo), class: "img-fluid rounded-image" %>
+    <%= image_tag url_for(@event.cover_photo), class: "img-fluid rounded-image", alt: "Couverture d'un event" %>
   <% else %>
     <p>Aucune photo de couverture disponible</p>
   <% end %>
