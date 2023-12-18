@@ -21,7 +21,7 @@
             <td class="text-center"><%= withdrawal.created_at.strftime("%d %B %Y %H:%M") %></td>
             <td class="text-center"><%= withdrawal.cagnotte_status&.status %></td>
             <td class="text-center">
-              <%= link_to "Détails", show_admin_withdrawal_path(withdrawal), style: 'text-decoration: none;' %>
+              <%= link_to "Détails", show_admin_withdrawal_path(withdrawal) %>
             </td>
           </tr>
         </tbody>
