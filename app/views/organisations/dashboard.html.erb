@@ -2,56 +2,40 @@
   <%= stylesheet_link_tag 'organisation.dashboard', media: 'all' %>
 <% end %>
 
-<div class="page-container">
-  <div class="content">
+  <div class="content" style= "width: 600px;">
     <!-- Cover photo de l'organisation -->
     <br>
     <% if @organisation.cover_photo.attached? %>
       <div class="cover-photo">
-        <%= image_tag @organisation.cover_photo, class: "rounded-corner", alt: "Photo de couverture de l'association #{@organisation.name}" %>
+        <%= image_tag @organisation.cover_photo, class: "rounded-corner", alt: "Photo de couverture de l'association #{@organisation.name}", style: "width: 100%; height: auto;" %>
       </div>
     <% end %>
 
     <div class="title">
       <% if @organisation %>
-        <h1>Dashboard</h1>
+        <h1 >Bienvenue,</h1>
         <%= @organisation.name %>
       <% else %>
         <p>Association non trouvée</p>
       <% end %>
     </div>
 
-    <div class="questions-container mb-5">
+    <div class="questions-container mb-5" style="margin-top: 20px;">
       <h3>Vos questions en attente</h3>
       <% if !@questions.empty? %>
         <% @questions.each do |faq| %>
-          <div class="question">
-            <% if faq.user.avatar.attached? %>
-              <%= image_tag faq.user.avatar, class: "card-img-top", alt: "Photo de profil de #{faq.user.name}" %>
-            <% else %>
-              <!-- Placeholder si aucune cover photo n'est attachée -->
-              <%= image_tag "anonymous-user.webp", class: "card-img-top", alt: "Une image de profil d'un utilisateur n'ayant pas défini de photo" %>
-            <% end %>
-            <div class="question-content">
-              <h4><%= faq.user.name %></h4>
-              <p><%= faq.question %></p>
-            </div>
-          </div>
-          <div class="btn-group">
-            <%= link_to "Répondre à la question", answer_faq_organisations_path(faq), class: "btn btn-primary" %>
-            <button class="btn btn-secondary">Signaler la question</button>
-          </div>
+          <!-- ... existing code ... -->
         <% end %>
       <% else %>
         <p>Aucune question en attente</p>
       <% end %>
     </div>
-    <div class="event-buttons text-center">
+
+    <div class="event-buttons text-center" style="margin-top: 20px;">
       <!-- Ajout d'une div pour les boutons -->
-      <div class="button-group">
-        <%= link_to "Voir les événements", organisation_events_path(@organisation), class: "btn btn-secondary" %>
-        <a href="/events/new" class="btn btn-secondary">Créer un événement</a>
+      <div class="button-group" style="text-align: center;">
+        <%= link_to "Voir les événements", organisation_events_path(@organisation), class: "btn btn-secondary", style: "font-size: 16px; padding: 5px 10px; margin-left: 10px; margin-right: 20px; margin-bottom: 10px; width: 200px;" %>
+        <a href="/events/new" class="btn btn-secondary" style="font-size: 16px; padding: 5px 10px; margin-left: 10px; margin-right: 20px; margin-bottom: 10px; width: 200px;">Créer un événement</a>
       </div>
     </div>
   </div>
-</div>
