@@ -1,3 +1,6 @@
+<% content_for :title, "Créer un compte" %>
+<% content_for :meta_description, "Créer un compte chez TrouveTonAsso afin de pouvoir participer aux événements et pouvoir donner aux associations présentes." %>
+
 <div class="card-container">
   <%= link_to new_user_registration_path, class: "card badge-login active" do %>
     Utilisateurs
@@ -30,8 +33,8 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up", class: "btn btn-primary" %>
+  <div class="btn-group">
+    <%= f.submit "S'inscrire", class: "btn btn-primary" %>
   </div>
 <% end %>
 

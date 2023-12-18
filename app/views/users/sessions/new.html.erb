@@ -1,3 +1,6 @@
+<% content_for :title, "Se connecter" %>
+<% content_for :meta_description, "Retrouvez accès à votre profil via cette page de connexion." %>
+
 <div class="card-container">
   <%= link_to new_user_session_path, class: "card badge-login active" do %>
     Utilisateurs
@@ -31,8 +34,8 @@
 
 <br>
 
-<div class="actions" style="text-align: center;">
-  <%= f.submit "Connexion", class: "btn btn-primary", style: "font-size: 16px; padding: 5px 10px; margin: 0 auto;" %>
+<div class="btn-group">
+  <%= f.submit "Connexion", class: "btn btn-primary" %>
 </div>
 <% end %>
 
