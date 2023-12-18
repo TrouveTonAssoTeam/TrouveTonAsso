@@ -1,3 +1,6 @@
+<% content_for :title, "Répondre à la question" %>
+<% content_for :meta_description, "Répondez à la question qu'un utilisateur a posé à votre association" %>
+
 <h1>Répondre à la question</h1>
 
 <%= form_with(model: @faq, url: create_answer_organisations_path(@faq), method: :post, class: "form") do |form| %>

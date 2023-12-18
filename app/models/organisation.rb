@@ -15,7 +15,7 @@ class Organisation < ApplicationRecord
       [address, city, zip].compact.join(', ')
     end
     
-    # Validations
+    # Pas de validates car création en deux temps à cause de Devise
     # validates :name, :description, :city, :address, :zip, presence: true
     
     has_many :donations

@@ -2,6 +2,8 @@
   <%= stylesheet_link_tag 'organisation.show', media: 'all' %>
   <%= stylesheet_link_tag 'reviews', media: 'all' %>
 <% end %>
+<% content_for :title, @organisation.name %>
+<% content_for :meta_description, @organisation.description %>
 
 <% if @organisation && @organisation.is_promoted? %>
   <div class="card card-gold star-promoted" name="Cette association est mise en avant" title="Cette association est mise en avant">
@@ -12,8 +14,8 @@
 <% end %>
 
 <% if @organisation %>
-  <div class="container">
-    <h1 class="mt-4 organisation-name"><strong><%= @organisation.name %></strong></h1>
+  <div class="container" itemscope itemtype="http://schema.org/Organization">
+    <h1 class="mt-4 organisation-name" itemprop="name"><strong><%= @organisation.name %></strong></h1>
 
     <% if @organisation.cover_photo.attached? %>
       <div class="image-container">
@@ -25,10 +27,10 @@
 
     <div class="element">
       <p><strong>Description</strong></p>
-      <p><%= @organisation.description %></p>
+      <p itemprop="description"><%= @organisation.description %></p>
       <p><strong>Ville</strong></p> 
       <p><%= @organisation.city %></p>
-      <p><strong>Adresse</strong></p>
+      <p itemprop="address"><strong>Adresse</strong></p>
       <p><%= @organisation.address %></p> 
 
       <!-- Google Maps API -->
@@ -149,3 +151,7 @@
 <% else %>
   <p>Association non trouvée</p>
 <% end %>
+
+<script type="application/ld+json">
+  <%= organisation_jsonld(@organisation) %>
+</script>
