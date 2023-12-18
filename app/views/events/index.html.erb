@@ -8,7 +8,7 @@
       <% @events.each do |event| %>
         <div class="card">
           <% if event.cover_photo.attached? %>
-            <%= image_tag url_for(event.cover_photo), class: "card-img-top img-fluid rounded-image" %>
+            <%= image_tag url_for(event.cover_photo), class: "card-img-top img-fluid rounded-image", alt: "Photo de couverture event" %>
           <% else %>
             <p class="card-img-top">Aucune photo de couverture disponible</p>
           <% end %>
