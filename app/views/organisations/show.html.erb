@@ -58,24 +58,24 @@
    <!-- Section pour afficher les événements -->
     <h2 class="mt-7"><strong>Événements</strong></h2>
     <hr style="width: 50%; margin-bottom: 30px;">
-<div class="events-container" style="max-width: 100%; margin: 0 auto; max-height: 500px; overflow-y: auto;">
-  <% if @organisation.events.any? %>
-    <% @organisation.events.each do |event| %>
-      <div class="card event-card" style="margin-bottom: 20px; margin-top: 5px; max-width: 90%; max-height: 95%; margin-left: auto; margin-right: auto;">
-        <div class="card-body" style="padding: 10px;">
-          <%= link_to event.name, event_path(event) %>
-          <% if event.start_date > Time.now %>
-            <span style="color: green;">À venir</span>
+    <div class="card-container" style="max-width: 100%; margin: 0 auto; max-height: 500px; overflow-y: auto;">
+      <% if @organisation.events.any? %>
+        <% @organisation.events.each do |event| %>
+          <div class="card event-card" style="margin-bottom: 20px; margin-top: 5px; max-width: 90%; max-height: 95%; margin-left: auto; margin-right: auto;">
+            <div class="card-body" style="padding: 10px;">
+              <%= link_to event.name, event_path(event) %>
+              <% if event.start_date > Time.now %>
+                <span style="color: green;">À venir</span>
+              <% else %>
+                <span style="color: red;">En cours</span>
+              <% end %>
+            </div>
+          </div>
+            <% end %>
           <% else %>
-            <span style="color: red;">En cours</span>
+            <p>Aucun événement trouvé pour cette organisation.</p>
           <% end %>
-        </div>
-      </div>
-        <% end %>
-      <% else %>
-        <p>Aucun événement trouvé pour cette organisation.</p>
-      <% end %>
-</div>
+    </div>
      <!-- Section pour afficher les avis sur les événements de l'association -->
     <% if @organisation.events.any? %>
         <div class="reviews-container">
@@ -95,15 +95,13 @@
                   </div>
                 <% end %>
               </div>
+            <% else %>
+              <p>Aucun avis pour l'événement <%= event.name %>.</p>
             <% end %>
           <% end %>
         </div>
-      <% else %>
-        <p>Aucun avis pour l'événement <%= event.name %>.</p>
-      <% end %>
     <% end %>
-  </div>
-<% end %>
+
   <h2 class="mt-7"> FAQ </h2>
     <% if !@faqs.empty? %>
       <div class="faq-container">
