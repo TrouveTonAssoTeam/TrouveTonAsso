@@ -56,6 +56,7 @@
       <div class="button-group">
         <%= link_to "Vos événements", organisation_events_path(@organisation), class: "btn btn-secondary", style: "font-size: 16px; padding: 5px 10px; margin-left: 10px; margin-right: 20px; margin-bottom: 10px;" %>
         <%= link_to "Créer un événement", new_event_path(@organisation), class: "btn btn-secondary", style: "font-size: 16px; padding: 5px 10px; margin-left: 10px; margin-right: 20px; margin-bottom: 10px;" %>
+        <%= link_to "Modifier page profil", edit_organisation_path(@organisation), class: "btn btn-secondary" %>
         <%= link_to "Voir la cagnotte", cagnotte_path(@organisation), class: "btn btn-secondary", style: "font-size: 16px; padding: 5px 10px; margin-left: 10px; margin-right: 20px; margin-bottom: 10px;" %>
         <%= link_to "Vos demandes de retrait", withdrawals_path(@organisation), class: "btn btn-secondary", style: "font-size: 16px; padding: 5px 10px; margin-left: 10px; margin-right: 20px; margin-bottom: 10px;" %>
       </div>
