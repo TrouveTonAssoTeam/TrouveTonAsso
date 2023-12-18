@@ -1,33 +1,37 @@
 <% content_for :head do %>
   <%= stylesheet_link_tag 'organisation.index', media: 'all' %>
 <% end %>
+<% content_for :title, "Liste des associations" %>
+<% content_for :meta_description, "Retrouvez la liste complette des associations présentes sur TrouveTonAsso, et peut-être trouver la future association qui vous fera de l'oeil" %>
 
 <div class="page-container">
   <div class="content">
     <% if @organisations.any? %>
-    <div class="association-list">
-      <h1>Liste des associations</h1>
-    </div>
-    <br>
-    <div class="association-cards">
-      <% @organisations.each do |organisation| %>
-        <div class="association-card">
-          <!-- Cover photo de l'association -->
-          <% if organisation.cover_photo.attached? %>
-            <%= image_tag organisation.cover_photo, class: "card-img-top", alt: organisation.name %>
-          <% else %>
-            <!-- Placeholder si aucune cover photo n'est attachée -->
-            <%= image_tag "placeholder-image.png", class: "card-img-top", alt: "Placeholder" %>
-          <% end %>
-          <div class="card-body">
-            <!-- Nom de l'association -->
-            <h5 class="card-title"><strong><%= organisation.name %></strong></h5>
-            <!-- Bouton "Voir plus" -->
-            <%= link_to "Voir plus", organisation_path(organisation), class: "btn btn-primary" %>
+      <div class="association-list">
+        <h1>Liste des associations</h1>
+      </div>
+      <br>
+      <div class="association-cards" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+        <% @organisations.each do |organisation| %>
+          <div class="association-card" style="width: 300px; height: 400px; box-sizing: border-box; margin-bottom: 20px;">
+            <!-- Cover photo de l'association -->
+            <% if organisation.cover_photo.attached? %>
+              <%= image_tag organisation.cover_photo, class: "card-img-top", alt: organisation.name, style: "width: 100%; height: 200px; object-fit: contain; object-position: center;" %>
+            <% else %>
+              <!-- Placeholder si aucune cover photo n'est attachée -->
+              <%= image_tag "placeholder-image.png", class: "card-img-top", alt: "Placeholder", style: "width: 100%; height: 200px; object-fit: contain; object-position: center;" %>
+            <% end %>
+            <div class="card-body">
+              <!-- Nom de l'association -->
+              <h5 class="card-title"><strong><%= organisation.name %></strong></h5>
+              <!-- Bouton "Voir plus" -->
+              <div class="actions" style="text-align: center;">
+                <%= link_to "Voir plus", organisation_path(organisation), class: "btn btn-primary", style: "font-size: 16px; padding: 5px 10px; margin: 0 auto; width: 100px;" %>
+              </div>
+            </div>
           </div>
-        </div>
-      <% end %>
-    </div>
+        <% end %>
+      </div>
     <% else %>
       <p>Aucune association trouvée</p>
     <% end %>

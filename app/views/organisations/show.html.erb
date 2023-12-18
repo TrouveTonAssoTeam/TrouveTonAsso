@@ -2,6 +2,8 @@
   <%= stylesheet_link_tag 'organisation.show', media: 'all' %>
   <%= stylesheet_link_tag 'reviews', media: 'all' %>
 <% end %>
+<% content_for :title, @organisation.name %>
+<% content_for :meta_description, @organisation.description %>
 
 <% if @organisation && @organisation.is_promoted? %>
   <div class="card card-gold star-promoted" name="Cette association est mise en avant" title="Cette association est mise en avant">
@@ -12,8 +14,8 @@
 <% end %>
 
 <% if @organisation %>
-  <div class="container">
-    <h1 class="mt-4 organisation-name"><strong><%= @organisation.name %></strong></h1>
+  <div class="container" itemscope itemtype="http://schema.org/Organization">
+    <h1 class="mt-4 organisation-name" itemprop="name"><strong><%= @organisation.name %></strong></h1>
 
     <% if @organisation.cover_photo.attached? %>
       <div class="image-container">
@@ -25,10 +27,10 @@
 
     <div class="element">
       <p><strong>Description</strong></p>
-      <p><%= @organisation.description %></p>
+      <p itemprop="description"><%= @organisation.description %></p>
       <p><strong>Ville</strong></p> 
       <p><%= @organisation.city %></p>
-      <p><strong>Adresse</strong></p>
+      <p itemprop="address"><strong>Adresse</strong></p>
       <p><%= @organisation.address %></p> 
 
       <!-- Google Maps API -->
@@ -55,48 +57,50 @@
     </div>
 
    <!-- Section pour afficher les événements -->
-    <h2><strong>Événements</strong></h2>
-    <div class="events-container">
-      <% if @organisation.events.any? %>
-        <% @organisation.events.each do |event| %>
-          <div class="card event-card">
-            <div class="card-body">
-              <%= link_to event.name, event_path(event) %>
-              <% if event.start_date > Time.now %>
-                <span style="color: green;">À venir</span>
-              <% else %>
-                <span style="color: red;">En cours</span>
-              <% end %>
-            </div>
-          </div>
+    <h2 style="text-align: center;"><strong>Événements</strong></h2>
+    <hr style="width: 50%; margin-bottom: 30px;">
+<div class="events-container" style="max-width: 100%; margin: 0 auto; max-height: 500px; overflow-y: auto;">
+  <% if @organisation.events.any? %>
+    <% @organisation.events.each do |event| %>
+      <div class="card event-card" style="margin-bottom: 20px; margin-top: 5px; max-width: 90%; max-height: 95%; margin-left: auto; margin-right: auto;">
+        <div class="card-body" style="padding: 10px;">
+          <%= link_to event.name, event_path(event) %>
+          <% if event.start_date > Time.now %>
+            <span style="color: green;">À venir</span>
+          <% else %>
+            <span style="color: red;">En cours</span>
+          <% end %>
+        </div>
+      </div>
         <% end %>
       <% else %>
         <p>Aucun événement trouvé pour cette organisation.</p>
       <% end %>
-    </div>
+</div>
      <!-- Section pour afficher les avis sur les événements de l'association -->
     <% if @organisation.events.any? %>
-  <div class="reviews-container">
-    <h2><strong>Derniers avis sur les événements de l'association</strong></h2>
-    <% @organisation.events.each do |event| %>
-      <% if event.reviews.any? %>
-        <div class="event-reviews">
-          <h3><i>Avis pour l'événement <%= event.name %></i></h3>
-          <% event.reviews.each do |review| %>
-            <div class="review-card">
-              <div class="review-info">
-                <strong>Utilisateur ID :</strong> <%= review.user_id %><br>
-                <strong>Description :</strong> <%= review.body %><br>
-                <strong>Note :</strong> <%= review.rating %> &#9733;<br>
+        <div class="reviews-container">
+          <h2 style="text-align: center;"><strong>Derniers avis sur les événements de l'association</strong></h2>
+          <hr style="width: 50%; margin-bottom: 30px;">
+          <% @organisation.events.each do |event| %>
+            <% if event.reviews.any? %>
+              <div class="event-reviews">
+                <h3><i>Avis pour l'événement <%= event.name %></i></h3>
+                <% event.reviews.each do |review| %>
+                  <div class="review-card">
+                    <div class="review-info">
+                      <strong>Utilisateur ID :</strong> <%= review.user_id %><br>
+                      <strong>Description :</strong> <%= review.body %><br>
+                      <strong>Note :</strong> <%= review.rating %> &#9733;<br>
+                    </div>
+                  </div>
+                <% end %>
               </div>
-            </div>
+            <% end %>
           <% end %>
         </div>
-      <% end %>
     <% end %>
-  </div>
-<% end %>
-  <h1> Questions-réponses </h1>
+  <h1 style="text-align: center;"> FAQ </h1>
     <% if !@faqs.empty? %>
       <div class="faq-container">
         <% @faqs.each do |faq| %>
@@ -126,7 +130,6 @@
                   <p><%= faq.question %></p>
                 </div>
               </div>
-              <%= link_to "Ajouter une question", new_organisation_faq_path(organisation_id: @organisation.id), class: "btn btn-primary" %>
             </div>
           <% end %>
         <% end %>
@@ -134,11 +137,21 @@
     <% else %>
       <p>Aucune question.</p>
     <% end %>
-    <%= link_to "Ajouter une question", new_organisation_faq_path(organisation_id: @organisation.id), class: "btn btn-primary" %>
+    <div class="actions" style="text-align: center;">
+      <%= link_to "Ajouter une question", new_organisation_faq_path(organisation_id: @organisation.id), class: "btn btn-primary", style: "font-size: 16px; padding: 5px 10px; margin: 0 auto; width: 200px;" %>
+    </div>
     <!-- Section pour faire un don à l'association -->
-    <h2><strong>Faites un don à <%= @organisation.name %></strong></h2>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2 style="text-align: center;"><strong>Faites un don à <%= @organisation.name %></strong></h2>
     <%= render 'shared/donate_button', association: @organisation %>
   </div>
 <% else %>
   <p>Association non trouvée</p>
 <% end %>
+
+<script type="application/ld+json">
+  <%= organisation_jsonld(@organisation) %>
+</script>
