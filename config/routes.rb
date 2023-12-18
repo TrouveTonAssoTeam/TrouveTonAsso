@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :promoteds
       resources :users
       resources :attendances
+      resources :withdrawals
 
       root to: "attendances#index"
     end
