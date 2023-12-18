@@ -99,6 +99,9 @@ class UserDashboard < Administrate::BaseDashboard
   #     open: ->(resources) { resources.where(open: true) }
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
+  
+
+
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
