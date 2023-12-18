@@ -1,98 +1,98 @@
 .card {
-    background-color: var(--background-card-color);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    backdrop-filter: var(--background-blur);
-    border: 1px solid;
-    border-color: var(--border-color);
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    flex: 1 200px;
-    justify-content: center;
+  background-color: var(--background-card-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  backdrop-filter: var(--background-blur);
+  border: 1px solid;
+  border-color: var(--border-color);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1 200px;
+  justify-content: center;
 }
 .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 1rem;
 }
 .inline-card-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 1rem;
-    overflow: auto;
-    padding: 1.5rem;
-    margin: 2rem 0 5rem 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  overflow: auto;
+  padding: 1.5rem;
+  margin: 2rem 0 5rem 0;
 }
 .inline-card-container .card {
-    justify-content: start;
-    max-width: 250px;
-    max-height: 350px;
-    overflow-y: auto;
-    flex-shrink: 0;
-    text-decoration: none;
-    color: var(--primary-color);
-    text-align: center;
+  justify-content: start;
+  max-width: 250px;
+  max-height: 350px;
+  overflow-y: auto;
+  flex-shrink: 0;
+  text-decoration: none;
+  color: var(--primary-color);
+  text-align: center;
 }
 .inline-card-container .card h4 {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 .inline-card-container .card p {
-    margin: 0;
+  margin: 0;
 }
 .inline-card-container .card p::first-letter {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 .inline-card-container > .card-gold {
-    background: var(--background-gold-color);
-    color: white;
+  background: var(--background-gold-color);
+  color: white;
 }
 .inline-card-container .card-img-top img {
-    width: 100%;
-    background-color: var(--background-card-color);
-    border-radius: var(--border-radius);
+  width: 100%;
+  background-color: var(--background-card-color);
+  border-radius: var(--border-radius);
 }
 .card-gold {
-    border-color: var(--gold-color);
-    background-color: var(--background-gold-color);
-    color: white;
-    text-shadow: 0 1px 4px #00000042;
-    background: url("gold-background-texture-gradients-shadow.jpg") repeat;
-    background-size: cover;
+  border-color: var(--gold-color);
+  background-color: var(--background-gold-color);
+  color: white;
+  text-shadow: 0 1px 4px #00000042;
+  background: url("gold-background-texture-gradients-shadow.jpg") repeat;
+  background-size: cover;
 }
 .card-body {
-    text-align: center;
+  text-align: center;
 }
 .card-body p {
-    margin-top: 0.2rem;
-    margin-bottom: 0.2rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
 }
 .card-body a {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 .star-promoted {
-    width: fit-content;
-    padding: 0.75rem;
+  width: fit-content;
+  padding: 0.75rem;
 }
 .star-promoted > svg {
-    filter: drop-shadow(0 1px 4px #00000042);
+  filter: drop-shadow(0 1px 4px #00000042);
 }
 
 .badge-login {
-    flex: 1 fit-content;
-    text-align: center;
-    padding: 0.6rem;
-    text-decoration: none;
-    color: var(--primary-color);
-    opacity: 0.7;
-    transition: all 0.2s ease-in-out;
+  flex: 1 fit-content;
+  text-align: center;
+  padding: 0.6rem;
+  text-decoration: none;
+  color: var(--primary-color);
+  opacity: 0.7;
+  transition: all 0.2s ease-in-out;
 }
 .badge-login.active {
-    background-color: var(--primary-color);
-    color: white;
+  background-color: var(--primary-color);
+  color: white;
 }
 .badge-login:hover {
-    opacity: 1;
+  opacity: 1;
 }
