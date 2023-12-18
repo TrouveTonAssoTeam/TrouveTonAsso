@@ -6,7 +6,7 @@
         <h1>Vos informations</h1>
         <p><strong>Email :</strong> <%= @user.email %></p>
         <p><strong>Mot de passe :</strong> ********</p>
-        <%= link_to "Changer de mot de passe", edit_user_registration_path(@user),style: "text-decoration: none; font-size: 0.9em;" %>
+        <%= link_to "Changer de mot de passe", edit_user_registration_path(@user),style: " font-size: 0.9em;" %>
 
         <% if @user.avatar.attached? %>
             <div class="form text-center">
@@ -17,7 +17,7 @@
         <p><strong>Prénom :</strong> <%= @user.first_name %></p>
         <p><strong>Nom :</strong> <%= @user.last_name %></p>
 
-        <%= link_to "Editer", edit_profil_path(@user),style: "text-decoration: none; font-size: 0.9em;" %>
+        <%= link_to "Editer", edit_profil_path(@user),style: " font-size: 0.9em;" %>
 
         <br>
         <br>
@@ -27,7 +27,7 @@
         <%= link_to "Supprimer le compte", registration_path(@user), 
             data: { confirm: "Êtes-vous sûr ?", turbo_confirm: "Êtes-vous sûr ?", turbo_method: :delete }, 
             method: :delete, 
-            style: "text-decoration: none; font-size: 0.8em; color: #777;" %>
+            style: " font-size: 0.8em; color: #777;" %>
 
     </div>
     <div class="card card-body">
@@ -54,8 +54,10 @@
                 </table>
             </div>
         <% else %>
+        <div class=placeholder-text style= "text-center">
             <p>Vous n'avez aucun don pour le moment.</p>
             <p>N'hésitez pas à faire un don sur la page d'une association !</p>
+        </div>
         <% end %>
     </div>
     <div class="card card-body">
@@ -75,7 +77,9 @@
                 <% end %>
             </div>
         <% else %>
+        <div class=placeholder-text style= "text-center">
             <p>Vous n'avez aucune association likée pour le moment.</p>
+        </div>
         <% end %>
     </div>
 </div>
