@@ -93,7 +93,7 @@ Rails.application.routes.draw do
     end
   end 
 
-  resources :withdrawals, only: [:index] do
+  resources :withdrawals, only: [:index ] do
     collection do
       get :admin_withdraw
     end
