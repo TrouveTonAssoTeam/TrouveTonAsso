@@ -16,7 +16,8 @@ end
 # Créer un admin
 User.create!(
   email: 'test@admin.com',
-  password: 'password'
+  password: 'password',
+  admin: true
 )
 
 # Créer 10 véritables associations

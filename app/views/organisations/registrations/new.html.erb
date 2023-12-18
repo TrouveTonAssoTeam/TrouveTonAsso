@@ -1,3 +1,6 @@
+<% content_for :title, "Finalisation de l'inscription" %>
+<% content_for :meta_description, "Afin de terminer l'inscription de votre association, vous devez définir un email et un mot de passe." %>
+
 <h2 class="text-center">Définissez un email et un mot de passe</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form' }) do |f| %>
@@ -36,5 +39,5 @@
     <%= f.password_field :password_confirmation, autocomplete: 'new-password', placeholder: 'Confirm Password', required: true %>
   </div>
 
-  <%= f.submit 'Sign up', class: 'btn btn-primary' %>
+  <%= f.submit "S'inscrire", class: 'btn btn-primary' %>
 <% end %>
