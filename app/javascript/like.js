@@ -1,9 +1,11 @@
 // Javascript pour faire allumer mon bouton
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("turbo:load", likeAnimation());
+
+function likeAnimation() {
     // Récupération des boutons
     var likeButtons = document.querySelectorAll("like-btn");
-
+    
     // Ajout d'un écouteur d'évènement sur chaque bouton
     likeButtons.forEach(function (button) {
         button.addEventListener("click", function () {
@@ -11,4 +13,4 @@ document.addEventListener("DOMContentLoaded", function () {
             button.classList.toggle("active");
         });
     });
-});
+}

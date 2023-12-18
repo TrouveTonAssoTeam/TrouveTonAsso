@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("turbo:load", handleCloseBtn());
+
+function handleCloseBtn() {
     document.querySelectorAll(".alert .close").forEach((btn) => {
         btn.addEventListener("click", (event) => {
             event.preventDefault();
@@ -8,4 +10,4 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 250);
         });
     });
-});
+}

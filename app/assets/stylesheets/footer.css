@@ -16,12 +16,16 @@ footer.footer .container {
     gap: 1.5rem;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 1120px) {
     footer.footer .container {
         justify-content: center;
+        flex-direction: column;
     }
     footer.footer .container .site-info {
         text-align: center;
+    }
+    footer.footer .footer-nav {
+        justify-content: center;
     }
 }
 

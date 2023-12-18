@@ -65,7 +65,7 @@
         <% if !@likes.empty? %>
             <div class="card-container">
                 <% @likes.each do |orga| %>
-                    <div class="card">
+                    <div class="card card-with-like">
                         <%= button_to unlike_asso_path(orga), method: :post, class: 'like-btn active', form: {class: 'like-btn-container'} do %>
                             <ion-icon name="heart">
                             <div class='red-bg'></div>

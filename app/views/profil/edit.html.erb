@@ -48,7 +48,10 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', updateAvatarPreview());
+  document.addEventListener('turbo:load', updateAvatarPreview());
+
+  function updateAvatarPreview() {
     const avatarInput = document.getElementById('avatar-input');
     const avatarPreview = document.getElementById('avatar-preview');
 
@@ -67,5 +70,5 @@
         avatarPreview.style.display = 'none';
       }
     });
-  });
+  }
 </script>
