@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <title>TrouveTonAsso</title>
+    <title>
+      <% if content_for?(:title) %>
+        TrouveTonAsso | <%= yield :title %>
+      <% else %>
+        TrouveTonAsso
+      <% end %>
+    </title>
+    <% if content_for?(:descirption) %>
+      <meta name="description" content="<%= yield :description %>">
+    <% end %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="Content-Language" content="fr">
     <%= csrf_meta_tags %>

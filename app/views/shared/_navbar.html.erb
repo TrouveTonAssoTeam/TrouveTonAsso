@@ -11,14 +11,19 @@
             <span class="bar"></span>
         </div>
         <div class="navbar-links">
-            <%= link_to "Home", root_path, class: "#{is_active?(root_path)}" %>
+            <%= link_to "Accueil", root_path, class: "#{is_active?(root_path)}" %>
             <%= link_to "Associations", organisations_path, class: "#{is_active?(organisations_path)}" %>
             <%= link_to "Contact", contact_path, class: "#{is_active?(contact_path)}" %>
             <%= link_to "A propos", about_path, class: "#{is_active?(about_path)}" %>
 
+
         <% if user_signed_in? || organisation_signed_in? %>
             <% if user_signed_in? %>
-                <%= link_to "Profil", profil_index_path, class: "#{is_active?(profil_index_path)}" %>      
+                <% if current_user.admin? %>
+                    <%= link_to "AdminBoard", admin_root_path %>
+                <% else %>
+                    <%= link_to "Profil", profil_index_path, class: "#{is_active?(profil_index_path)}" %>
+                <% end %>
                 <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete, data: {turbo_method: :delete, turbo_confirm: "Etes-vous sur de vouloir vous deconnecter ?"} %>
             <% elsif organisation_signed_in? %>
                 <%= link_to "Dashboard", dashboard_organisations_path, class: "#{is_active?(dashboard_organisations_path)}" %>
@@ -27,7 +32,7 @@
         
         <% else %>
 
-            <%= link_to "Se connecter", new_user_session_path, class: "#{is_active?(new_user_session_path)}" %>
+            <%= link_to "Se connecter", new_user_session_path, class: "#{is_active?(new_user_session_path, new_organisation_session_path)}" %>
 
         <% end %>
         </div>

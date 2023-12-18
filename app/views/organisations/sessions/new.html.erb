@@ -1,3 +1,6 @@
+<% content_for :title, "Se connecter" %>
+<% content_for :meta_description, "Retrouvez accès à votre association via cette page de connexion." %>
+
 <div class="card-container">
   <%= link_to new_user_session_path, class: "card badge-login" do %>
     Utilisateurs
@@ -6,6 +9,8 @@
     Associations
   <% end %>
 </div>
+
+<br>
 
 <h2 class="text-center">Se connecter</h2>
 
@@ -23,12 +28,14 @@
   <% if devise_mapping.rememberable? %>
     <div class="field text-center">
       <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.label :remember_me, "Rester connecté" %>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Se connecter", class: "btn btn-primary" %>
+<br>
+
+  <div class="btn-group">
+    <%= f.submit "Connexion", class: "btn btn-primary" %>
   </div>
 <% end %>
 

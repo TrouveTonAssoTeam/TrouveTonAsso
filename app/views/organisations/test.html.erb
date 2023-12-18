@@ -1,3 +1,6 @@
+<% content_for :title, "Inscrire son association" %>
+<% content_for :meta_description, "Afin de créer un compte pour votre association, vous devez fournir le numéro SIREN ou RNA de votre association. Vous pourrez par la suite accéder au site TrouveTonAsso pour rentrer en contact avec de potentiels donateurs ou bénévoles." %>
+
 <div class="card-container">
   <%= link_to new_user_registration_path, class: "card badge-login" do %>
     Utilisateurs
@@ -16,8 +19,10 @@
   
   <%= f.text_field :id, placeholder: 'SIREN ou n° RNA' %>
 
-  <%= f.submit 'Sign up', class: 'btn btn-primary' %>
+  <%= f.submit "S'inscire", class: 'btn btn-primary' %>
 
-  <%= link_to "Vous êtes deja inscrit ?", new_organisation_session_path %>
-  <%= link_to "Vous êtes un utilisateur ? Inscrivez-vous", new_user_registration_path %>
+  <div class="text-center">
+    <%= link_to "Vous êtes deja inscrit ?", new_organisation_session_path %><br>
+    <%= link_to "Vous êtes un utilisateur ? Inscrivez-vous", new_user_registration_path %>
+  </div>
 <% end %>

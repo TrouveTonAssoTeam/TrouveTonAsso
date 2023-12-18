@@ -1,3 +1,6 @@
+<% content_for :title, "Cagnotte" %>
+<% content_for :meta_description, "Retrouvez ici le montant de la cagnotte de votre association et faites des demandes de virement afin de récupérer l'ensemble de vos dons." %>
+
 <h1 class="text-center">Bonjour, <em><strong><%= @organisation.name %></strong></em> !</h1>
 
 <% if @cagnotte.present? %>
@@ -10,17 +13,17 @@
       <div style="margin-bottom: 5px; text-align: center;">
         <%= form_with(model: Withdrawal.new, url: process_withdrawal_cagnotte_path(@cagnotte), data: { turbo: false }) do |form| %>
           <%= form.label :Montant %>
-          <%= form.number_field :amount, step: 'any', style: 'width: 100%; padding: 5px; box-sizing: border-box; border-radius: 10px' %>
+          <%= form.number_field :amount, step: 'any', min: 0, style: 'width: 100%; padding: 5px; box-sizing: border-box; border-radius: 10px', required: true %>
           
         <div style="text-align: center; margin-top: 30px;">
-          <%= form.submit 'Confirmer', class: 'btn btn-primary', style: 'width: auto; height: 30px; margin: 0 auto;' %>
+          <%= form.submit 'Confirmer', class: 'btn btn-primary', style: "font-size: 16px; padding: 5px 10px; margin: 0 auto;" %>
         </div>
         <% end %>
       </div>
     </div>
 
   <div style="text-align: center; margin-top: 30px;">
-    <%= link_to "Historique des Retraits", withdrawals_path, style: 'text-decoration: none;' %>
+    <%= link_to "Historique des Retraits", withdrawals_path %>
   </div>
 <br>
 
@@ -32,7 +35,7 @@
       <table class="text-center">
         <thead>
           <tr>
-            <th class="text-center" >Montant</th>
+            <th class="text-center">Montant</th>
             <th class="text-center">Donateur</th>
             <th class="text-center">Date</th>
           </tr>
@@ -41,7 +44,7 @@
           <tr>
             <td class="text-center"><%= number_to_currency(donation.no_tip, unit: '€') %></td>
             <td class="text-center">
-              <%= donation.user.first_name %>.<%= donation.user.last_name.first %>
+              <%= donation.user.name %>
             </td>
             <td class="text-center"><%= donation.created_at.strftime("%d %B %Y %H:%M") %></td>
           </tr>
@@ -62,9 +65,9 @@
 <br>
 <br>
 <div style="text-align: center; margin-top: 10px;">
-  <%= link_to "Retour à l'accueil", root_path, style: 'text-decoration: none;' %>
+  <%= link_to "Retour à l'accueil", root_path %>
 </div>
 <br>
 <div style="text-align: center; margin-top: 10px;">
-  <%= link_to "Retour à votre dashboard", dashboard_organisations_path, style: 'text-decoration: none;' %>
+  <%= link_to "Retour à votre dashboard", dashboard_organisations_path %>
 </div>

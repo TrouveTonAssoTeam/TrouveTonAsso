@@ -30,6 +30,10 @@ class User < ApplicationRecord
     UserMailer.welcome_email(self).deliver_now
   end
 
+  def admin?
+    self.admin # Cet attribut doit être présent dans votre modèle User pour déterminer le statut d'administrateur
+  end
+
   def name
     if self.first_name && self.last_name
       return self.first_name + " " + self.last_name.slice(0,1).upcase + "."

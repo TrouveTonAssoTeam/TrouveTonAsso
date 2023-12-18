@@ -1,3 +1,6 @@
+<% content_for :title, "Modifier les informations de #{@organisation.name}" %>
+<% content_for :meta_description, "Modifier les informations publiques de votre association en personalisant son nom, sa decription, sa photo de couverture ou même sa localisation." %>
+
 <%= form_for @organisation, url: organisation_path(Organisation.find(params[:id])), method: :patch, html: { class: "form", multipart: true } do |f| %>
 
   <div class="field">

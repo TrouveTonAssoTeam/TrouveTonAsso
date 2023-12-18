@@ -34,6 +34,7 @@
 }
 .form input[type="submit"] {
     margin-top: 0.5rem;
+    padding: 0.5rem 0.75rem;
 }
 
 .form input:disabled,

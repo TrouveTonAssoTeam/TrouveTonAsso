@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :promoteds
       resources :users
       resources :attendances
+      resources :withdrawals
 
       root to: "attendances#index"
     end
@@ -93,7 +94,7 @@ Rails.application.routes.draw do
     end
   end 
 
-  resources :withdrawals, only: [:index] do
+  resources :withdrawals, only: [:index ] do
     collection do
       get :admin_withdraw
     end
