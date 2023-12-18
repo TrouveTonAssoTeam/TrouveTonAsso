@@ -1,3 +1,6 @@
+<% content_for :title, "Changement de mot de passe" %>
+<% content_for :meta_description, "Changez votre mot de passe pour vous connecter." %>
+
 <h2 class="text-center">Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form" }) do |f| %>
