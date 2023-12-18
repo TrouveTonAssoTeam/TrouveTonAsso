@@ -4,24 +4,23 @@
 <% content_for :title, "Dashboard de l'association" %>
 <% content_for :meta_description, "Ici vous pouvez gérer votre association, programmer des évènements, voir les derniers avis sur les évènements de l'association, ou même répondre aux questions posées par la communauté" %>
 
-
-  <div class="content" style= "width: 600px;">
-    <!-- Cover photo de l'organisation -->
-    <br>
-    <% if @organisation.cover_photo.attached? %>
-      <div class="cover-photo">
-        <%= image_tag @organisation.cover_photo, class: "rounded-corner", alt: "Photo de couverture de l'association #{@organisation.name}", style: "width: 100%; height: auto;" %>
-      </div>
-    <% end %>
-
-    <div class="title">
-      <% if @organisation %>
-        <h1 >Bienvenue,</h1>
-        <%= @organisation.name %>
-      <% else %>
-        <p>Association non trouvée</p>
-      <% end %>
+<div class="content">
+  <!-- Cover photo de l'organisation -->
+  <br>
+  <% if @organisation.cover_photo.attached? %>
+    <div class="cover-photo">
+      <%= image_tag @organisation.cover_photo, class: "rounded-corner", alt: "Photo de couverture de l'association #{@organisation.name}", style: "width: 100%; height: auto;" %>
     </div>
+  <% end %>
+
+  <div class="title">
+    <% if @organisation %>
+      <h1>Bienvenue,</h1>
+      <%= @organisation.name %>
+    <% else %>
+      <p>Association non trouvée</p>
+    <% end %>
+  </div>
 
     <div class="questions-container mb-5" style="margin-top: 20px;">
       <h3>Vos questions en attente</h3>
@@ -33,13 +32,19 @@
         <p>Aucune question en attente</p>
       <% end %>
     </div>
+
+
     <div class="event-buttons text-center" style="margin-top: 20px;">
-      <%= link_to "Voir les événements", organisation_events_path(@organisation), class: "btn btn-secondary" %>
+      <!-- Ajout d'une div pour les boutons -->
+      <div class="button-group" style="text-align: center;">
+        <%= link_to "Voir les événements", organisation_events_path(@organisation), class: "btn btn-secondary", style: "font-size: 16px; padding: 5px 10px; margin-left: 10px; margin-right: 20px; margin-bottom: 10px; width: 200px;" %>
+        <a href="/events/new" class="btn btn-secondary" style="font-size: 16px; padding: 5px 10px; margin-left: 10px; margin-right: 20px; margin-bottom: 10px; width: 200px;">Créer un événement</a>
+    <div class="event-buttons text-center">
+      <div class="button-group">
+        <%= link_to "Voir les événements", organisation_events_path(@organisation), class: "btn btn-secondary" %>
         <%= link_to "Créer un événement", new_event_path(@organisation), class: "btn btn-secondary" %>
-         <%= link_to "Modifier page profil", edit_organisation_path(@organisation), class: "btn btn-secondary" %>
         <%= link_to "Voir la cagnotte", cagnotte_path(@organisation), class: "btn btn-secondary" %>
         <%= link_to "Voir les demandes de retrait", withdrawals_path(@organisation), class: "btn btn-secondary" %>
-      <div class="button-group">
       </div>
     </div>
   </div>
