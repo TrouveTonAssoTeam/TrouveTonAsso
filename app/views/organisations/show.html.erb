@@ -22,7 +22,7 @@
         <%= image_tag @organisation.cover_photo, class: "img-fluid rounded-custom", alt: "Photo de couverture de l'association #{@organisation.name}" %>
       </div>
     <% else %>
-      <p>Aucune photo de couverture pour cette association</p>
+      <p style="text-align: center;">Aucune photo de couverture pour cette association</p>
     <% end %>
 
     <div class="element">
@@ -74,7 +74,7 @@
       </div>
         <% end %>
       <% else %>
-        <p>Aucun événement trouvé pour cette organisation.</p>
+        <p style="text-align: center;">Aucun événement trouvé pour cette organisation.</p>
       <% end %>
 </div>
      <!-- Section pour afficher les avis sur les événements de l'association -->
@@ -135,7 +135,7 @@
         <% end %>
       </div>
     <% else %>
-      <p>Aucune question.</p>
+      <p style="text-align: center;">Aucune question.</p>
     <% end %>
     <div class="actions" style="text-align: center;">
       <%= link_to "Ajouter une question", new_organisation_faq_path(organisation_id: @organisation.id), class: "btn btn-primary", style: "font-size: 16px; padding: 5px 10px; margin: 0 auto; width: 200px;" %>
@@ -149,7 +149,7 @@
     <%= render 'shared/donate_button', association: @organisation %>
   </div>
 <% else %>
-  <p>Association non trouvée</p>
+  <p style="text-align: center;">Association non trouvée</p>
 <% end %>
 
 <script type="application/ld+json">
