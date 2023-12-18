@@ -2,6 +2,7 @@ require "administrate/base_dashboard"
 
 class WithdrawalDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
+
   # a hash that describes the type of each of the model's fields.
   #
   # Each different type represents an Administrate::Field object,
@@ -62,6 +63,7 @@ class WithdrawalDashboard < Administrate::BaseDashboard
   #     open: ->(resources) { resources.where(open: true) }
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
+   
 
   # Overwrite this method to customize how withdrawals are displayed
   # across all pages of the admin dashboard.

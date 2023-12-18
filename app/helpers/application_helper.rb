@@ -1,6 +1,6 @@
 module ApplicationHelper
-    def is_active?(link_path)
-        current_page?(link_path) ? "active" : ""
+    def is_active?(*paths)
+        paths.include?(request.path) ? 'active' : ''
     end
 
     def organisation_jsonld(organisation)

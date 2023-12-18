@@ -4,9 +4,9 @@
 <div class="card-container">
     <div class="card card-body">
         <h1>Vos informations</h1>
-        <p>Email : <%= @user.email %></p>
-        <p>Mot de passe : ********</p>
-        <%= link_to "Modifier le mot de passe", edit_user_registration_path(@user) %>
+        <p><strong>Email :</strong> <%= @user.email %></p>
+        <p><strong>Mot de passe :</strong> ********</p>
+        <%= link_to "Changer de mot de passe", edit_user_registration_path(@user),style: "text-decoration: none; font-size: 0.9em;" %>
 
         <% if @user.avatar.attached? %>
             <div class="form text-center">
@@ -14,13 +14,21 @@
             <p>Photo de profil</p>
             </div>
         <% end %>
-        <p>Prénom : <%= @user.first_name %></p>
-        <p>Nom : <%= @user.last_name %></p>
+        <p><strong>Prénom :</strong> <%= @user.first_name %></p>
+        <p><strong>Nom :</strong> <%= @user.last_name %></p>
 
-        <%= link_to "Editer le profil", edit_profil_path(@user) %>
+        <%= link_to "Editer", edit_profil_path(@user),style: "text-decoration: none; font-size: 0.9em;" %>
 
-        <h4>Mécontent de votre profil ?</h4>
-        <%= link_to "Supprimer le compte", registration_path(@user), data: { confirm: "Êtes-vous sûr ?", turbo_confirm: "Êtes-vous sûr ?", turbo_method: :delete }, method: :delete %>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <%= link_to "Supprimer le compte", registration_path(@user), 
+            data: { confirm: "Êtes-vous sûr ?", turbo_confirm: "Êtes-vous sûr ?", turbo_method: :delete }, 
+            method: :delete, 
+            style: "text-decoration: none; font-size: 0.8em; color: #777;" %>
+
     </div>
     <div class="card card-body">
         <h1>Historique de vos dons</h1>
