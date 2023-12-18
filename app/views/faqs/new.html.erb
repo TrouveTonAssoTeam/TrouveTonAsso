@@ -1,3 +1,6 @@
+<% content_for :title, "Poser votre question" %>
+<% content_for :meta_description, "Posez votre question, votre intérrogation à #{@organisation.name} et recevez une réponse directement sur TrouveTonAsso" %>
+
 <h1>Posez votre question à <%= @organisation.name %></h1>
 
 <%= form_with(model: @faq, url: organisation_faqs_path(@organisation), html: { class: "form" }) do |f| %>

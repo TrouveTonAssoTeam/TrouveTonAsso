@@ -1,64 +1,72 @@
+<% content_for :title, "Modifier votre profil" %>
+<% content_for :meta_description, "Modifier votre nom, prénom, avatar associé à votre profil et votre compte utilisateur." %>
+
 <h2>Modifier vos informations</h2>
+<div class="user-profile-edit text-center">
+  <h2>Modifier vos informations</h2>
+  <br>
+  <%= form_for(@user, url: profil_path(@user), method: :patch, html: { class: "form" }) do |f| %>
+    <%= render "users/shared/error_messages", resource: @user %>
 
+    <div style="margin-bottom: 10px;">
+      <label for="avatar-input" style="display: block; margin-bottom: 5px; cursor: pointer;">
+        Choisir un avatar
+      </label>
+        <div class="actions">
+        <input id="avatar-input" class="form-control mx-auto" type="file" name="user[avatar]" style="width: 0; height: 0; overflow: hidden; opacity: 0; position: absolute; z-index: -1;">
+          <button type="button" onclick="document.getElementById('avatar-input').click()" class="btn btn-primary", style= "font-size: 16px; padding: 5px 10px; margin: 0 auto;">
+              Choisir un fichier
+          </button>
+        </div>
+    </div>
 
-<%= form_for( @user, url: profil_path(@user), method: :patch) do |f| %>
-  <div>
-    <%= f.label :avatar, "Choisir un avatar" %>
-    <%= f.file_field :avatar, class: "form-control", id: "avatar-input" %>
-  </div>
+    <div class="field avatar-container mx-auto">
+      <% if @user.avatar.attached? %>
+        <%= image_tag @user.avatar, id: "avatar-preview", class: "avatar-preview", alt: "Avatar Preview" %>
+      <% else %>
+        <img id="avatar-preview" class="avatar-preview" src="#" alt="Avatar Preview" style="display: none;">
+      <% end %>
+    </div>
 
-  <div class="text-center">
-    <% if @user.avatar.attached? %>
-      <%= image_tag @user.avatar, id: "avatar-preview", class: "avatar-preview", alt: "Avatar Preview" %>
-    <% else %>
-      <img id="avatar-preview" class="avatar-preview" src="#" alt="Avatar Preview" style="display: none;">
-    <% end %>
-  </div>
+    <div class="field text-center">
+      <%= f.label :first_name, "Prénom" %><br />
+      <%= f.text_field :first_name, autofocus: true, autocomplete: "given-name", class: "form-control mx-auto" %>
+    </div>
 
-<%= form_for( @user, url: profil_path(@user), method: :patch, html: { class: "form" }) do |f| %>
+    <div class="field text-center">
+      <%= f.label :last_name, "Nom" %><br />
+      <%= f.text_field :last_name, autofocus: true, autocomplete: "family-name", class: "form-control mx-auto" %>
+    </div>
 
-  
-  <div class="field">
-  <%= f.label :first_name, "Prénom" %><br />
-  <%= f.text_field :first_name, autofocus: true, autocomplete: "email" %>
+    <br>
+    <br>
+    <div class="actions" style="text-align: center;">
+      <%= f.submit "Mettre à jour", class: "btn btn-primary", style: "font-size: 16px; padding: 5px 10px; margin: 0 auto;" %>
+    </div>
+  <% end %>
+  <br>
+  <%= link_to "Retour au profil", :back, class: "text-center", style: 'text-decoration: none;' %>
 </div>
-
-<div class="field">
-    <%= f.label :last_name, "Nom" %><br />
-    <%= f.text_field :last_name, autofocus: true, autocomplete: "email" %>
-  </div>
-
-
-  <div class="actions">
-    <%= f.submit "Mettre à jour", class: "btn btn-primary" %>
-  </div>
-<% end %>
-
-
-<h3>Cancel my account</h3>
-
-
-
-<%= link_to "Retour", :back %>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-      const avatarInput = document.getElementById('avatar-input');
-      const avatarPreview = document.getElementById('avatar-preview');
+    const avatarInput = document.getElementById('avatar-input');
+    const avatarPreview = document.getElementById('avatar-preview');
 
-      avatarInput.addEventListener('change', function() {
-        const file = avatarInput.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            avatarPreview.src = e.target.result;
-            avatarPreview.style.display = 'block';
-          }
-          reader.readAsDataURL(file);
-        } else {
-          avatarPreview.src = '#';
-          avatarPreview.style.display = 'none';
+    avatarInput.addEventListener('change', function() {
+      const file = avatarInput.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          avatarPreview.src = e.target.result;
+          avatarPreview.style.display = 'block';
         }
-      });
+        reader.readAsDataURL(file);
+      } else {
+        avatarPreview.src = '#';
+        avatarPreview.style.display = 'none';
+      }
     });
+  });
 </script>
