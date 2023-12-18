@@ -93,3 +93,5 @@ gem "administrate-field-active_storage"
 
 gem "image_processing"
 gem "faker", "~> 3.2"
+
+gem "google-cloud-storage", "~> 1.45", require: false
