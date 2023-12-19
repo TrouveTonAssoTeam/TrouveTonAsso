@@ -1,4 +1,4 @@
-require 'Faker'
+require 'faker'
 Faker::Config.locale= 'fr'
 require "open-uri"
 

@@ -8,8 +8,12 @@
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  flex: 1 200px;
+  flex: 1 350px;
+  overflow: auto;
   justify-content: center;
+}
+.card-with-like {
+  overflow: visible;
 }
 .card-container {
   display: flex;

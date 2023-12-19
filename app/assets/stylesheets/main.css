@@ -266,6 +266,11 @@ b {
   margin-right: 2.5rem !important;
 }
 
+.mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 .pt-0 {
   padding-top: 0 !important;
 }
