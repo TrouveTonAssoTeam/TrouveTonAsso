@@ -15,7 +15,7 @@
 
   <div class="title">
     <% if @organisation %>
-      <h1>Bienvenue,</h1>
+      <h1 class="mt-0">Bienvenue,</h1>
       <%= @organisation.name %>
     <% else %>
       <p>Association non trouvée</p>
@@ -43,18 +43,14 @@
         <p>Aucune question en attente</p>
       <% end %>
     </div>
-    <div class="event-buttons text-center" style="margin-top: 20px;">
-    <div class="button-group">
-       <div class="event-buttons text-center" style="margin-top: 20px;">
-    <div class="event-buttons text-center">
-      <div class="button-group">
+    <div class="event-buttons text-center mt-5 px-3 py-3">
+      <div class="btn-group">
         <%= link_to "Vos événements", organisation_events_path(@organisation), class: "btn btn-secondary", style: "font-size: 16px; padding: 5px 10px; margin-left: 10px; margin-right: 20px; margin-bottom: 10px;" %>
         <%= link_to "Créer un événement", new_event_path(@organisation), class: "btn btn-secondary", style: "font-size: 16px; padding: 5px 10px; margin-left: 10px; margin-right: 20px; margin-bottom: 10px;" %>
         <%= link_to "Modifier page profil", edit_organisation_path(@organisation), class: "btn btn-secondary", style: "font-size: 16px; padding: 5px 10px; margin-left: 10px; margin-right: 20px; margin-bottom: 10px;" %>
         <%= link_to "Voir la cagnotte", cagnotte_path(@organisation), class: "btn btn-secondary", style: "font-size: 16px; padding: 5px 10px; margin-left: 10px; margin-right: 20px; margin-bottom: 10px;" %>
         <%= link_to "Vos demandes de retrait", withdrawals_path(@organisation), class: "btn btn-secondary", style: "font-size: 16px; padding: 5px 10px; margin-left: 10px; margin-right: 20px; margin-bottom: 10px;" %>
-        <br>
-        <br>
+        <%= link_to "Mettre en avant", organisation_promoted_index_path(@organisation), class: "btn btn-secondary", style: "font-size: 16px; padding: 5px 10px; margin-left: 10px; margin-right: 20px; margin-bottom: 10px;" %>
       </div>
     </div>
   </div>
