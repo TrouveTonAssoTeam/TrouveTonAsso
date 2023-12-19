@@ -29,4 +29,7 @@ module ApplicationHelper
             }
         }.to_json.html_safe
     end
+        def canonical_url
+          request.original_url
+        end
 end
