@@ -23,17 +23,6 @@
   </div>
 
   <div class="questions-container mb-5" style="margin-top: 20px;">
-    <h3>Vos questions en attente</h3>
-    <% if !@questions.empty? %>
-      <% @questions.each do |faq| %>
-        <!-- ... existing code ... -->
-      <% end %>
-    <% else %>
-      <p>Aucune question en attente</p>
-    <% end %>
-  </div>
-
-    <div class="questions-container mb-5" style="margin-top: 20px;">
       <h3>Vos questions en attente</h3>
       <% if !@questions.empty? %>
         <% @questions.each do |faq| %>
